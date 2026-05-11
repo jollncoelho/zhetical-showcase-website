@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import {
   Shield,
   Search,
@@ -23,6 +24,7 @@ import {
   BookOpen,
   Fingerprint,
 } from 'lucide-react';
+import './i18n/index';
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 
@@ -60,9 +62,75 @@ function useTypingEffect(words: string[], speed = 80, pause = 1800) {
   return display;
 }
 
+// ── Language selector ─────────────────────────────────────────────────────────
+
+const LANGS = [
+  { code: 'fr', label: 'FR', flag: '🇫🇷' },
+  { code: 'en', label: 'EN', flag: '🇬🇧' },
+  { code: 'es', label: 'ES', flag: '🇪🇸' },
+];
+
+function LangSelector() {
+  const { i18n } = useTranslation();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const current = LANGS.find((l) => l.code === i18n.language) ?? LANGS[0];
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-1.5 bg-emerald-500/8 border border-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded text-xs font-mono hover:bg-emerald-500/15 hover:border-emerald-500/40 transition-all"
+        aria-label="Select language"
+      >
+        <span>{current.flag}</span>
+        <span className="tracking-wider">{current.label}</span>
+        <ChevDown size={10} className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <motion.div
+          initial={{ opacity: 0, y: -6, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.15 }}
+          className="absolute right-0 top-full mt-1.5 bg-[#0a0f0a] border border-emerald-500/20 rounded shadow-lg shadow-black/40 overflow-hidden z-50 min-w-[80px]"
+        >
+          {LANGS.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => {
+                i18n.changeLanguage(lang.code);
+                setOpen(false);
+              }}
+              className={`w-full flex items-center gap-2 px-3 py-2 text-xs font-mono transition-colors ${
+                lang.code === i18n.language
+                  ? 'bg-emerald-500/15 text-emerald-400'
+                  : 'text-gray-400 hover:bg-emerald-500/8 hover:text-emerald-300'
+              }`}
+            >
+              <span>{lang.flag}</span>
+              <span>{lang.label}</span>
+            </button>
+          ))}
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
 // ── sub-components ────────────────────────────────────────────────────────────
 
 function Navbar() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -87,37 +155,42 @@ function Navbar() {
           <span className="text-white">ZH</span><span className="text-emerald-400 emerald-glow">É</span><span className="text-white">TICAL</span>
         </span>
         <div className="hidden md:flex items-center gap-8">
-          {['Enquêtes', 'Prévention', 'Tracker', 'Contact'].map((item) => (
+          {[
+            { key: 'nav.enquetes', anchor: 'enquetes' },
+            { key: 'nav.prevention', anchor: 'prévention' },
+            { key: 'nav.tracker', anchor: 'tracker' },
+            { key: 'nav.contact', anchor: 'contact' },
+          ].map(({ key, anchor }) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={key}
+              href={`#${anchor}`}
               className="text-gray-400 hover:text-emerald-400 transition-colors text-sm font-medium tracking-wide"
             >
-              {item}
+              {t(key)}
             </a>
           ))}
         </div>
-        <a
-          href="https://tracker.prohacking77.me"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded text-sm font-mono hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all"
-        >
-          <Radio size={14} />
-          Tracker
-        </a>
+        <div className="flex items-center gap-3">
+          <LangSelector />
+          <a
+            href="https://tracker.prohacking77.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded text-sm font-mono hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all"
+          >
+            <Radio size={14} />
+            {t('nav.trackerBtn')}
+          </a>
+        </div>
       </div>
     </motion.nav>
   );
 }
 
 function HeroSection() {
-  const typed = useTypingEffect([
-    'Protection & Investigation',
-    'OSINT Expert',
-    'Cyber Intelligence',
-    'Digital Forensics',
-  ]);
+  const { t } = useTranslation();
+  const typingWords = t('hero.typingWords', { returnObjects: true }) as string[];
+  const typed = useTypingEffect(typingWords);
 
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 600], [0, 150]);
@@ -130,10 +203,8 @@ function HeroSection() {
       style={{ opacity }}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden grid-bg noise-bg"
     >
-      {/* Scanline */}
       <div className="scanline fixed inset-x-0 h-32 z-10 pointer-events-none" />
 
-      {/* Floating particles */}
       {particles.map((i) => (
         <motion.div
           key={i}
@@ -142,19 +213,11 @@ function HeroSection() {
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
           }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.8, 0.2],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 4,
-            repeat: Infinity,
-            delay: Math.random() * 4,
-          }}
+          animate={{ y: [0, -30, 0], opacity: [0.2, 0.8, 0.2] }}
+          transition={{ duration: 3 + Math.random() * 4, repeat: Infinity, delay: Math.random() * 4 }}
         />
       ))}
 
-      {/* Large background text */}
       <motion.div
         style={{ y }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
@@ -165,7 +228,6 @@ function HeroSection() {
       </motion.div>
 
       <div className="relative z-20 text-center px-6 max-w-4xl">
-        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -174,11 +236,10 @@ function HeroSection() {
         >
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">
-            Expert OSINT · Opérationnel
+            {t('hero.badge')}
           </span>
         </motion.div>
 
-        {/* Main heading */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -188,7 +249,6 @@ function HeroSection() {
           <span className="text-white">ZH</span><span className="text-emerald-400">É</span><span className="text-white">TICAL</span>
         </motion.h1>
 
-        {/* Typing text */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -199,18 +259,15 @@ function HeroSection() {
           <span className="typing-cursor ml-0.5">&nbsp;</span>
         </motion.div>
 
-        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
           className="text-gray-400 text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Intelligence numérique de pointe. Investigations OSINT, protection contre les prédateurs
-          en ligne et sécurisation des communautés digitales.
+          {t('hero.description')}
         </motion.p>
 
-        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -224,18 +281,17 @@ function HeroSection() {
             className="flex items-center justify-center gap-2 bg-emerald-500 text-black px-8 py-3 rounded font-semibold hover:bg-emerald-400 transition-all hover:scale-105 active:scale-95"
           >
             <Zap size={18} />
-            Lancer le Tracker
+            {t('hero.ctaTracker')}
           </a>
           <a
             href="#enquetes"
             className="flex items-center justify-center gap-2 border border-emerald-500/30 text-emerald-400 px-8 py-3 rounded font-semibold hover:bg-emerald-500/10 transition-all"
           >
             <Search size={18} />
-            Découvrir Ghostint
+            {t('hero.ctaGhostint')}
           </a>
         </motion.div>
 
-        {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -243,28 +299,25 @@ function HeroSection() {
           className="flex flex-col sm:flex-row gap-8 justify-center"
         >
           {[
-            { label: 'Enquêtes OSINT réussies', value: '50+' },
-            { label: 'Taux de réussite', value: '97%' },
-            { label: "Années d'expérience", value: '2+' },
+            { label: t('hero.stat1Label'), value: '50+' },
+            { label: t('hero.stat2Label'), value: '97%' },
+            { label: t('hero.stat3Label'), value: '2+' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-3xl font-black text-emerald-400 font-mono emerald-glow">
-                {stat.value}
-              </div>
+              <div className="text-3xl font-black text-emerald-400 font-mono emerald-glow">{stat.value}</div>
               <div className="text-gray-500 text-sm mt-1">{stat.label}</div>
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-600"
       >
-        <span className="text-xs font-mono tracking-widest uppercase">Défiler</span>
+        <span className="text-xs font-mono tracking-widest uppercase">{t('hero.scroll')}</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
           <ChevronDown size={20} />
         </motion.div>
@@ -277,23 +330,14 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-1 mb-4">
       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-      <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">
-        {children}
-      </span>
+      <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">{children}</span>
     </div>
   );
 }
 
-function AnimatedSection({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-
   return (
     <motion.div
       ref={ref}
@@ -307,39 +351,65 @@ function AnimatedSection({
   );
 }
 
+function BioText({ raw }: { raw: string }) {
+  const parts = raw.split(/(<b>.*?<\/b>|<w>.*?<\/w>)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.startsWith('<b>')) {
+          return <span key={i} className="text-emerald-400 font-semibold">{part.slice(3, -4)}</span>;
+        }
+        if (part.startsWith('<w>')) {
+          return <span key={i} className="text-white font-medium">{part.slice(3, -4)}</span>;
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </>
+  );
+}
+
 function ExpertiseBioSection() {
+  const { t } = useTranslation();
+
   const certRows = [
-    { domain: 'Offensive Security (PenTesting)', level: 'Professionnel Avancé', proof: 'Certifié ExorciseThat' },
-    { domain: 'OSINT & Digital Forensics', level: 'Expert Enquêteur', proof: "Permis d'Osinter / CanCred" },
-    { domain: 'Threat Intelligence', level: 'Spécialiste Groupes', proof: '30+ Diplômes Pro' },
+    { domain: t('expertise.cert1Domain'), level: t('expertise.cert1Level'), proof: t('expertise.cert1Proof') },
+    { domain: t('expertise.cert2Domain'), level: t('expertise.cert2Level'), proof: t('expertise.cert2Proof') },
+    { domain: t('expertise.cert3Domain'), level: t('expertise.cert3Level'), proof: t('expertise.cert3Proof') },
+  ];
+
+  const pills = [
+    { icon: <Zap size={10} />, label: t('expertise.pill1') },
+    { icon: <BookOpen size={10} />, label: t('expertise.pill2') },
+    { icon: <MapPin size={10} />, label: t('expertise.pill3') },
+    { icon: <Crosshair size={10} />, label: t('expertise.pill4') },
+    { icon: <Globe size={10} />, label: t('expertise.pill5') },
   ];
 
   return (
     <section id="expertise" className="py-12 px-6 bg-[#050505]">
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
-          {/* Passport — compact card with hairline emerald border */}
           <div className="relative rounded-xl border border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.06)] bg-[#080b08] overflow-hidden">
-
             <div className="h-px w-full bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
 
-            {/* ── HEADER ROW — compact ── */}
+            {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-emerald-500/10 bg-emerald-500/3">
               <div className="flex items-center gap-4">
                 <div>
                   <p className="text-emerald-400/40 text-[10px] font-mono tracking-[0.3em] uppercase leading-none mb-0.5">
-                    PASSEPORT CYBER · N° ZHT-2026-BE
+                    {t('expertise.passportLabel')}
                   </p>
                   <h2 className="text-2xl font-black font-mono leading-none">
-                    <span className="text-white">ZH</span><span className="text-emerald-400" style={{ textShadow: '0 0 12px rgba(16,185,129,0.5)' }}>É</span><span className="text-white">TICAL</span>
+                    <span className="text-white">ZH</span>
+                    <span className="text-emerald-400" style={{ textShadow: '0 0 12px rgba(16,185,129,0.5)' }}>É</span>
+                    <span className="text-white">TICAL</span>
                   </h2>
                 </div>
-                {/* Stats inline */}
                 <div className="hidden sm:flex items-center gap-1 ml-4">
                   {[
-                    { v: '30+', l: 'Certif.' },
-                    { v: '20', l: 'Ans' },
-                    { v: '9', l: 'Badges' },
+                    { v: '30+', l: t('expertise.certif') },
+                    { v: '20', l: t('expertise.years') },
+                    { v: '9', l: t('expertise.badges') },
                   ].map((s, i) => (
                     <div key={s.l} className={`px-3 py-1.5 ${i < 2 ? 'border-r border-emerald-500/10' : ''}`}>
                       <p className="text-emerald-400 font-black text-base font-mono leading-none">{s.v}</p>
@@ -348,12 +418,10 @@ function ExpertiseBioSection() {
                   ))}
                 </div>
               </div>
-              {/* Badges — right, inline */}
               <div className="flex items-center gap-3">
                 <img src="https://i.postimg.cc/14t7v4k2/03-photo-2026-02-23-03-15-49.jpg" alt="Trace Labs CTF" className="h-10 w-10 object-contain rounded opacity-80 hover:opacity-100 transition-opacity" title="Trace Labs CTF Participant" />
                 <img src="https://i.postimg.cc/PNxVSNgV/00openbadge-OZ-2026-VLAMZF.png" alt="Oscar Zulu" className="h-10 w-10 object-contain rounded-full opacity-80 hover:opacity-100 transition-opacity" title="Oscar Zulu — Permis d'Osinter" />
                 <img src="https://i.postimg.cc/JtnYptfS/06-photo-2024-08-16-13-55-19.jpg" alt="ExorciseThat" className="h-10 w-10 object-contain rounded-full opacity-80 hover:opacity-100 transition-opacity" title="ExorciseThat Cybersecurity" />
-                {/* VERIFIED stamp */}
                 <div className="w-12 h-12 rounded-full border border-emerald-500/25 flex flex-col items-center justify-center text-center ml-1">
                   <span className="text-emerald-400/50 text-[6px] font-mono font-black leading-tight tracking-widest">VERIF.</span>
                   <span className="text-emerald-400/50 text-[6px] font-mono font-black leading-tight tracking-widest">2026</span>
@@ -361,54 +429,45 @@ function ExpertiseBioSection() {
               </div>
             </div>
 
-            {/* MRZ line */}
+            {/* MRZ */}
             <div className="px-6 py-1.5 border-b border-emerald-500/8 font-mono text-[9px] text-emerald-500/20 tracking-widest overflow-hidden whitespace-nowrap">
               P&lt;BEL&lt;ZHETICAL&lt;&lt;OPERATOR&lt;OSINT&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;ZHT2026BE&lt;&lt;CANCRED13165
             </div>
 
-            {/* ── BODY : 2 columns — bio left, certs right ── */}
+            {/* Body */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-
-              {/* LEFT — Bio dense */}
+              {/* Left — Bio */}
               <div className="px-6 py-5 border-b lg:border-b-0 lg:border-r border-emerald-500/10 space-y-3">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-0.5 h-4 bg-emerald-400 rounded-full" />
-                  <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">Profil Opérateur</span>
+                  <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">{t('expertise.profileLabel')}</span>
                 </div>
                 <div className="border-l-2 border-emerald-500/60 pl-3">
-                  <p className="text-gray-300 leading-relaxed text-xs">
-                    Expert en cybersécurité basé en <span className="text-emerald-400 font-semibold">Belgique</span>, avec une expérience technique très solide acquise sur le terrain depuis plus de <span className="text-emerald-400 font-semibold">20 ans</span>, dans les domaines du renseignement en sources ouvertes (OSINT), de la sécurité offensive et de l'investigation numérique. Opérateur actif intervenant aussi bien sur des enquêtes civiles que sur des contextes à enjeux élevés.
-                  </p>
+                  <p className="text-gray-300 leading-relaxed text-xs"><BioText raw={t('expertise.bio1')} /></p>
                 </div>
                 <div className="border-l-2 border-emerald-500/30 pl-3">
-                  <p className="text-gray-400 leading-relaxed text-xs">
-                    <span className="text-emerald-400 font-semibold">Instructeur</span> de groupes techniques spécialisés — formation de la prochaine génération d'analystes OSINT et de professionnels de la cybersécurité. Transmission des techniques avancées de collecte, d'analyse et de corrélation de données issues de sources ouvertes, réseaux sociaux, registres publics et infrastructures numériques.
-                  </p>
+                  <p className="text-gray-400 leading-relaxed text-xs"><BioText raw={t('expertise.bio2')} /></p>
                 </div>
                 <div className="border-l-2 border-emerald-500/15 pl-3">
-                  <p className="text-gray-400 leading-relaxed text-xs">
-                    Spécialisé dans la <span className="text-white font-medium">protection des mineurs en ligne</span>, la traque des prédateurs numériques et la documentation légale de preuves numériques. Collaboration régulière avec des plateformes communautaires (Roblox, Discord) pour l'identification et l'exposition d'acteurs malveillants. Chaque intervention est conduite avec une méthodologie rigoureuse, une discrétion absolue et une traçabilité complète.
-                  </p>
+                  <p className="text-gray-400 leading-relaxed text-xs"><BioText raw={t('expertise.bio3')} /></p>
                 </div>
                 <div className="border-l-2 border-emerald-500/8 pl-3">
-                  <p className="text-gray-400 leading-relaxed text-xs">
-                    Titulaire de <span className="text-emerald-400 font-semibold">30+ certifications professionnelles</span> vérifiables publiquement via le registre CanCred. Chaque accréditation représente une validation formelle d'une compétence opérationnelle dans le domaine de la cybersécurité, du renseignement ou de l'investigation numérique.
-                  </p>
+                  <p className="text-gray-400 leading-relaxed text-xs"><BioText raw={t('expertise.bio4')} /></p>
                 </div>
               </div>
 
-              {/* RIGHT — Certifications table + stats + CTA */}
+              {/* Right — Certs + Badges + CTA */}
               <div className="px-6 py-5 flex flex-col gap-4">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-0.5 h-4 bg-emerald-400 rounded-full" />
-                  <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">Registre des Certifications</span>
+                  <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">{t('expertise.certsLabel')}</span>
                 </div>
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="border-b border-emerald-500/15">
-                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2 pr-4">Domaine</th>
-                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2 pr-4">Niveau</th>
-                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2">Preuve</th>
+                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2 pr-4">{t('expertise.certDomain')}</th>
+                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2 pr-4">{t('expertise.certLevel')}</th>
+                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2">{t('expertise.certProof')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -428,15 +487,8 @@ function ExpertiseBioSection() {
                   </tbody>
                 </table>
 
-                {/* Biometric pills */}
                 <div className="flex flex-wrap gap-2 pt-1">
-                  {[
-                    { icon: <Zap size={10} />, label: "20+ Ans d'Expérience" },
-                    { icon: <BookOpen size={10} />, label: 'Instructeur OSINT' },
-                    { icon: <MapPin size={10} />, label: 'Belgique' },
-                    { icon: <Crosshair size={10} />, label: 'Offensive Security' },
-                    { icon: <Globe size={10} />, label: 'Trace Labs GOSP' },
-                  ].map((p) => (
+                  {pills.map((p) => (
                     <span key={p.label} className="inline-flex items-center gap-1 bg-emerald-500/5 border border-emerald-500/15 text-emerald-400/60 text-[10px] font-mono px-2 py-0.5 rounded-full">
                       {p.icon}{p.label}
                     </span>
@@ -450,7 +502,7 @@ function ExpertiseBioSection() {
                   <img src="https://i.postimg.cc/JtnYptfS/06-photo-2024-08-16-13-55-19.jpg" alt="ExorciseThat Cybersecurity" className="h-20 w-20 object-contain rounded-full hover:scale-105 transition-transform duration-200" />
                 </div>
 
-                {/* CTA row */}
+                {/* CTA */}
                 <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-emerald-500/10">
                   <a
                     href="https://passport.cancred.ca/app/profile/13165"
@@ -459,7 +511,7 @@ function ExpertiseBioSection() {
                     className="inline-flex items-center gap-1.5 bg-emerald-500 text-black px-4 py-2 rounded font-black text-xs hover:bg-emerald-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_12px_rgba(16,185,129,0.3)]"
                   >
                     <BadgeCheck size={12} />
-                    Vérifier mon Passeport CanCred
+                    {t('expertise.ctaCanCred')}
                     <ExternalLink size={10} />
                   </a>
                   <a
@@ -478,7 +530,7 @@ function ExpertiseBioSection() {
                     className="inline-flex items-center gap-1.5 border border-emerald-500/20 text-emerald-400/60 px-3 py-2 rounded text-xs hover:bg-emerald-500/8 transition-all"
                   >
                     <Mail size={11} />
-                    Contact
+                    {t('expertise.ctaContact')}
                   </a>
                 </div>
               </div>
@@ -493,64 +545,38 @@ function ExpertiseBioSection() {
 }
 
 function EnquetesSection() {
+  const { t } = useTranslation();
+
   const features = [
-    {
-      icon: <Search className="text-emerald-400" size={20} />,
-      title: "Recherche d'identité",
-      desc: 'Retrouver des pseudos, avatars, historiques et connexions entre comptes sur toutes les plateformes.',
-    },
-    {
-      icon: <Globe className="text-emerald-400" size={20} />,
-      title: 'Géolocalisation digitale',
-      desc: "Analyse de métadonnées, adresses IP et empreintes numériques pour localiser avec précision.",
-    },
-    {
-      icon: <Database className="text-emerald-400" size={20} />,
-      title: 'Analyse de données',
-      desc: 'Croisement de bases de données publiques, réseaux sociaux et sources open-source.',
-    },
-    {
-      icon: <Activity className="text-emerald-400" size={20} />,
-      title: 'Surveillance discrète',
-      desc: "Monitoring passif et collecte de renseignements sans alerter la cible.",
-    },
+    { icon: <Search className="text-emerald-400" size={20} />, title: t('enquetes.f1Title'), desc: t('enquetes.f1Desc') },
+    { icon: <Globe className="text-emerald-400" size={20} />, title: t('enquetes.f2Title'), desc: t('enquetes.f2Desc') },
+    { icon: <Database className="text-emerald-400" size={20} />, title: t('enquetes.f3Title'), desc: t('enquetes.f3Desc') },
+    { icon: <Activity className="text-emerald-400" size={20} />, title: t('enquetes.f4Title'), desc: t('enquetes.f4Desc') },
   ];
 
   return (
     <section id="enquetes" className="py-32 px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-
-        {/* Left: label + title + paragraphs + button */}
         <AnimatedSection>
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-emerald-500" />
-            <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">Investigations</span>
+            <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">{t('enquetes.sectionLabel')}</span>
           </div>
           <h2 className="text-5xl font-black text-white leading-tight mb-6">
-            Ghostint<br />
-            <span className="text-emerald-400">OSINT avancé</span>
+            {t('enquetes.title1')}<br />
+            <span className="text-emerald-400">{t('enquetes.title2')}</span>
           </h2>
-          <p className="text-gray-300 text-base leading-relaxed mb-5">
-            Ghostint est notre service d'enquête OSINT de premier rang.
-            Nous traquons les individus malveillants, identifions les
-            prédateurs en ligne et documentons les preuves numériques
-            avec une précision chirurgicale.
-          </p>
-          <p className="text-gray-500 text-sm leading-relaxed mb-10">
-            Chaque enquête est menée avec discrétion absolue. Nos méthodes
-            combinent intelligence artificielle, techniques forensiques et veille
-            multi-sources pour des résultats irréfutables.
-          </p>
+          <p className="text-gray-300 text-base leading-relaxed mb-5">{t('enquetes.p1')}</p>
+          <p className="text-gray-500 text-sm leading-relaxed mb-10">{t('enquetes.p2')}</p>
           <a
             href="mailto:jose@prohacking77.me"
             className="inline-flex items-center gap-2 border border-emerald-500/40 text-emerald-400 px-6 py-3 rounded font-mono text-sm hover:bg-emerald-500/10 transition-all"
           >
             <Mail size={15} />
-            Demander une enquête
+            {t('enquetes.cta')}
           </a>
         </AnimatedSection>
 
-        {/* Right: 4 stacked feature cards */}
         <div className="flex flex-col gap-3">
           {features.map((f, i) => (
             <motion.div
@@ -570,13 +596,14 @@ function EnquetesSection() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
 }
 
 function PreventionSection() {
+  const { t } = useTranslation();
+
   const platforms = [
     {
       name: 'Roblox',
@@ -585,8 +612,8 @@ function PreventionSection() {
       border: 'border-red-500/20',
       accent: 'text-red-400',
       badge: 'bg-red-500/10 text-red-400 border-red-500/20',
-      desc: "Les grooming, harcèlement et manipulation de mineurs sur Roblox sont en forte hausse. Nous identifions et exposons ces individus.",
-      threats: ['Grooming de mineurs', 'Harcèlement ciblé', 'Vol de comptes', 'Arnaques Robux'],
+      desc: t('prevention.robloxDesc'),
+      threats: t('prevention.robloxThreats', { returnObjects: true }) as string[],
     },
     {
       name: 'Discord',
@@ -595,30 +622,29 @@ function PreventionSection() {
       border: 'border-blue-500/20',
       accent: 'text-blue-400',
       badge: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-      desc: "Serveurs malveillants, bots d'espionnage et réseaux de manipulation. Nous sécurisons vos communautés Discord.",
-      threats: ['Raids de serveurs', 'Doxxing', 'Phishing ciblé', 'Bot malveillants'],
+      desc: t('prevention.discordDesc'),
+      threats: t('prevention.discordThreats', { returnObjects: true }) as string[],
     },
   ];
 
   const steps = [
-    { step: '01', icon: <Search size={20} />, title: 'Détection', desc: 'Identification des comportements suspects' },
-    { step: '02', icon: <Eye size={20} />, title: 'Investigation', desc: 'Collecte de preuves numériques' },
-    { step: '03', icon: <Database size={20} />, title: 'Documentation', desc: 'Rapport légal complet et certifié' },
-    { step: '04', icon: <Send size={20} />, title: 'Signalement', desc: 'Transmission aux autorités compétentes' },
+    { step: '01', icon: <Search size={20} />, title: t('prevention.step1Title'), desc: t('prevention.step1Desc') },
+    { step: '02', icon: <Eye size={20} />, title: t('prevention.step2Title'), desc: t('prevention.step2Desc') },
+    { step: '03', icon: <Database size={20} />, title: t('prevention.step3Title'), desc: t('prevention.step3Desc') },
+    { step: '04', icon: <Send size={20} />, title: t('prevention.step4Title'), desc: t('prevention.step4Desc') },
   ];
 
   return (
     <section id="prévention" className="py-32 px-6 bg-cyber-darker/50">
       <div className="max-w-6xl mx-auto">
         <AnimatedSection>
-          <SectionLabel>Protection</SectionLabel>
+          <SectionLabel>{t('prevention.sectionLabel')}</SectionLabel>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
-            Prévention &amp;{' '}
-            <span className="text-emerald-400">Sécurité</span>
+            {t('prevention.title1')}{' '}
+            <span className="text-emerald-400">{t('prevention.title2')}</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mb-16 leading-relaxed">
-            Nous protégeons les communautés en ligne contre les menaces numériques, en particulier
-            les plus jeunes utilisateurs.
+            {t('prevention.subtitle')}
           </p>
         </AnimatedSection>
 
@@ -638,23 +664,23 @@ function PreventionSection() {
                   <div>
                     <h3 className={`text-xl font-bold ${p.accent}`}>{p.name}</h3>
                     <span className={`text-xs border rounded-full px-2 py-0.5 ${p.badge}`}>
-                      Protection active
+                      {t('prevention.activeBadge')}
                     </span>
                   </div>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed mb-6">{p.desc}</p>
                 <div>
                   <p className="text-gray-600 text-xs uppercase tracking-widest mb-3 font-mono">
-                    Menaces identifiées
+                    {t('prevention.threatsLabel')}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {p.threats.map((t) => (
+                    {p.threats.map((threat) => (
                       <span
-                        key={t}
+                        key={threat}
                         className="flex items-center gap-1.5 text-xs text-gray-400 bg-cyber-card border border-cyber-border rounded px-2 py-1"
                       >
                         <AlertTriangle size={10} className="text-yellow-500" />
-                        {t}
+                        {threat}
                       </span>
                     ))}
                   </div>
@@ -664,10 +690,9 @@ function PreventionSection() {
           ))}
         </div>
 
-        {/* Process steps */}
         <AnimatedSection>
           <h3 className="text-2xl font-bold text-white mb-10 text-center">
-            Notre processus d'intervention
+            {t('prevention.processTitle')}
           </h3>
           <div className="flex flex-col md:flex-row items-start md:items-center gap-0 md:gap-0 relative">
             {steps.map((item, i) => (
@@ -680,9 +705,7 @@ function PreventionSection() {
                   <h4 className="text-white font-semibold mb-1">{item.title}</h4>
                   <p className="text-gray-500 text-sm">{item.desc}</p>
                 </div>
-                {i < 3 && (
-                  <div className="hidden md:block w-8 h-px bg-emerald-500/20 flex-shrink-0" />
-                )}
+                {i < 3 && <div className="hidden md:block w-8 h-px bg-emerald-500/20 flex-shrink-0" />}
               </div>
             ))}
           </div>
@@ -693,33 +716,24 @@ function PreventionSection() {
 }
 
 function TrackerSection() {
-  const pills = [
-    'Tracking IP',
-    'Geo-intelligence',
-    'Device fingerprint',
-    'Session analysis',
-    'Cross-platform',
-    'Temps réel',
-  ];
+  const { t } = useTranslation();
+  const pills = t('tracker.pills', { returnObjects: true }) as string[];
 
   return (
     <section id="tracker" className="py-32 px-6 relative overflow-hidden">
-      {/* Background glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <AnimatedSection>
-          <SectionLabel>Outil Exclusif</SectionLabel>
+          <SectionLabel>{t('tracker.sectionLabel')}</SectionLabel>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-            Tracker <span className="text-emerald-400">Intelligence</span> en temps réel
+            {t('tracker.title1')} <span className="text-emerald-400">{t('tracker.title2')}</span> {t('tracker.title3')}
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Notre outil propriétaire de tracking OSINT permet une collecte d'informations en temps
-            réel sur des cibles définies.
+            {t('tracker.desc')}
           </p>
-
           <a
             href="https://tracker.prohacking77.me"
             target="_blank"
@@ -727,21 +741,13 @@ function TrackerSection() {
             className="inline-flex items-center gap-3 bg-emerald-500 text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-emerald-400 transition-all hover:scale-105 active:scale-95 mb-4"
           >
             <Activity size={22} />
-            Lancer le Tracker
+            {t('tracker.cta')}
             <ExternalLink size={16} />
           </a>
-
-          <p className="text-gray-600 text-sm font-mono mb-12">
-            tracker.prohacking77.me · Accès professionnel uniquement
-          </p>
-
-          {/* Feature pills */}
+          <p className="text-gray-600 text-sm font-mono mb-12">{t('tracker.subtext')}</p>
           <div className="flex flex-wrap gap-3 justify-center">
             {pills.map((pill) => (
-              <span
-                key={pill}
-                className="bg-cyber-card border border-emerald-500/20 text-emerald-400/80 px-4 py-2 rounded-full text-sm font-mono"
-              >
+              <span key={pill} className="bg-cyber-card border border-emerald-500/20 text-emerald-400/80 px-4 py-2 rounded-full text-sm font-mono">
                 {pill}
               </span>
             ))}
@@ -792,6 +798,8 @@ const socialLinks = [
 ];
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer id="contact" className="border-t border-cyber-border bg-cyber-darker py-16 px-6">
       <div className="max-w-6xl mx-auto">
@@ -800,40 +808,27 @@ function Footer() {
             <span className="font-mono font-bold tracking-widest text-xl block mb-4">
               <span className="text-white">ZH</span><span className="text-emerald-400">É</span><span className="text-white">TICAL</span>
             </span>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              Expert OSINT spécialisé dans l'investigation numérique, la protection des mineurs et
-              la sécurité des communautés en ligne.
-            </p>
+            <p className="text-gray-500 text-sm leading-relaxed">{t('footer.tagline')}</p>
           </div>
-
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-widest">
-              Services
+              {t('footer.servicesTitle')}
             </h4>
             <ul className="space-y-2 text-sm text-gray-500">
-              <li><a href="#enquetes" className="hover:text-emerald-400 transition-colors">Ghostint OSINT</a></li>
-              <li><a href="#prévention" className="hover:text-emerald-400 transition-colors">Protection mineurs</a></li>
+              <li><a href="#enquetes" className="hover:text-emerald-400 transition-colors">{t('footer.service1')}</a></li>
+              <li><a href="#prévention" className="hover:text-emerald-400 transition-colors">{t('footer.service2')}</a></li>
               <li>
-                <a
-                  href="https://tracker.prohacking77.me"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-emerald-400 transition-colors flex items-center gap-1"
-                >
-                  Tracker Intelligence <ExternalLink size={12} />
+                <a href="https://tracker.prohacking77.me" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors flex items-center gap-1">
+                  {t('footer.service3')} <ExternalLink size={12} />
                 </a>
               </li>
             </ul>
           </div>
-
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-widest">
-              Contact
+              {t('footer.contactTitle')}
             </h4>
-            <a
-              href="mailto:jose@prohacking77.me"
-              className="flex items-center gap-2 text-gray-500 hover:text-emerald-400 transition-colors text-sm mb-6"
-            >
+            <a href="mailto:jose@prohacking77.me" className="flex items-center gap-2 text-gray-500 hover:text-emerald-400 transition-colors text-sm mb-6">
               <Mail size={14} />
               jose@prohacking77.me
             </a>
@@ -853,14 +848,11 @@ function Footer() {
             </div>
           </div>
         </div>
-
         <div className="border-t border-cyber-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-600 text-xs font-mono">
-            © 2026 Zhétical · Tous droits réservés
-          </p>
+          <p className="text-gray-600 text-xs font-mono">{t('footer.rights')}</p>
           <div className="flex items-center gap-2 text-xs text-gray-600 font-mono">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Systèmes opérationnels
+            {t('footer.operational')}
           </div>
         </div>
       </div>
