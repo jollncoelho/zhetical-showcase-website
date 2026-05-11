@@ -863,6 +863,18 @@ function Footer() {
             Systèmes opérationnels
           </div>
         </div>
+
+        {/* Disclaimer */}
+        <div className="mt-6 pt-5 border-t border-cyber-border/50">
+          <div className="flex items-start gap-2.5 text-gray-600 text-xs leading-relaxed max-w-3xl mx-auto text-center justify-center">
+            <Shield size={13} className="flex-shrink-0 mt-0.5 text-gray-600/70" />
+            <p>
+              <span className="text-gray-500 font-medium">Avertissement</span>
+              {' — '}
+              Ce site est strictement réservé à un usage éducatif et à la sensibilisation en cybersécurité. L'auteur décline toute responsabilité pour tout usage malveillant ou illégal des informations présentées.
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );
