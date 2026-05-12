@@ -62,7 +62,31 @@ function useTypingEffect(words: string[], speed = 80, pause = 1800) {
 
 // ── sub-components ────────────────────────────────────────────────────────────
 
-function Navbar() {
+type Lang = 'FR' | 'EN' | 'ES';
+
+function LanguageSwitcher({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
+  return (
+    <div className="flex items-center gap-1 font-mono text-xs">
+      {(['FR', 'EN', 'ES'] as Lang[]).map((l, i) => (
+        <span key={l} className="flex items-center gap-1">
+          {i > 0 && <span className="text-gray-700">|</span>}
+          <button
+            onClick={() => setLang(l)}
+            className={`px-1 py-0.5 rounded transition-colors ${
+              lang === l
+                ? 'text-emerald-400 font-bold'
+                : 'text-gray-600 hover:text-gray-400'
+            }`}
+          >
+            {l}
+          </button>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -97,15 +121,18 @@ function Navbar() {
             </a>
           ))}
         </div>
-        <a
-          href="https://tracker.prohacking77.me"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded text-sm font-mono hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all"
-        >
-          <Radio size={14} />
-          Tracker
-        </a>
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher lang={lang} setLang={setLang} />
+          <a
+            href="https://tracker.prohacking77.me"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded text-sm font-mono hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all"
+          >
+            <Radio size={14} />
+            Tracker
+          </a>
+        </div>
       </div>
     </motion.nav>
   );
@@ -883,9 +910,11 @@ function Footer() {
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 export default function App() {
+  const [lang, setLang] = useState<Lang>('FR');
+
   return (
     <div className="bg-cyber-dark min-h-screen">
-      <Navbar />
+      <Navbar lang={lang} setLang={setLang} />
       <HeroSection />
       <EnquetesSection />
       <PreventionSection />
