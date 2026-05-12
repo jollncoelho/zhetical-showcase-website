@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
   Shield,
   Search,
   Eye,
   Globe,
-  Lock,
   AlertTriangle,
   ExternalLink,
   Mail,
@@ -17,12 +16,443 @@ import {
   Radio,
   Activity,
   Send,
-  Award,
   BadgeCheck,
   MapPin,
   BookOpen,
-  Fingerprint,
 } from 'lucide-react';
+
+// ── Types ─────────────────────────────────────────────────────────────────────
+
+type Lang = 'FR' | 'EN' | 'ES' | 'PT';
+
+// ── Translations ──────────────────────────────────────────────────────────────
+
+const t = {
+  FR: {
+    nav: {
+      links: ['Enquêtes', 'Prévention', 'Tracker', 'Contact'],
+      tracker: 'Tracker',
+    },
+    hero: {
+      badge: 'Expert OSINT · Opérationnel',
+      typingWords: ['Protection & Investigation', 'Expert OSINT', 'Cyber Intelligence', 'Digital Forensics'],
+      description: "Intelligence numérique de pointe. Investigations OSINT, protection contre les prédateurs en ligne et sécurisation des communautés digitales.",
+      ctaTracker: 'Lancer le Tracker',
+      ctaGhostint: 'Découvrir Ghostint',
+      stats: [
+        { label: 'Enquêtes OSINT réussies', value: '50+' },
+        { label: 'Taux de réussite', value: '97%' },
+        { label: "Années d'expérience", value: '2+' },
+      ],
+      scroll: 'Défiler',
+    },
+    enquetes: {
+      sectionLabel: 'Investigations',
+      title: 'Ghostint',
+      titleAccent: 'OSINT avancé',
+      p1: "Ghostint est notre service d'enquête OSINT de premier rang. Nous traquons les individus malveillants, identifions les prédateurs en ligne et documentons les preuves numériques avec une précision chirurgicale.",
+      p2: "Chaque enquête est menée avec discrétion absolue. Nos méthodes combinent intelligence artificielle, techniques forensiques et veille multi-sources pour des résultats irréfutables.",
+      cta: 'Demander une enquête',
+      features: [
+        { title: "Recherche d'identité", desc: 'Retrouver des pseudos, avatars, historiques et connexions entre comptes sur toutes les plateformes.' },
+        { title: 'Géolocalisation digitale', desc: "Analyse de métadonnées, adresses IP et empreintes numériques pour localiser avec précision." },
+        { title: 'Analyse de données', desc: 'Croisement de bases de données publiques, réseaux sociaux et sources open-source.' },
+        { title: 'Surveillance discrète', desc: "Monitoring passif et collecte de renseignements sans alerter la cible." },
+      ],
+    },
+    prevention: {
+      sectionLabel: 'Protection',
+      title: 'Prévention &',
+      titleAccent: 'Sécurité',
+      description: "Nous protégeons les communautés en ligne contre les menaces numériques, en particulier les plus jeunes utilisateurs.",
+      activeBadge: 'Protection active',
+      threatsLabel: 'Menaces identifiées',
+      processTitle: "Notre processus d'intervention",
+      platforms: [
+        {
+          name: 'Roblox',
+          desc: "Les grooming, harcèlement et manipulation de mineurs sur Roblox sont en forte hausse. Nous identifions et exposons ces individus.",
+          threats: ['Grooming de mineurs', 'Harcèlement ciblé', 'Vol de comptes', 'Arnaques Robux'],
+        },
+        {
+          name: 'Discord',
+          desc: "Serveurs malveillants, bots d'espionnage et réseaux de manipulation. Nous sécurisons vos communautés Discord.",
+          threats: ['Raids de serveurs', 'Doxxing', 'Phishing ciblé', 'Bot malveillants'],
+        },
+      ],
+      steps: [
+        { title: 'Détection', desc: 'Identification des comportements suspects' },
+        { title: 'Investigation', desc: 'Collecte de preuves numériques' },
+        { title: 'Documentation', desc: 'Rapport légal complet et certifié' },
+        { title: 'Signalement', desc: 'Transmission aux autorités compétentes' },
+      ],
+    },
+    tracker: {
+      sectionLabel: 'Outil Exclusif',
+      title: 'Tracker',
+      titleAccent: 'Intelligence',
+      titleSuffix: 'en temps réel',
+      description: "Notre outil propriétaire de tracking OSINT permet une collecte d'informations en temps réel sur des cibles définies.",
+      cta: 'Lancer le Tracker',
+      accessNote: 'tracker.prohacking77.me · Accès professionnel uniquement',
+      pills: ['Tracking IP', 'Geo-intelligence', 'Device fingerprint', 'Session analysis', 'Cross-platform', 'Temps réel'],
+    },
+    bio: {
+      passportLabel: 'PASSEPORT CYBER · N° ZHT-2026-BE',
+      statsLabels: ['Certif.', 'Ans', 'Badges'],
+      operatorProfile: 'Profil Opérateur',
+      certRegistry: 'Registre des Certifications',
+      bio1: (
+        <>Expert en cybersécurité basé en <span className="text-emerald-400 font-semibold">Belgique</span>, avec une expérience technique très solide acquise sur le terrain depuis plus de <span className="text-emerald-400 font-semibold">20 ans</span>, dans les domaines du renseignement en sources ouvertes (OSINT), de la sécurité offensive et de l'investigation numérique. Opérateur actif intervenant aussi bien sur des enquêtes civiles que sur des contextes à enjeux élevés.</>
+      ),
+      bio2: (
+        <><span className="text-emerald-400 font-semibold">Instructeur</span> de groupes techniques spécialisés — formation de la prochaine génération d'analystes OSINT et de professionnels de la cybersécurité. Transmission des techniques avancées de collecte, d'analyse et de corrélation de données issues de sources ouvertes, réseaux sociaux, registres publics et infrastructures numériques.</>
+      ),
+      bio3: (
+        <>Spécialisé dans la <span className="text-white font-medium">protection des mineurs en ligne</span>, la traque des prédateurs numériques et la documentation légale de preuves numériques. Collaboration régulière avec des plateformes communautaires (Roblox, Discord) pour l'identification et l'exposition d'acteurs malveillants. Chaque intervention est conduite avec une méthodologie rigoureuse, une discrétion absolue et une traçabilité complète.</>
+      ),
+      bio4: (
+        <>Titulaire de <span className="text-emerald-400 font-semibold">30+ certifications professionnelles</span> vérifiables publiquement via le registre CanCred. Chaque accréditation représente une validation formelle d'une compétence opérationnelle dans le domaine de la cybersécurité, du renseignement ou de l'investigation numérique.</>
+      ),
+      certHeaders: ['Domaine', 'Niveau', 'Preuve'],
+      certRows: [
+        { domain: 'Offensive Security (PenTesting)', level: 'Professionnel Avancé', proof: 'Certifié ExorciseThat' },
+        { domain: 'OSINT & Digital Forensics', level: 'Expert Enquêteur', proof: "Permis d'Osinter / CanCred" },
+        { domain: 'Threat Intelligence', level: 'Spécialiste Groupes', proof: '30+ Diplômes Pro' },
+      ],
+      pills: ["20+ Ans d'Expérience", 'Instructeur OSINT', 'Belgique', 'Offensive Security', 'Trace Labs GOSP'],
+      verifyCta: 'Vérifier mon Passeport CanCred',
+      contactCta: 'Contact',
+    },
+    footer: {
+      tagline: "Expert OSINT spécialisé dans l'investigation numérique, la protection des mineurs et la sécurité des communautés en ligne.",
+      servicesTitle: 'Services',
+      services: ['Ghostint OSINT', 'Protection mineurs', 'Tracker Intelligence'],
+      contactTitle: 'Contact',
+      copyright: '© 2026 Zhétical · Tous droits réservés',
+      status: 'Systèmes opérationnels',
+      disclaimer: { label: 'Avertissement', text: "Ce site est strictement réservé à un usage éducatif et à la sensibilisation en cybersécurité. L'auteur décline toute responsabilité pour tout usage malveillant ou illégal des informations présentées." },
+    },
+  },
+  EN: {
+    nav: {
+      links: ['Investigations', 'Prevention', 'Tracker', 'Contact'],
+      tracker: 'Tracker',
+    },
+    hero: {
+      badge: 'OSINT Expert · Operational',
+      typingWords: ['Protection & Investigation', 'OSINT Expert', 'Cyber Intelligence', 'Digital Forensics'],
+      description: "Cutting-edge digital intelligence. OSINT investigations, protection against online predators and securing digital communities.",
+      ctaTracker: 'Launch Tracker',
+      ctaGhostint: 'Discover Ghostint',
+      stats: [
+        { label: 'Successful OSINT Investigations', value: '50+' },
+        { label: 'Success Rate', value: '97%' },
+        { label: 'Years of Experience', value: '2+' },
+      ],
+      scroll: 'Scroll',
+    },
+    enquetes: {
+      sectionLabel: 'Investigations',
+      title: 'Ghostint',
+      titleAccent: 'Advanced OSINT',
+      p1: "Ghostint is our premier OSINT investigation service. We track malicious individuals, identify online predators, and document digital evidence with surgical precision.",
+      p2: "Every investigation is conducted with absolute discretion. Our methods combine artificial intelligence, forensic techniques, and multi-source intelligence for irrefutable results.",
+      cta: 'Request an investigation',
+      features: [
+        { title: 'Identity Research', desc: 'Trace pseudonyms, avatars, histories and account connections across all platforms.' },
+        { title: 'Digital Geolocation', desc: 'Metadata analysis, IP addresses and digital fingerprints for precise location.' },
+        { title: 'Data Analysis', desc: 'Cross-referencing public databases, social networks and open-source information.' },
+        { title: 'Covert Surveillance', desc: 'Passive monitoring and intelligence gathering without alerting the target.' },
+      ],
+    },
+    prevention: {
+      sectionLabel: 'Protection',
+      title: 'Prevention &',
+      titleAccent: 'Security',
+      description: "We protect online communities against digital threats, especially the youngest users.",
+      activeBadge: 'Active protection',
+      threatsLabel: 'Identified threats',
+      processTitle: 'Our intervention process',
+      platforms: [
+        {
+          name: 'Roblox',
+          desc: "Grooming, harassment and manipulation of minors on Roblox are rising sharply. We identify and expose these individuals.",
+          threats: ['Minor grooming', 'Targeted harassment', 'Account theft', 'Robux scams'],
+        },
+        {
+          name: 'Discord',
+          desc: "Malicious servers, spy bots and manipulation networks. We secure your Discord communities.",
+          threats: ['Server raids', 'Doxxing', 'Targeted phishing', 'Malicious bots'],
+        },
+      ],
+      steps: [
+        { title: 'Detection', desc: 'Identification of suspicious behaviour' },
+        { title: 'Investigation', desc: 'Digital evidence collection' },
+        { title: 'Documentation', desc: 'Full certified legal report' },
+        { title: 'Reporting', desc: 'Submission to competent authorities' },
+      ],
+    },
+    tracker: {
+      sectionLabel: 'Exclusive Tool',
+      title: 'Tracker',
+      titleAccent: 'Intelligence',
+      titleSuffix: 'in real time',
+      description: "Our proprietary OSINT tracking tool enables real-time information gathering on defined targets.",
+      cta: 'Launch Tracker',
+      accessNote: 'tracker.prohacking77.me · Professional access only',
+      pills: ['IP Tracking', 'Geo-intelligence', 'Device fingerprint', 'Session analysis', 'Cross-platform', 'Real-time'],
+    },
+    bio: {
+      passportLabel: 'CYBER PASSPORT · N° ZHT-2026-BE',
+      statsLabels: ['Certif.', 'Yrs', 'Badges'],
+      operatorProfile: 'Operator Profile',
+      certRegistry: 'Certification Registry',
+      bio1: (
+        <>Cybersecurity expert based in <span className="text-emerald-400 font-semibold">Belgium</span>, with solid technical field experience spanning over <span className="text-emerald-400 font-semibold">20 years</span> in open-source intelligence (OSINT), offensive security and digital investigation. Active operator engaging in both civil inquiries and high-stakes contexts.</>
+      ),
+      bio2: (
+        <><span className="text-emerald-400 font-semibold">Instructor</span> for specialised technical groups — training the next generation of OSINT analysts and cybersecurity professionals. Teaching advanced collection, analysis and data-correlation techniques from open sources, social networks, public registries and digital infrastructure.</>
+      ),
+      bio3: (
+        <>Specialised in <span className="text-white font-medium">protection of minors online</span>, tracking digital predators, and legally documenting digital evidence. Regular collaboration with online communities (Roblox, Discord) to identify and expose malicious actors. Every intervention is conducted with rigorous methodology, absolute discretion and full traceability.</>
+      ),
+      bio4: (
+        <>Holder of <span className="text-emerald-400 font-semibold">30+ professional certifications</span> publicly verifiable via the CanCred registry. Each accreditation is a formal validation of an operational competency in cybersecurity, intelligence, or digital investigation.</>
+      ),
+      certHeaders: ['Domain', 'Level', 'Proof'],
+      certRows: [
+        { domain: 'Offensive Security (PenTesting)', level: 'Advanced Professional', proof: 'ExorciseThat Certified' },
+        { domain: 'OSINT & Digital Forensics', level: 'Expert Investigator', proof: "Osinter Licence / CanCred" },
+        { domain: 'Threat Intelligence', level: 'Group Specialist', proof: '30+ Pro Diplomas' },
+      ],
+      pills: ['20+ Years Experience', 'OSINT Instructor', 'Belgium', 'Offensive Security', 'Trace Labs GOSP'],
+      verifyCta: 'Verify my CanCred Passport',
+      contactCta: 'Contact',
+    },
+    footer: {
+      tagline: "OSINT expert specialised in digital investigation, protection of minors and online community security.",
+      servicesTitle: 'Services',
+      services: ['Ghostint OSINT', 'Minor protection', 'Tracker Intelligence'],
+      contactTitle: 'Contact',
+      copyright: '© 2026 Zhétical · All rights reserved',
+      status: 'Systems operational',
+      disclaimer: { label: 'Disclaimer', text: 'This site is strictly reserved for educational purposes and cybersecurity awareness. The author disclaims all responsibility for any malicious or illegal use of the information presented.' },
+    },
+  },
+  ES: {
+    nav: {
+      links: ['Investigaciones', 'Prevención', 'Tracker', 'Contacto'],
+      tracker: 'Tracker',
+    },
+    hero: {
+      badge: 'Experto OSINT · Operacional',
+      typingWords: ['Protección & Investigación', 'Experto OSINT', 'Cyber Intelligence', 'Forense Digital'],
+      description: "Inteligencia digital de vanguardia. Investigaciones OSINT, protección contra depredadores en línea y seguridad de comunidades digitales.",
+      ctaTracker: 'Iniciar Tracker',
+      ctaGhostint: 'Descubrir Ghostint',
+      stats: [
+        { label: 'Investigaciones OSINT exitosas', value: '50+' },
+        { label: 'Tasa de éxito', value: '97%' },
+        { label: 'Años de experiencia', value: '2+' },
+      ],
+      scroll: 'Desplazar',
+    },
+    enquetes: {
+      sectionLabel: 'Investigaciones',
+      title: 'Ghostint',
+      titleAccent: 'OSINT avanzado',
+      p1: "Ghostint es nuestro servicio de investigación OSINT de primer nivel. Rastreamos individuos maliciosos, identificamos depredadores en línea y documentamos evidencia digital con precisión quirúrgica.",
+      p2: "Cada investigación se lleva a cabo con discreción absoluta. Nuestros métodos combinan inteligencia artificial, técnicas forenses y vigilancia multifuente para obtener resultados irrefutables.",
+      cta: 'Solicitar una investigación',
+      features: [
+        { title: 'Búsqueda de identidad', desc: 'Rastrear seudónimos, avatares, historiales y conexiones entre cuentas en todas las plataformas.' },
+        { title: 'Geolocalización digital', desc: 'Análisis de metadatos, direcciones IP y huellas digitales para localizar con precisión.' },
+        { title: 'Análisis de datos', desc: 'Cruce de bases de datos públicas, redes sociales y fuentes de código abierto.' },
+        { title: 'Vigilancia discreta', desc: 'Monitoreo pasivo y recopilación de inteligencia sin alertar al objetivo.' },
+      ],
+    },
+    prevention: {
+      sectionLabel: 'Protección',
+      title: 'Prevención &',
+      titleAccent: 'Seguridad',
+      description: "Protegemos las comunidades en línea contra amenazas digitales, especialmente a los usuarios más jóvenes.",
+      activeBadge: 'Protección activa',
+      threatsLabel: 'Amenazas identificadas',
+      processTitle: 'Nuestro proceso de intervención',
+      platforms: [
+        {
+          name: 'Roblox',
+          desc: "El grooming, el acoso y la manipulación de menores en Roblox están en fuerte aumento. Identificamos y exponemos a estos individuos.",
+          threats: ['Grooming de menores', 'Acoso dirigido', 'Robo de cuentas', 'Estafas Robux'],
+        },
+        {
+          name: 'Discord',
+          desc: "Servidores maliciosos, bots espía y redes de manipulación. Aseguramos tus comunidades de Discord.",
+          threats: ['Raids de servidores', 'Doxxing', 'Phishing dirigido', 'Bots maliciosos'],
+        },
+      ],
+      steps: [
+        { title: 'Detección', desc: 'Identificación de comportamientos sospechosos' },
+        { title: 'Investigación', desc: 'Recopilación de evidencia digital' },
+        { title: 'Documentación', desc: 'Informe legal completo y certificado' },
+        { title: 'Reporte', desc: 'Transmisión a las autoridades competentes' },
+      ],
+    },
+    tracker: {
+      sectionLabel: 'Herramienta Exclusiva',
+      title: 'Tracker',
+      titleAccent: 'Intelligence',
+      titleSuffix: 'en tiempo real',
+      description: "Nuestra herramienta de seguimiento OSINT propietaria permite la recopilación de información en tiempo real sobre objetivos definidos.",
+      cta: 'Iniciar Tracker',
+      accessNote: 'tracker.prohacking77.me · Acceso profesional únicamente',
+      pills: ['Tracking IP', 'Geo-intelligence', 'Huella de dispositivo', 'Análisis de sesión', 'Cross-platform', 'Tiempo real'],
+    },
+    bio: {
+      passportLabel: 'PASAPORTE CYBER · N° ZHT-2026-BE',
+      statsLabels: ['Certif.', 'Años', 'Badges'],
+      operatorProfile: 'Perfil del Operador',
+      certRegistry: 'Registro de Certificaciones',
+      bio1: (
+        <>Experto en ciberseguridad con sede en <span className="text-emerald-400 font-semibold">Bélgica</span>, con una sólida experiencia técnica de campo durante más de <span className="text-emerald-400 font-semibold">20 años</span> en inteligencia de fuentes abiertas (OSINT), seguridad ofensiva e investigación digital. Operador activo que interviene tanto en investigaciones civiles como en contextos de alto riesgo.</>
+      ),
+      bio2: (
+        <><span className="text-emerald-400 font-semibold">Instructor</span> de grupos técnicos especializados — formando a la próxima generación de analistas OSINT y profesionales de ciberseguridad. Transmisión de técnicas avanzadas de recopilación, análisis y correlación de datos de fuentes abiertas, redes sociales, registros públicos e infraestructuras digitales.</>
+      ),
+      bio3: (
+        <>Especializado en la <span className="text-white font-medium">protección de menores en línea</span>, el rastreo de depredadores digitales y la documentación legal de evidencia digital. Colaboración habitual con plataformas comunitarias (Roblox, Discord) para identificar y exponer a actores maliciosos. Cada intervención se realiza con metodología rigurosa, discreción absoluta y trazabilidad completa.</>
+      ),
+      bio4: (
+        <>Titular de <span className="text-emerald-400 font-semibold">30+ certificaciones profesionales</span> verificables públicamente a través del registro CanCred. Cada acreditación representa una validación formal de una competencia operacional en ciberseguridad, inteligencia o investigación digital.</>
+      ),
+      certHeaders: ['Dominio', 'Nivel', 'Prueba'],
+      certRows: [
+        { domain: 'Seguridad Ofensiva (PenTesting)', level: 'Profesional Avanzado', proof: 'Certificado ExorciseThat' },
+        { domain: 'OSINT & Forense Digital', level: 'Investigador Experto', proof: "Licencia Osinter / CanCred" },
+        { domain: 'Threat Intelligence', level: 'Especialista en Grupos', proof: '30+ Diplomas Pro' },
+      ],
+      pills: ['20+ Años de Experiencia', 'Instructor OSINT', 'Bélgica', 'Seguridad Ofensiva', 'Trace Labs GOSP'],
+      verifyCta: 'Verificar mi Pasaporte CanCred',
+      contactCta: 'Contacto',
+    },
+    footer: {
+      tagline: "Experto OSINT especializado en investigación digital, protección de menores y seguridad de comunidades en línea.",
+      servicesTitle: 'Servicios',
+      services: ['Ghostint OSINT', 'Protección de menores', 'Tracker Intelligence'],
+      contactTitle: 'Contacto',
+      copyright: '© 2026 Zhétical · Todos los derechos reservados',
+      status: 'Sistemas operacionales',
+      disclaimer: { label: 'Aviso', text: 'Este sitio está estrictamente reservado para fines educativos y de concienciación sobre ciberseguridad. El autor declina toda responsabilidad por cualquier uso malicioso o ilegal de la información presentada.' },
+    },
+  },
+  PT: {
+    nav: {
+      links: ['Investigações', 'Prevenção', 'Tracker', 'Contacto'],
+      tracker: 'Tracker',
+    },
+    hero: {
+      badge: 'Especialista OSINT · Operacional',
+      typingWords: ['Proteção & Investigação', 'Especialista OSINT', 'Cyber Intelligence', 'Forense Digital'],
+      description: "Inteligência digital de ponta. Investigações OSINT, proteção contra predadores online e segurança de comunidades digitais.",
+      ctaTracker: 'Iniciar Tracker',
+      ctaGhostint: 'Descobrir Ghostint',
+      stats: [
+        { label: 'Investigações OSINT bem-sucedidas', value: '50+' },
+        { label: 'Taxa de sucesso', value: '97%' },
+        { label: 'Anos de experiência', value: '2+' },
+      ],
+      scroll: 'Rolar',
+    },
+    enquetes: {
+      sectionLabel: 'Investigações',
+      title: 'Ghostint',
+      titleAccent: 'OSINT avançado',
+      p1: "O Ghostint é o nosso serviço de investigação OSINT de primeiro nível. Rastreamos indivíduos maliciosos, identificamos predadores online e documentamos provas digitais com precisão cirúrgica.",
+      p2: "Cada investigação é conduzida com discrição absoluta. Os nossos métodos combinam inteligência artificial, técnicas forenses e vigilância multi-fonte para resultados irrefutáveis.",
+      cta: 'Solicitar uma investigação',
+      features: [
+        { title: 'Pesquisa de identidade', desc: 'Rastrear pseudónimos, avatares, históricos e ligações entre contas em todas as plataformas.' },
+        { title: 'Geolocalização digital', desc: 'Análise de metadados, endereços IP e impressões digitais para localizar com precisão.' },
+        { title: 'Análise de dados', desc: 'Cruzamento de bases de dados públicas, redes sociais e fontes de código aberto.' },
+        { title: 'Vigilância discreta', desc: 'Monitorização passiva e recolha de informações sem alertar o alvo.' },
+      ],
+    },
+    prevention: {
+      sectionLabel: 'Proteção',
+      title: 'Prevenção &',
+      titleAccent: 'Segurança',
+      description: "Protegemos as comunidades online contra ameaças digitais, especialmente os utilizadores mais jovens.",
+      activeBadge: 'Proteção ativa',
+      threatsLabel: 'Ameaças identificadas',
+      processTitle: 'O nosso processo de intervenção',
+      platforms: [
+        {
+          name: 'Roblox',
+          desc: "O grooming, assédio e manipulação de menores no Roblox estão a aumentar fortemente. Identificamos e expossamos esses indivíduos.",
+          threats: ['Grooming de menores', 'Assédio dirigido', 'Roubo de contas', 'Fraudes Robux'],
+        },
+        {
+          name: 'Discord',
+          desc: "Servidores maliciosos, bots espiões e redes de manipulação. Protegemos as suas comunidades Discord.",
+          threats: ['Raids de servidores', 'Doxxing', 'Phishing dirigido', 'Bots maliciosos'],
+        },
+      ],
+      steps: [
+        { title: 'Deteção', desc: 'Identificação de comportamentos suspeitos' },
+        { title: 'Investigação', desc: 'Recolha de provas digitais' },
+        { title: 'Documentação', desc: 'Relatório legal completo e certificado' },
+        { title: 'Denúncia', desc: 'Transmissão às autoridades competentes' },
+      ],
+    },
+    tracker: {
+      sectionLabel: 'Ferramenta Exclusiva',
+      title: 'Tracker',
+      titleAccent: 'Intelligence',
+      titleSuffix: 'em tempo real',
+      description: "A nossa ferramenta proprietária de tracking OSINT permite a recolha de informações em tempo real sobre alvos definidos.",
+      cta: 'Iniciar Tracker',
+      accessNote: 'tracker.prohacking77.me · Acesso profissional apenas',
+      pills: ['Tracking IP', 'Geo-intelligence', 'Impressão digital do dispositivo', 'Análise de sessão', 'Cross-platform', 'Tempo real'],
+    },
+    bio: {
+      passportLabel: 'PASSAPORTE CYBER · N° ZHT-2026-BE',
+      statsLabels: ['Certif.', 'Anos', 'Badges'],
+      operatorProfile: 'Perfil do Operador',
+      certRegistry: 'Registo de Certificações',
+      bio1: (
+        <>Especialista em cibersegurança sediado na <span className="text-emerald-400 font-semibold">Bélgica</span>, com uma sólida experiência técnica de campo de mais de <span className="text-emerald-400 font-semibold">20 anos</span> nos domínios da inteligência em fontes abertas (OSINT), segurança ofensiva e investigação digital. Operador ativo que intervém tanto em investigações civis como em contextos de alto risco.</>
+      ),
+      bio2: (
+        <><span className="text-emerald-400 font-semibold">Instrutor</span> de grupos técnicos especializados — formando a próxima geração de analistas OSINT e profissionais de cibersegurança. Transmissão de técnicas avançadas de recolha, análise e correlação de dados de fontes abertas, redes sociais, registos públicos e infraestruturas digitais.</>
+      ),
+      bio3: (
+        <>Especializado na <span className="text-white font-medium">proteção de menores online</span>, rastreio de predadores digitais e documentação legal de provas digitais. Colaboração regular com plataformas comunitárias (Roblox, Discord) para identificar e expor atores maliciosos. Cada intervenção é conduzida com metodologia rigorosa, discrição absoluta e rastreabilidade completa.</>
+      ),
+      bio4: (
+        <>Titular de <span className="text-emerald-400 font-semibold">mais de 30 certificações profissionais</span> verificáveis publicamente através do registo CanCred. Cada acreditação representa uma validação formal de uma competência operacional no domínio da cibersegurança, inteligência ou investigação digital.</>
+      ),
+      certHeaders: ['Domínio', 'Nível', 'Prova'],
+      certRows: [
+        { domain: 'Segurança Ofensiva (PenTesting)', level: 'Profissional Avançado', proof: 'Certificado ExorciseThat' },
+        { domain: 'OSINT & Forense Digital', level: 'Investigador Especialista', proof: "Licença Osinter / CanCred" },
+        { domain: 'Threat Intelligence', level: 'Especialista em Grupos', proof: '30+ Diplomas Pro' },
+      ],
+      pills: ['20+ Anos de Experiência', 'Instrutor OSINT', 'Bélgica', 'Segurança Ofensiva', 'Trace Labs GOSP'],
+      verifyCta: 'Verificar o meu Passaporte CanCred',
+      contactCta: 'Contacto',
+    },
+    footer: {
+      tagline: "Especialista OSINT em investigação digital, proteção de menores e segurança de comunidades online.",
+      servicesTitle: 'Serviços',
+      services: ['Ghostint OSINT', 'Proteção de menores', 'Tracker Intelligence'],
+      contactTitle: 'Contacto',
+      copyright: '© 2026 Zhétical · Todos os direitos reservados',
+      status: 'Sistemas operacionais',
+      disclaimer: { label: 'Aviso', text: 'Este site destina-se exclusivamente a fins educativos e à sensibilização para a cibersegurança. O autor declina qualquer responsabilidade pelo uso indevido ou ilegal das informações apresentadas.' },
+    },
+  },
+} as const;
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 
@@ -62,8 +492,6 @@ function useTypingEffect(words: string[], speed = 80, pause = 1800) {
 
 // ── sub-components ────────────────────────────────────────────────────────────
 
-type Lang = 'FR' | 'EN' | 'ES' | 'PT';
-
 function LanguageSwitcher({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   return (
     <div className="flex items-center gap-1 font-mono text-xs">
@@ -73,9 +501,7 @@ function LanguageSwitcher({ lang, setLang }: { lang: Lang; setLang: (l: Lang) =>
           <button
             onClick={() => setLang(l)}
             className={`px-1 py-0.5 rounded transition-colors ${
-              lang === l
-                ? 'text-emerald-400 font-bold'
-                : 'text-gray-600 hover:text-gray-400'
+              lang === l ? 'text-emerald-400 font-bold' : 'text-gray-600 hover:text-gray-400'
             }`}
           >
             {l}
@@ -88,6 +514,7 @@ function LanguageSwitcher({ lang, setLang }: { lang: Lang; setLang: (l: Lang) =>
 
 function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   const [scrolled, setScrolled] = useState(false);
+  const tr = t[lang].nav;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -98,9 +525,7 @@ function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-cyber-darker/95 backdrop-blur-md border-b border-cyber-border'
-          : 'bg-transparent'
+        scrolled ? 'bg-cyber-darker/95 backdrop-blur-md border-b border-cyber-border' : 'bg-transparent'
       }`}
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -111,10 +536,10 @@ function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
           <span className="text-white">ZH</span><span className="text-emerald-400 emerald-glow">É</span><span className="text-white">TICAL</span>
         </span>
         <div className="hidden md:flex items-center gap-8">
-          {['Enquêtes', 'Prévention', 'Tracker', 'Contact'].map((item) => (
+          {tr.links.map((item, i) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`#${['enquetes', 'prévention', 'tracker', 'contact'][i]}`}
               className="text-gray-400 hover:text-emerald-400 transition-colors text-sm font-medium tracking-wide"
             >
               {item}
@@ -130,7 +555,7 @@ function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
             className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-2 rounded text-sm font-mono hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all"
           >
             <Radio size={14} />
-            Tracker
+            {tr.tracker}
           </a>
         </div>
       </div>
@@ -138,18 +563,12 @@ function Navbar({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   );
 }
 
-function HeroSection() {
-  const typed = useTypingEffect([
-    'Protection & Investigation',
-    'OSINT Expert',
-    'Cyber Intelligence',
-    'Digital Forensics',
-  ]);
-
+function HeroSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].hero;
+  const typed = useTypingEffect(tr.typingWords as unknown as string[]);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 600], [0, 150]);
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
-
   const particles = Array.from({ length: 30 }, (_, i) => i);
 
   return (
@@ -157,42 +576,26 @@ function HeroSection() {
       style={{ opacity }}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden grid-bg noise-bg"
     >
-      {/* Scanline */}
       <div className="scanline fixed inset-x-0 h-32 z-10 pointer-events-none" />
 
-      {/* Floating particles */}
       {particles.map((i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-emerald-500/20 rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.8, 0.2],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 4,
-            repeat: Infinity,
-            delay: Math.random() * 4,
-          }}
+          style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+          animate={{ y: [0, -30, 0], opacity: [0.2, 0.8, 0.2] }}
+          transition={{ duration: 3 + Math.random() * 4, repeat: Infinity, delay: Math.random() * 4 }}
         />
       ))}
 
-      {/* Large background text */}
       <motion.div
         style={{ y }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
       >
-        <span className="text-[20vw] font-black text-emerald-500/[0.02] tracking-tighter font-mono">
-          OSINT
-        </span>
+        <span className="text-[20vw] font-black text-emerald-500/[0.02] tracking-tighter font-mono">OSINT</span>
       </motion.div>
 
       <div className="relative z-20 text-center px-6 max-w-4xl">
-        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -200,12 +603,9 @@ function HeroSection() {
           className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5 mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">
-            Expert OSINT · Opérationnel
-          </span>
+          <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">{tr.badge}</span>
         </motion.div>
 
-        {/* Main heading */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -215,29 +615,24 @@ function HeroSection() {
           <span className="text-white">ZH</span><span className="text-emerald-400">É</span><span className="text-white">TICAL</span>
         </motion.h1>
 
-        {/* Typing text */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
           className="text-xl md:text-2xl text-emerald-400 font-mono mb-6 h-8"
         >
-          {typed}
-          <span className="typing-cursor ml-0.5">&nbsp;</span>
+          {typed}<span className="typing-cursor ml-0.5">&nbsp;</span>
         </motion.div>
 
-        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
           className="text-gray-400 text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Intelligence numérique de pointe. Investigations OSINT, protection contre les prédateurs
-          en ligne et sécurisation des communautés digitales.
+          {tr.description}
         </motion.p>
 
-        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -251,47 +646,39 @@ function HeroSection() {
             className="flex items-center justify-center gap-2 bg-emerald-500 text-black px-8 py-3 rounded font-semibold hover:bg-emerald-400 transition-all hover:scale-105 active:scale-95"
           >
             <Zap size={18} />
-            Lancer le Tracker
+            {tr.ctaTracker}
           </a>
           <a
             href="#enquetes"
             className="flex items-center justify-center gap-2 border border-emerald-500/30 text-emerald-400 px-8 py-3 rounded font-semibold hover:bg-emerald-500/10 transition-all"
           >
             <Search size={18} />
-            Découvrir Ghostint
+            {tr.ctaGhostint}
           </a>
         </motion.div>
 
-        {/* Stats */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.3 }}
           className="flex flex-col sm:flex-row gap-8 justify-center"
         >
-          {[
-            { label: 'Enquêtes OSINT réussies', value: '50+' },
-            { label: 'Taux de réussite', value: '97%' },
-            { label: "Années d'expérience", value: '2+' },
-          ].map((stat) => (
+          {tr.stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <div className="text-3xl font-black text-emerald-400 font-mono emerald-glow">
-                {stat.value}
-              </div>
+              <div className="text-3xl font-black text-emerald-400 font-mono emerald-glow">{stat.value}</div>
               <div className="text-gray-500 text-sm mt-1">{stat.label}</div>
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-600"
       >
-        <span className="text-xs font-mono tracking-widest uppercase">Défiler</span>
+        <span className="text-xs font-mono tracking-widest uppercase">{tr.scroll}</span>
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
           <ChevronDown size={20} />
         </motion.div>
@@ -304,20 +691,12 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded px-3 py-1 mb-4">
       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-      <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">
-        {children}
-      </span>
+      <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">{children}</span>
     </div>
   );
 }
 
-function AnimatedSection({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -334,40 +713,28 @@ function AnimatedSection({
   );
 }
 
-function ExpertiseBioSection() {
-  const certRows = [
-    { domain: 'Offensive Security (PenTesting)', level: 'Professionnel Avancé', proof: 'Certifié ExorciseThat' },
-    { domain: 'OSINT & Digital Forensics', level: 'Expert Enquêteur', proof: "Permis d'Osinter / CanCred" },
-    { domain: 'Threat Intelligence', level: 'Spécialiste Groupes', proof: '30+ Diplômes Pro' },
-  ];
+function ExpertiseBioSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].bio;
 
   return (
     <section id="expertise" className="py-12 px-6 bg-[#050505]">
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
-          {/* Passport — compact card with hairline emerald border */}
           <div className="relative rounded-xl border border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.06)] bg-[#080b08] overflow-hidden">
-
             <div className="h-px w-full bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
 
-            {/* ── HEADER ROW — compact ── */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-emerald-500/10 bg-emerald-500/3">
               <div className="flex items-center gap-4">
                 <div>
                   <p className="text-emerald-400/40 text-[10px] font-mono tracking-[0.3em] uppercase leading-none mb-0.5">
-                    PASSEPORT CYBER · N° ZHT-2026-BE
+                    {tr.passportLabel}
                   </p>
                   <h2 className="text-2xl font-black font-mono leading-none">
                     <span className="text-white">ZH</span><span className="text-emerald-400" style={{ textShadow: '0 0 12px rgba(16,185,129,0.5)' }}>É</span><span className="text-white">TICAL</span>
                   </h2>
                 </div>
-                {/* Stats inline */}
                 <div className="hidden sm:flex items-center gap-1 ml-4">
-                  {[
-                    { v: '30+', l: 'Certif.' },
-                    { v: '20', l: 'Ans' },
-                    { v: '9', l: 'Badges' },
-                  ].map((s, i) => (
+                  {[{ v: '30+', l: tr.statsLabels[0] }, { v: '20', l: tr.statsLabels[1] }, { v: '9', l: tr.statsLabels[2] }].map((s, i) => (
                     <div key={s.l} className={`px-3 py-1.5 ${i < 2 ? 'border-r border-emerald-500/10' : ''}`}>
                       <p className="text-emerald-400 font-black text-base font-mono leading-none">{s.v}</p>
                       <p className="text-gray-600 text-[10px]">{s.l}</p>
@@ -375,12 +742,10 @@ function ExpertiseBioSection() {
                   ))}
                 </div>
               </div>
-              {/* Badges — right, inline */}
               <div className="flex items-center gap-3">
                 <img src="https://i.postimg.cc/14t7v4k2/03-photo-2026-02-23-03-15-49.jpg" alt="Trace Labs CTF" className="h-10 w-10 object-contain rounded opacity-80 hover:opacity-100 transition-opacity" title="Trace Labs CTF Participant" />
                 <img src="https://i.postimg.cc/PNxVSNgV/00openbadge-OZ-2026-VLAMZF.png" alt="Oscar Zulu" className="h-10 w-10 object-contain rounded-full opacity-80 hover:opacity-100 transition-opacity" title="Oscar Zulu — Permis d'Osinter" />
                 <img src="https://i.postimg.cc/JtnYptfS/06-photo-2024-08-16-13-55-19.jpg" alt="ExorciseThat" className="h-10 w-10 object-contain rounded-full opacity-80 hover:opacity-100 transition-opacity" title="ExorciseThat Cybersecurity" />
-                {/* VERIFIED stamp */}
                 <div className="w-12 h-12 rounded-full border border-emerald-500/25 flex flex-col items-center justify-center text-center ml-1">
                   <span className="text-emerald-400/50 text-[6px] font-mono font-black leading-tight tracking-widest">VERIF.</span>
                   <span className="text-emerald-400/50 text-[6px] font-mono font-black leading-tight tracking-widest">2026</span>
@@ -388,58 +753,45 @@ function ExpertiseBioSection() {
               </div>
             </div>
 
-            {/* MRZ line */}
             <div className="px-6 py-1.5 border-b border-emerald-500/8 font-mono text-[9px] text-emerald-500/20 tracking-widest overflow-hidden whitespace-nowrap">
               P&lt;BEL&lt;ZHETICAL&lt;&lt;OPERATOR&lt;OSINT&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;ZHT2026BE&lt;&lt;CANCRED13165
             </div>
 
-            {/* ── BODY : 2 columns — bio left, certs right ── */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-
-              {/* LEFT — Bio dense */}
               <div className="px-6 py-5 border-b lg:border-b-0 lg:border-r border-emerald-500/10 space-y-3">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="w-0.5 h-4 bg-emerald-400 rounded-full" />
-                  <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">Profil Opérateur</span>
+                  <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">{tr.operatorProfile}</span>
                 </div>
                 <div className="border-l-2 border-emerald-500/60 pl-3">
-                  <p className="text-gray-300 leading-relaxed text-xs">
-                    Expert en cybersécurité basé en <span className="text-emerald-400 font-semibold">Belgique</span>, avec une expérience technique très solide acquise sur le terrain depuis plus de <span className="text-emerald-400 font-semibold">20 ans</span>, dans les domaines du renseignement en sources ouvertes (OSINT), de la sécurité offensive et de l'investigation numérique. Opérateur actif intervenant aussi bien sur des enquêtes civiles que sur des contextes à enjeux élevés.
-                  </p>
+                  <p className="text-gray-300 leading-relaxed text-xs">{tr.bio1}</p>
                 </div>
                 <div className="border-l-2 border-emerald-500/30 pl-3">
-                  <p className="text-gray-400 leading-relaxed text-xs">
-                    <span className="text-emerald-400 font-semibold">Instructeur</span> de groupes techniques spécialisés — formation de la prochaine génération d'analystes OSINT et de professionnels de la cybersécurité. Transmission des techniques avancées de collecte, d'analyse et de corrélation de données issues de sources ouvertes, réseaux sociaux, registres publics et infrastructures numériques.
-                  </p>
+                  <p className="text-gray-400 leading-relaxed text-xs">{tr.bio2}</p>
                 </div>
                 <div className="border-l-2 border-emerald-500/15 pl-3">
-                  <p className="text-gray-400 leading-relaxed text-xs">
-                    Spécialisé dans la <span className="text-white font-medium">protection des mineurs en ligne</span>, la traque des prédateurs numériques et la documentation légale de preuves numériques. Collaboration régulière avec des plateformes communautaires (Roblox, Discord) pour l'identification et l'exposition d'acteurs malveillants. Chaque intervention est conduite avec une méthodologie rigoureuse, une discrétion absolue et une traçabilité complète.
-                  </p>
+                  <p className="text-gray-400 leading-relaxed text-xs">{tr.bio3}</p>
                 </div>
                 <div className="border-l-2 border-emerald-500/8 pl-3">
-                  <p className="text-gray-400 leading-relaxed text-xs">
-                    Titulaire de <span className="text-emerald-400 font-semibold">30+ certifications professionnelles</span> vérifiables publiquement via le registre CanCred. Chaque accréditation représente une validation formelle d'une compétence opérationnelle dans le domaine de la cybersécurité, du renseignement ou de l'investigation numérique.
-                  </p>
+                  <p className="text-gray-400 leading-relaxed text-xs">{tr.bio4}</p>
                 </div>
               </div>
 
-              {/* RIGHT — Certifications table + stats + CTA */}
               <div className="px-6 py-5 flex flex-col gap-4">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-0.5 h-4 bg-emerald-400 rounded-full" />
-                  <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">Registre des Certifications</span>
+                  <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">{tr.certRegistry}</span>
                 </div>
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="border-b border-emerald-500/15">
-                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2 pr-4">Domaine</th>
-                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2 pr-4">Niveau</th>
-                      <th className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2">Preuve</th>
+                      {tr.certHeaders.map((h) => (
+                        <th key={h} className="text-left text-emerald-400/60 font-mono text-[10px] tracking-wider pb-2 pr-4">{h}</th>
+                      ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {certRows.map((row, i) => (
+                    {tr.certRows.map((row, i) => (
                       <motion.tr
                         key={row.domain}
                         initial={{ opacity: 0, x: -8 }}
@@ -455,14 +807,13 @@ function ExpertiseBioSection() {
                   </tbody>
                 </table>
 
-                {/* Biometric pills */}
                 <div className="flex flex-wrap gap-2 pt-1">
                   {[
-                    { icon: <Zap size={10} />, label: "20+ Ans d'Expérience" },
-                    { icon: <BookOpen size={10} />, label: 'Instructeur OSINT' },
-                    { icon: <MapPin size={10} />, label: 'Belgique' },
-                    { icon: <Crosshair size={10} />, label: 'Offensive Security' },
-                    { icon: <Globe size={10} />, label: 'Trace Labs GOSP' },
+                    { icon: <Zap size={10} />, label: tr.pills[0] },
+                    { icon: <BookOpen size={10} />, label: tr.pills[1] },
+                    { icon: <MapPin size={10} />, label: tr.pills[2] },
+                    { icon: <Crosshair size={10} />, label: tr.pills[3] },
+                    { icon: <Globe size={10} />, label: tr.pills[4] },
                   ].map((p) => (
                     <span key={p.label} className="inline-flex items-center gap-1 bg-emerald-500/5 border border-emerald-500/15 text-emerald-400/60 text-[10px] font-mono px-2 py-0.5 rounded-full">
                       {p.icon}{p.label}
@@ -470,14 +821,12 @@ function ExpertiseBioSection() {
                   ))}
                 </div>
 
-                {/* Badge images */}
                 <div className="flex items-center justify-around gap-4 pt-1 border-t border-emerald-500/10">
-                  <img src="https://i.postimg.cc/PNxVSNgV/00openbadge-OZ-2026-VLAMZF.png" alt="Oscar Zulu — Permis d'Osinter" className="h-20 w-20 object-contain rounded-full hover:scale-105 transition-transform duration-200" />
-                  <img src="https://i.postimg.cc/14t7v4k2/03-photo-2026-02-23-03-15-49.jpg" alt="Trace Labs CTF Participant" className="h-20 w-20 object-contain rounded hover:scale-105 transition-transform duration-200" />
-                  <img src="https://i.postimg.cc/JtnYptfS/06-photo-2024-08-16-13-55-19.jpg" alt="ExorciseThat Cybersecurity" className="h-20 w-20 object-contain rounded-full hover:scale-105 transition-transform duration-200" />
+                  <img src="https://i.postimg.cc/PNxVSNgV/00openbadge-OZ-2026-VLAMZF.png" alt="Oscar Zulu" className="h-20 w-20 object-contain rounded-full hover:scale-105 transition-transform duration-200" />
+                  <img src="https://i.postimg.cc/14t7v4k2/03-photo-2026-02-23-03-15-49.jpg" alt="Trace Labs CTF" className="h-20 w-20 object-contain rounded hover:scale-105 transition-transform duration-200" />
+                  <img src="https://i.postimg.cc/JtnYptfS/06-photo-2024-08-16-13-55-19.jpg" alt="ExorciseThat" className="h-20 w-20 object-contain rounded-full hover:scale-105 transition-transform duration-200" />
                 </div>
 
-                {/* CTA row */}
                 <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-emerald-500/10">
                   <a
                     href="https://passport.cancred.ca/app/profile/13165"
@@ -486,7 +835,7 @@ function ExpertiseBioSection() {
                     className="inline-flex items-center gap-1.5 bg-emerald-500 text-black px-4 py-2 rounded font-black text-xs hover:bg-emerald-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_12px_rgba(16,185,129,0.3)]"
                   >
                     <BadgeCheck size={12} />
-                    Vérifier mon Passeport CanCred
+                    {tr.verifyCta}
                     <ExternalLink size={10} />
                   </a>
                   <a
@@ -505,7 +854,7 @@ function ExpertiseBioSection() {
                     className="inline-flex items-center gap-1.5 border border-emerald-500/20 text-emerald-400/60 px-3 py-2 rounded text-xs hover:bg-emerald-500/8 transition-all"
                   >
                     <Mail size={11} />
-                    Contact
+                    {tr.contactCta}
                   </a>
                 </div>
               </div>
@@ -519,67 +868,41 @@ function ExpertiseBioSection() {
   );
 }
 
-function EnquetesSection() {
-  const features = [
-    {
-      icon: <Search className="text-emerald-400" size={20} />,
-      title: "Recherche d'identité",
-      desc: 'Retrouver des pseudos, avatars, historiques et connexions entre comptes sur toutes les plateformes.',
-    },
-    {
-      icon: <Globe className="text-emerald-400" size={20} />,
-      title: 'Géolocalisation digitale',
-      desc: "Analyse de métadonnées, adresses IP et empreintes numériques pour localiser avec précision.",
-    },
-    {
-      icon: <Database className="text-emerald-400" size={20} />,
-      title: 'Analyse de données',
-      desc: 'Croisement de bases de données publiques, réseaux sociaux et sources open-source.',
-    },
-    {
-      icon: <Activity className="text-emerald-400" size={20} />,
-      title: 'Surveillance discrète',
-      desc: "Monitoring passif et collecte de renseignements sans alerter la cible.",
-    },
+function EnquetesSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].enquetes;
+
+  const featureIcons = [
+    <Search className="text-emerald-400" size={20} />,
+    <Globe className="text-emerald-400" size={20} />,
+    <Database className="text-emerald-400" size={20} />,
+    <Activity className="text-emerald-400" size={20} />,
   ];
 
   return (
     <section id="enquetes" className="py-32 px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-
-        {/* Left: label + title + paragraphs + button */}
         <AnimatedSection>
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-px bg-emerald-500" />
-            <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">Investigations</span>
+            <span className="text-emerald-400 text-xs font-mono tracking-widest uppercase">{tr.sectionLabel}</span>
           </div>
           <h2 className="text-5xl font-black text-white leading-tight mb-6">
-            Ghostint<br />
-            <span className="text-emerald-400">OSINT avancé</span>
+            {tr.title}<br />
+            <span className="text-emerald-400">{tr.titleAccent}</span>
           </h2>
-          <p className="text-gray-300 text-base leading-relaxed mb-5">
-            Ghostint est notre service d'enquête OSINT de premier rang.
-            Nous traquons les individus malveillants, identifions les
-            prédateurs en ligne et documentons les preuves numériques
-            avec une précision chirurgicale.
-          </p>
-          <p className="text-gray-500 text-sm leading-relaxed mb-10">
-            Chaque enquête est menée avec discrétion absolue. Nos méthodes
-            combinent intelligence artificielle, techniques forensiques et veille
-            multi-sources pour des résultats irréfutables.
-          </p>
+          <p className="text-gray-300 text-base leading-relaxed mb-5">{tr.p1}</p>
+          <p className="text-gray-500 text-sm leading-relaxed mb-10">{tr.p2}</p>
           <a
             href="mailto:jose@prohacking77.me"
             className="inline-flex items-center gap-2 border border-emerald-500/40 text-emerald-400 px-6 py-3 rounded font-mono text-sm hover:bg-emerald-500/10 transition-all"
           >
             <Mail size={15} />
-            Demander une enquête
+            {tr.cta}
           </a>
         </AnimatedSection>
 
-        {/* Right: 4 stacked feature cards */}
         <div className="flex flex-col gap-3">
-          {features.map((f, i) => (
+          {tr.features.map((f, i) => (
             <motion.div
               key={f.title}
               initial={{ opacity: 0, x: 20 }}
@@ -588,7 +911,7 @@ function EnquetesSection() {
               className="flex items-start gap-4 bg-cyber-card border border-cyber-border rounded-lg p-5"
             >
               <div className="w-10 h-10 flex-shrink-0 bg-emerald-500/10 border border-emerald-500/20 rounded-lg flex items-center justify-center">
-                {f.icon}
+                {featureIcons[i]}
               </div>
               <div>
                 <h3 className="text-white font-semibold text-sm mb-1">{f.title}</h3>
@@ -597,119 +920,85 @@ function EnquetesSection() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
 }
 
-function PreventionSection() {
-  const platforms = [
-    {
-      name: 'Roblox',
-      icon: <Shield className="text-red-400" size={24} />,
-      color: 'from-red-900/20 to-transparent',
-      border: 'border-red-500/20',
-      accent: 'text-red-400',
-      badge: 'bg-red-500/10 text-red-400 border-red-500/20',
-      desc: "Les grooming, harcèlement et manipulation de mineurs sur Roblox sont en forte hausse. Nous identifions et exposons ces individus.",
-      threats: ['Grooming de mineurs', 'Harcèlement ciblé', 'Vol de comptes', 'Arnaques Robux'],
-    },
-    {
-      name: 'Discord',
-      icon: <Users className="text-blue-400" size={24} />,
-      color: 'from-blue-900/20 to-transparent',
-      border: 'border-blue-500/20',
-      accent: 'text-blue-400',
-      badge: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-      desc: "Serveurs malveillants, bots d'espionnage et réseaux de manipulation. Nous sécurisons vos communautés Discord.",
-      threats: ['Raids de serveurs', 'Doxxing', 'Phishing ciblé', 'Bot malveillants'],
-    },
+function PreventionSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].prevention;
+
+  const platformMeta = [
+    { icon: <Shield className="text-red-400" size={24} />, color: 'from-red-900/20 to-transparent', border: 'border-red-500/20', accent: 'text-red-400', badge: 'bg-red-500/10 text-red-400 border-red-500/20' },
+    { icon: <Users className="text-blue-400" size={24} />, color: 'from-blue-900/20 to-transparent', border: 'border-blue-500/20', accent: 'text-blue-400', badge: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
   ];
 
-  const steps = [
-    { step: '01', icon: <Search size={20} />, title: 'Détection', desc: 'Identification des comportements suspects' },
-    { step: '02', icon: <Eye size={20} />, title: 'Investigation', desc: 'Collecte de preuves numériques' },
-    { step: '03', icon: <Database size={20} />, title: 'Documentation', desc: 'Rapport légal complet et certifié' },
-    { step: '04', icon: <Send size={20} />, title: 'Signalement', desc: 'Transmission aux autorités compétentes' },
-  ];
+  const stepIcons = [<Search size={20} />, <Eye size={20} />, <Database size={20} />, <Send size={20} />];
 
   return (
     <section id="prévention" className="py-32 px-6 bg-cyber-darker/50">
       <div className="max-w-6xl mx-auto">
         <AnimatedSection>
-          <SectionLabel>Protection</SectionLabel>
+          <SectionLabel>{tr.sectionLabel}</SectionLabel>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
-            Prévention &amp;{' '}
-            <span className="text-emerald-400">Sécurité</span>
+            {tr.title}{' '}
+            <span className="text-emerald-400">{tr.titleAccent}</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mb-16 leading-relaxed">
-            Nous protégeons les communautés en ligne contre les menaces numériques, en particulier
-            les plus jeunes utilisateurs.
-          </p>
+          <p className="text-gray-400 text-lg max-w-2xl mb-16 leading-relaxed">{tr.description}</p>
         </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-          {platforms.map((p, i) => (
-            <AnimatedSection key={p.name}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.15 }}
-                className={`bg-gradient-to-b ${p.color} border ${p.border} rounded-xl p-8`}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 bg-cyber-card border border-cyber-border rounded-lg flex items-center justify-center">
-                    {p.icon}
+          {tr.platforms.map((p, i) => {
+            const meta = platformMeta[i];
+            return (
+              <AnimatedSection key={p.name}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.15 }}
+                  className={`bg-gradient-to-b ${meta.color} border ${meta.border} rounded-xl p-8`}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-12 h-12 bg-cyber-card border border-cyber-border rounded-lg flex items-center justify-center">
+                      {meta.icon}
+                    </div>
+                    <div>
+                      <h3 className={`text-xl font-bold ${meta.accent}`}>{p.name}</h3>
+                      <span className={`text-xs border rounded-full px-2 py-0.5 ${meta.badge}`}>{tr.activeBadge}</span>
+                    </div>
                   </div>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6">{p.desc}</p>
                   <div>
-                    <h3 className={`text-xl font-bold ${p.accent}`}>{p.name}</h3>
-                    <span className={`text-xs border rounded-full px-2 py-0.5 ${p.badge}`}>
-                      Protection active
-                    </span>
+                    <p className="text-gray-600 text-xs uppercase tracking-widest mb-3 font-mono">{tr.threatsLabel}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {p.threats.map((threat) => (
+                        <span key={threat} className="flex items-center gap-1.5 text-xs text-gray-400 bg-cyber-card border border-cyber-border rounded px-2 py-1">
+                          <AlertTriangle size={10} className="text-yellow-500" />
+                          {threat}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <p className="text-gray-400 text-sm leading-relaxed mb-6">{p.desc}</p>
-                <div>
-                  <p className="text-gray-600 text-xs uppercase tracking-widest mb-3 font-mono">
-                    Menaces identifiées
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {p.threats.map((t) => (
-                      <span
-                        key={t}
-                        className="flex items-center gap-1.5 text-xs text-gray-400 bg-cyber-card border border-cyber-border rounded px-2 py-1"
-                      >
-                        <AlertTriangle size={10} className="text-yellow-500" />
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatedSection>
-          ))}
+                </motion.div>
+              </AnimatedSection>
+            );
+          })}
         </div>
 
-        {/* Process steps */}
         <AnimatedSection>
-          <h3 className="text-2xl font-bold text-white mb-10 text-center">
-            Notre processus d'intervention
-          </h3>
+          <h3 className="text-2xl font-bold text-white mb-10 text-center">{tr.processTitle}</h3>
           <div className="flex flex-col md:flex-row items-start md:items-center gap-0 md:gap-0 relative">
-            {steps.map((item, i) => (
-              <div key={item.step} className="flex flex-col md:flex-row items-center flex-1">
+            {tr.steps.map((item, i) => (
+              <div key={item.title} className="flex flex-col md:flex-row items-center flex-1">
                 <div className="flex flex-col items-center text-center px-4 py-4 flex-1">
                   <div className="w-14 h-14 bg-emerald-500/10 border border-emerald-500/30 rounded-full flex items-center justify-center text-emerald-400 mb-3">
-                    {item.icon}
+                    {stepIcons[i]}
                   </div>
-                  <span className="text-emerald-500/50 text-xs font-mono mb-1">{item.step}</span>
+                  <span className="text-emerald-500/50 text-xs font-mono mb-1">{String(i + 1).padStart(2, '0')}</span>
                   <h4 className="text-white font-semibold mb-1">{item.title}</h4>
                   <p className="text-gray-500 text-sm">{item.desc}</p>
                 </div>
-                {i < 3 && (
-                  <div className="hidden md:block w-8 h-px bg-emerald-500/20 flex-shrink-0" />
-                )}
+                {i < 3 && <div className="hidden md:block w-8 h-px bg-emerald-500/20 flex-shrink-0" />}
               </div>
             ))}
           </div>
@@ -719,33 +1008,22 @@ function PreventionSection() {
   );
 }
 
-function TrackerSection() {
-  const pills = [
-    'Tracking IP',
-    'Geo-intelligence',
-    'Device fingerprint',
-    'Session analysis',
-    'Cross-platform',
-    'Temps réel',
-  ];
+function TrackerSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].tracker;
 
   return (
     <section id="tracker" className="py-32 px-6 relative overflow-hidden">
-      {/* Background glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <AnimatedSection>
-          <SectionLabel>Outil Exclusif</SectionLabel>
+          <SectionLabel>{tr.sectionLabel}</SectionLabel>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-            Tracker <span className="text-emerald-400">Intelligence</span> en temps réel
+            {tr.title} <span className="text-emerald-400">{tr.titleAccent}</span> {tr.titleSuffix}
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-            Notre outil propriétaire de tracking OSINT permet une collecte d'informations en temps
-            réel sur des cibles définies.
-          </p>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">{tr.description}</p>
 
           <a
             href="https://tracker.prohacking77.me"
@@ -754,21 +1032,15 @@ function TrackerSection() {
             className="inline-flex items-center gap-3 bg-emerald-500 text-black px-10 py-4 rounded-lg font-bold text-lg hover:bg-emerald-400 transition-all hover:scale-105 active:scale-95 mb-4"
           >
             <Activity size={22} />
-            Lancer le Tracker
+            {tr.cta}
             <ExternalLink size={16} />
           </a>
 
-          <p className="text-gray-600 text-sm font-mono mb-12">
-            tracker.prohacking77.me · Accès professionnel uniquement
-          </p>
+          <p className="text-gray-600 text-sm font-mono mb-12">{tr.accessNote}</p>
 
-          {/* Feature pills */}
           <div className="flex flex-wrap gap-3 justify-center">
-            {pills.map((pill) => (
-              <span
-                key={pill}
-                className="bg-cyber-card border border-emerald-500/20 text-emerald-400/80 px-4 py-2 rounded-full text-sm font-mono"
-              >
+            {tr.pills.map((pill) => (
+              <span key={pill} className="bg-cyber-card border border-emerald-500/20 text-emerald-400/80 px-4 py-2 rounded-full text-sm font-mono">
                 {pill}
               </span>
             ))}
@@ -818,27 +1090,9 @@ const socialLinks = [
   },
 ];
 
-const disclaimerText: Record<Lang, { label: string; text: string }> = {
-  FR: {
-    label: 'Avertissement',
-    text: "Ce site est strictement réservé à un usage éducatif et à la sensibilisation en cybersécurité. L'auteur décline toute responsabilité pour tout usage malveillant ou illégal des informations présentées.",
-  },
-  EN: {
-    label: 'Disclaimer',
-    text: 'This site is strictly reserved for educational purposes and cybersecurity awareness. The author disclaims all responsibility for any malicious or illegal use of the information presented.',
-  },
-  ES: {
-    label: 'Aviso',
-    text: 'Este sitio está estrictamente reservado para fines educativos y de concienciación sobre ciberseguridad. El autor declina toda responsabilidad por cualquier uso malicioso o ilegal de la información presentada.',
-  },
-  PT: {
-    label: 'Aviso',
-    text: 'Este site destina-se exclusivamente a fins educativos e à sensibilização para a cibersegurança. O autor declina qualquer responsabilidade pelo uso indevido ou ilegal das informações apresentadas.',
-  },
-};
-
 function Footer({ lang }: { lang: Lang }) {
-  const disclaimer = disclaimerText[lang];
+  const tr = t[lang].footer;
+
   return (
     <footer id="contact" className="border-t border-cyber-border bg-cyber-darker py-16 px-6">
       <div className="max-w-6xl mx-auto">
@@ -847,40 +1101,25 @@ function Footer({ lang }: { lang: Lang }) {
             <span className="font-mono font-bold tracking-widest text-xl block mb-4">
               <span className="text-white">ZH</span><span className="text-emerald-400">É</span><span className="text-white">TICAL</span>
             </span>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              Expert OSINT spécialisé dans l'investigation numérique, la protection des mineurs et
-              la sécurité des communautés en ligne.
-            </p>
+            <p className="text-gray-500 text-sm leading-relaxed">{tr.tagline}</p>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-widest">
-              Services
-            </h4>
+            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-widest">{tr.servicesTitle}</h4>
             <ul className="space-y-2 text-sm text-gray-500">
-              <li><a href="#enquetes" className="hover:text-emerald-400 transition-colors">Ghostint OSINT</a></li>
-              <li><a href="#prévention" className="hover:text-emerald-400 transition-colors">Protection mineurs</a></li>
+              <li><a href="#enquetes" className="hover:text-emerald-400 transition-colors">{tr.services[0]}</a></li>
+              <li><a href="#prévention" className="hover:text-emerald-400 transition-colors">{tr.services[1]}</a></li>
               <li>
-                <a
-                  href="https://tracker.prohacking77.me"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-emerald-400 transition-colors flex items-center gap-1"
-                >
-                  Tracker Intelligence <ExternalLink size={12} />
+                <a href="https://tracker.prohacking77.me" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors flex items-center gap-1">
+                  {tr.services[2]} <ExternalLink size={12} />
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-widest">
-              Contact
-            </h4>
-            <a
-              href="mailto:jose@prohacking77.me"
-              className="flex items-center gap-2 text-gray-500 hover:text-emerald-400 transition-colors text-sm mb-6"
-            >
+            <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-widest">{tr.contactTitle}</h4>
+            <a href="mailto:jose@prohacking77.me" className="flex items-center gap-2 text-gray-500 hover:text-emerald-400 transition-colors text-sm mb-6">
               <Mail size={14} />
               jose@prohacking77.me
             </a>
@@ -902,23 +1141,20 @@ function Footer({ lang }: { lang: Lang }) {
         </div>
 
         <div className="border-t border-cyber-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-600 text-xs font-mono">
-            © 2026 Zhétical · Tous droits réservés
-          </p>
+          <p className="text-gray-600 text-xs font-mono">{tr.copyright}</p>
           <div className="flex items-center gap-2 text-xs text-gray-600 font-mono">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Systèmes opérationnels
+            {tr.status}
           </div>
         </div>
 
-        {/* Disclaimer */}
         <div className="mt-6 pt-5 border-t border-cyber-border/50">
           <div className="flex items-start gap-2.5 text-gray-600 text-xs leading-relaxed max-w-3xl mx-auto text-center justify-center">
             <Shield size={13} className="flex-shrink-0 mt-0.5 text-gray-600/70" />
             <p>
-              <span className="text-gray-500 font-medium">{disclaimer.label}</span>
+              <span className="text-gray-500 font-medium">{tr.disclaimer.label}</span>
               {' — '}
-              {disclaimer.text}
+              {tr.disclaimer.text}
             </p>
           </div>
         </div>
@@ -935,11 +1171,11 @@ export default function App() {
   return (
     <div className="bg-cyber-dark min-h-screen">
       <Navbar lang={lang} setLang={setLang} />
-      <HeroSection />
-      <EnquetesSection />
-      <PreventionSection />
-      <TrackerSection />
-      <ExpertiseBioSection />
+      <HeroSection lang={lang} />
+      <EnquetesSection lang={lang} />
+      <PreventionSection lang={lang} />
+      <TrackerSection lang={lang} />
+      <ExpertiseBioSection lang={lang} />
       <Footer lang={lang} />
     </div>
   );
