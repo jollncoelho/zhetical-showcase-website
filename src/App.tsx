@@ -62,12 +62,12 @@ function useTypingEffect(words: string[], speed = 80, pause = 1800) {
 
 // ── sub-components ────────────────────────────────────────────────────────────
 
-type Lang = 'FR' | 'EN' | 'ES';
+type Lang = 'FR' | 'EN' | 'ES' | 'PT';
 
 function LanguageSwitcher({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
   return (
     <div className="flex items-center gap-1 font-mono text-xs">
-      {(['FR', 'EN', 'ES'] as Lang[]).map((l, i) => (
+      {(['FR', 'EN', 'ES', 'PT'] as Lang[]).map((l, i) => (
         <span key={l} className="flex items-center gap-1">
           {i > 0 && <span className="text-gray-700">|</span>}
           <button
@@ -818,7 +818,27 @@ const socialLinks = [
   },
 ];
 
-function Footer() {
+const disclaimerText: Record<Lang, { label: string; text: string }> = {
+  FR: {
+    label: 'Avertissement',
+    text: "Ce site est strictement réservé à un usage éducatif et à la sensibilisation en cybersécurité. L'auteur décline toute responsabilité pour tout usage malveillant ou illégal des informations présentées.",
+  },
+  EN: {
+    label: 'Disclaimer',
+    text: 'This site is strictly reserved for educational purposes and cybersecurity awareness. The author disclaims all responsibility for any malicious or illegal use of the information presented.',
+  },
+  ES: {
+    label: 'Aviso',
+    text: 'Este sitio está estrictamente reservado para fines educativos y de concienciación sobre ciberseguridad. El autor declina toda responsabilidad por cualquier uso malicioso o ilegal de la información presentada.',
+  },
+  PT: {
+    label: 'Aviso',
+    text: 'Este site destina-se exclusivamente a fins educativos e à sensibilização para a cibersegurança. O autor declina qualquer responsabilidade pelo uso indevido ou ilegal das informações apresentadas.',
+  },
+};
+
+function Footer({ lang }: { lang: Lang }) {
+  const disclaimer = disclaimerText[lang];
   return (
     <footer id="contact" className="border-t border-cyber-border bg-cyber-darker py-16 px-6">
       <div className="max-w-6xl mx-auto">
@@ -896,9 +916,9 @@ function Footer() {
           <div className="flex items-start gap-2.5 text-gray-600 text-xs leading-relaxed max-w-3xl mx-auto text-center justify-center">
             <Shield size={13} className="flex-shrink-0 mt-0.5 text-gray-600/70" />
             <p>
-              <span className="text-gray-500 font-medium">Avertissement</span>
+              <span className="text-gray-500 font-medium">{disclaimer.label}</span>
               {' — '}
-              Ce site est strictement réservé à un usage éducatif et à la sensibilisation en cybersécurité. L'auteur décline toute responsabilité pour tout usage malveillant ou illégal des informations présentées.
+              {disclaimer.text}
             </p>
           </div>
         </div>
@@ -920,7 +940,7 @@ export default function App() {
       <PreventionSection />
       <TrackerSection />
       <ExpertiseBioSection />
-      <Footer />
+      <Footer lang={lang} />
     </div>
   );
 }
