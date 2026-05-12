@@ -454,6 +454,55 @@ const t = {
   },
 } as const;
 
+// ── SEO ───────────────────────────────────────────────────────────────────────
+
+const seoMeta: Record<Lang, { htmlLang: string; title: string; description: string; ogLocale: string }> = {
+  FR: {
+    htmlLang: 'fr',
+    title: 'Zhétical · Expert OSINT & Cybersécurité | Belgique',
+    description: "Zhétical — Expert OSINT basé en Belgique. Investigation numérique, Pentesting, protection des mineurs en ligne, Cyber-segurança, Threat Intelligence. 30+ certifications.",
+    ogLocale: 'fr_FR',
+  },
+  EN: {
+    htmlLang: 'en',
+    title: 'Zhétical · OSINT Expert & Cybersecurity | Belgium',
+    description: "Zhétical — OSINT Expert based in Belgium. Digital investigation, Pentesting, online child protection, Cyber-segurança, Threat Intelligence. 30+ certifications.",
+    ogLocale: 'en_GB',
+  },
+  ES: {
+    htmlLang: 'es',
+    title: 'Zhétical · Experto OSINT & Ciberseguridad | Bélgica',
+    description: "Zhétical — Experto OSINT con sede en Bélgica. Investigación digital, Pentesting, protección de menores en línea, Cyber-segurança, Threat Intelligence. 30+ certificaciones.",
+    ogLocale: 'es_ES',
+  },
+  PT: {
+    htmlLang: 'pt',
+    title: 'Zhétical · Especialista em OSINT & Cyber-segurança | Bélgica',
+    description: "Zhétical — Especialista em OSINT sediado na Bélgica. Investigação digital, Pentesting, proteção de menores online, Cyber-segurança, Threat Intelligence. 30+ certificações.",
+    ogLocale: 'pt_PT',
+  },
+};
+
+function useSEO(lang: Lang) {
+  useEffect(() => {
+    const meta = seoMeta[lang];
+    document.documentElement.lang = meta.htmlLang;
+    document.title = meta.title;
+
+    const setMeta = (selector: string, attr: string, value: string) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, value);
+    };
+
+    setMeta('meta[name="description"]', 'content', meta.description);
+    setMeta('meta[property="og:title"]', 'content', meta.title);
+    setMeta('meta[property="og:description"]', 'content', meta.description);
+    setMeta('meta[property="og:locale"]', 'content', meta.ogLocale);
+    setMeta('meta[name="twitter:title"]', 'content', meta.title);
+    setMeta('meta[name="twitter:description"]', 'content', meta.description);
+  }, [lang]);
+}
+
 // ── helpers ───────────────────────────────────────────────────────────────────
 
 function useTypingEffect(words: string[], speed = 80, pause = 1800) {
@@ -1167,6 +1216,7 @@ function Footer({ lang }: { lang: Lang }) {
 
 export default function App() {
   const [lang, setLang] = useState<Lang>('FR');
+  useSEO(lang);
 
   return (
     <div className="bg-cyber-dark min-h-screen">
