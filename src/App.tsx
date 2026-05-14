@@ -99,11 +99,11 @@ const t = {
     },
     bio: {
       passportLabel: 'PASSEPORT CYBER · N° ZHT-2026-BE',
-      statsLabels: ['Certif.', 'Ans', 'Badges'],
+      statsLabels: ['Certif.', 'Badges'],
       operatorProfile: 'Profil Opérateur',
       certRegistry: 'Registre des Certifications',
       bio1: (
-        <>Expert en cybersécurité basé en <span className="text-emerald-400 font-semibold">Belgique</span>, avec une expérience technique très solide acquise sur le terrain depuis plus de <span className="text-emerald-400 font-semibold">20 ans</span>, dans les domaines du renseignement en sources ouvertes (OSINT), de la sécurité offensive et de l'investigation numérique. Opérateur actif intervenant aussi bien sur des enquêtes civiles que sur des contextes à enjeux élevés.</>
+        <>Spécialiste en cybersécurité et OSINT, mon expertise s'est d'abord forgée sur le terrain en tant qu'<span className="text-emerald-400 font-semibold">autodidacte passionné</span>. Ce parcours riche en expériences concrètes a ensuite été consolidé par un solide cursus de formation continue, comptant aujourd'hui plus de <span className="text-emerald-400 font-semibold">30 certifications internationales</span>. Ma démarche allie la curiosité naturelle de l'investigateur à la rigueur des standards professionnels actuels.</>
       ),
       bio2: (
         <><span className="text-emerald-400 font-semibold">Instructeur</span> de groupes techniques spécialisés — formation de la prochaine génération d'analystes OSINT et de professionnels de la cybersécurité. Transmission des techniques avancées de collecte, d'analyse et de corrélation de données issues de sources ouvertes, réseaux sociaux, registres publics et infrastructures numériques.</>
@@ -120,7 +120,7 @@ const t = {
         { domain: 'OSINT & Digital Forensics', level: 'Expert Enquêteur', proof: "Permis d'Osinter / CanCred" },
         { domain: 'Threat Intelligence', level: 'Spécialiste Groupes', proof: '30+ Diplômes Pro' },
       ],
-      pills: ["20+ Ans d'Expérience", 'Instructeur OSINT', 'Belgique', 'Offensive Security', 'Trace Labs GOSP'],
+      pills: ['30+ Certifications', 'Instructeur OSINT', 'Belgique', 'Offensive Security', 'Trace Labs GOSP'],
       verifyCta: 'Vérifier mon Passeport CanCred',
       contactCta: 'Contact',
     },
@@ -205,11 +205,11 @@ const t = {
     },
     bio: {
       passportLabel: 'CYBER PASSPORT · N° ZHT-2026-BE',
-      statsLabels: ['Certif.', 'Yrs', 'Badges'],
+      statsLabels: ['Certif.', 'Badges'],
       operatorProfile: 'Operator Profile',
       certRegistry: 'Certification Registry',
       bio1: (
-        <>Cybersecurity expert based in <span className="text-emerald-400 font-semibold">Belgium</span>, with solid technical field experience spanning over <span className="text-emerald-400 font-semibold">20 years</span> in open-source intelligence (OSINT), offensive security and digital investigation. Active operator engaging in both civil inquiries and high-stakes contexts.</>
+        <>Cybersecurity and OSINT specialist, my expertise was first forged in the field as a <span className="text-emerald-400 font-semibold">self-taught practitioner</span>. This hands-on journey was then consolidated through a rigorous continuing education path, now counting over <span className="text-emerald-400 font-semibold">30 international certifications</span>. My approach combines the natural curiosity of an investigator with the discipline of current professional standards.</>
       ),
       bio2: (
         <><span className="text-emerald-400 font-semibold">Instructor</span> for specialised technical groups — training the next generation of OSINT analysts and cybersecurity professionals. Teaching advanced collection, analysis and data-correlation techniques from open sources, social networks, public registries and digital infrastructure.</>
@@ -226,7 +226,7 @@ const t = {
         { domain: 'OSINT & Digital Forensics', level: 'Expert Investigator', proof: "Osinter Licence / CanCred" },
         { domain: 'Threat Intelligence', level: 'Group Specialist', proof: '30+ Pro Diplomas' },
       ],
-      pills: ['20+ Years Experience', 'OSINT Instructor', 'Belgium', 'Offensive Security', 'Trace Labs GOSP'],
+      pills: ['30+ Certifications', 'OSINT Instructor', 'Belgium', 'Offensive Security', 'Trace Labs GOSP'],
       verifyCta: 'Verify my CanCred Passport',
       contactCta: 'Contact',
     },
@@ -311,11 +311,11 @@ const t = {
     },
     bio: {
       passportLabel: 'PASAPORTE CYBER · N° ZHT-2026-BE',
-      statsLabels: ['Certif.', 'Años', 'Badges'],
+      statsLabels: ['Certif.', 'Badges'],
       operatorProfile: 'Perfil del Operador',
       certRegistry: 'Registro de Certificaciones',
       bio1: (
-        <>Experto en ciberseguridad con sede en <span className="text-emerald-400 font-semibold">Bélgica</span>, con una sólida experiencia técnica de campo durante más de <span className="text-emerald-400 font-semibold">20 años</span> en inteligencia de fuentes abiertas (OSINT), seguridad ofensiva e investigación digital. Operador activo que interviene tanto en investigaciones civiles como en contextos de alto riesgo.</>
+        <>Especialista en ciberseguridad y OSINT, mi experiencia se forjó primero en el campo como <span className="text-emerald-400 font-semibold">autodidacta apasionado</span>. Este recorrido rico en experiencias concretas se consolidó mediante una sólida formación continua, con más de <span className="text-emerald-400 font-semibold">30 certificaciones internacionales</span>. Mi enfoque combina la curiosidad natural del investigador con el rigor de los estándares profesionales actuales.</>
       ),
       bio2: (
         <><span className="text-emerald-400 font-semibold">Instructor</span> de grupos técnicos especializados — formando a la próxima generación de analistas OSINT y profesionales de ciberseguridad. Transmisión de técnicas avanzadas de recopilación, análisis y correlación de datos de fuentes abiertas, redes sociales, registros públicos e infraestructuras digitales.</>
@@ -332,7 +332,7 @@ const t = {
         { domain: 'OSINT & Forense Digital', level: 'Investigador Experto', proof: "Licencia Osinter / CanCred" },
         { domain: 'Threat Intelligence', level: 'Especialista en Grupos', proof: '30+ Diplomas Pro' },
       ],
-      pills: ['20+ Años de Experiencia', 'Instructor OSINT', 'Bélgica', 'Seguridad Ofensiva', 'Trace Labs GOSP'],
+      pills: ['30+ Certificaciones', 'Instructor OSINT', 'Bélgica', 'Seguridad Ofensiva', 'Trace Labs GOSP'],
       verifyCta: 'Verificar mi Pasaporte CanCred',
       contactCta: 'Contacto',
     },
@@ -417,11 +417,11 @@ const t = {
     },
     bio: {
       passportLabel: 'PASSAPORTE CYBER · N° ZHT-2026-BE',
-      statsLabels: ['Certif.', 'Anos', 'Badges'],
+      statsLabels: ['Certif.', 'Badges'],
       operatorProfile: 'Perfil do Operador',
       certRegistry: 'Registo de Certificações',
       bio1: (
-        <>Especialista em cibersegurança sediado na <span className="text-emerald-400 font-semibold">Bélgica</span>, com uma sólida experiência técnica de campo de mais de <span className="text-emerald-400 font-semibold">20 anos</span> nos domínios da inteligência em fontes abertas (OSINT), segurança ofensiva e investigação digital. Operador ativo que intervém tanto em investigações civis como em contextos de alto risco.</>
+        <>Especialista em cibersegurança e OSINT, a minha competência forjou-se primeiro no terreno como <span className="text-emerald-400 font-semibold">autodidata apaixonado</span>. Este percurso rico em experiências concretas foi depois consolidado por uma sólida formação contínua, contando hoje com mais de <span className="text-emerald-400 font-semibold">30 certificações internacionais</span>. A minha abordagem alia a curiosidade natural do investigador ao rigor dos padrões profissionais atuais.</>
       ),
       bio2: (
         <><span className="text-emerald-400 font-semibold">Instrutor</span> de grupos técnicos especializados — formando a próxima geração de analistas OSINT e profissionais de cibersegurança. Transmissão de técnicas avançadas de recolha, análise e correlação de dados de fontes abertas, redes sociais, registos públicos e infraestruturas digitais.</>
@@ -438,7 +438,7 @@ const t = {
         { domain: 'OSINT & Forense Digital', level: 'Investigador Especialista', proof: "Licença Osinter / CanCred" },
         { domain: 'Threat Intelligence', level: 'Especialista em Grupos', proof: '30+ Diplomas Pro' },
       ],
-      pills: ['20+ Anos de Experiência', 'Instrutor OSINT', 'Bélgica', 'Segurança Ofensiva', 'Trace Labs GOSP'],
+      pills: ['30+ Certificações', 'Instrutor OSINT', 'Bélgica', 'Segurança Ofensiva', 'Trace Labs GOSP'],
       verifyCta: 'Verificar o meu Passaporte CanCred',
       contactCta: 'Contacto',
     },
@@ -783,8 +783,8 @@ function ExpertiseBioSection({ lang }: { lang: Lang }) {
                   </h2>
                 </div>
                 <div className="hidden sm:flex items-center gap-1 ml-4">
-                  {[{ v: '30+', l: tr.statsLabels[0] }, { v: '20', l: tr.statsLabels[1] }, { v: '9', l: tr.statsLabels[2] }].map((s, i) => (
-                    <div key={s.l} className={`px-3 py-1.5 ${i < 2 ? 'border-r border-emerald-500/10' : ''}`}>
+                  {[{ v: '30+', l: tr.statsLabels[0] }, { v: '9', l: tr.statsLabels[1] }].map((s, i) => (
+                    <div key={s.l} className={`px-3 py-1.5 ${i < 1 ? 'border-r border-emerald-500/10' : ''}`}>
                       <p className="text-emerald-400 font-black text-base font-mono leading-none">{s.v}</p>
                       <p className="text-gray-600 text-[10px]">{s.l}</p>
                     </div>
