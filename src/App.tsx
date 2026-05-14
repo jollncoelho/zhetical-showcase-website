@@ -112,7 +112,7 @@ const t = {
         <>Spécialisé dans la <span className="text-white font-medium">protection des mineurs en ligne</span>, la traque des prédateurs numériques et la documentation légale de preuves numériques. Collaboration régulière avec des plateformes communautaires (Roblox, Discord) pour l'identification et l'exposition d'acteurs malveillants. Chaque intervention est conduite avec une méthodologie rigoureuse, une discrétion absolue et une traçabilité complète.</>
       ),
       bio4: (
-        <>Titulaire de <span className="text-emerald-400 font-semibold">30+ certifications professionnelles</span> vérifiables publiquement via le registre CanCred. Chaque accréditation représente une validation formelle d'une compétence opérationnelle dans le domaine de la cybersécurité, du renseignement ou de l'investigation numérique.</>
+        <>Titulaire de <span className="text-emerald-400 font-semibold">30+ certifications professionnelles plus 9 Badges</span> vérifiables publiquement via le registre CanCred. Chaque accréditation représente une validation formelle d'une compétence opérationnelle dans le domaine de la cybersécurité, du renseignement ou de l'investigation numérique.</>
       ),
       certHeaders: ['Domaine', 'Niveau', 'Preuve'],
       certRows: [
