@@ -1206,6 +1206,16 @@ function Footer({ lang }: { lang: Lang }) {
               {tr.disclaimer.text}
             </p>
           </div>
+          <div className="mt-4 text-center">
+            <a
+              href="https://www.privacypolicies.com/live/b4307360-c094-42b1-afb4-98831d384fc0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-gray-400 text-xs font-mono transition-colors underline underline-offset-2 decoration-gray-700 hover:decoration-gray-500"
+            >
+              Politique de Confidentialité
+            </a>
+          </div>
         </div>
       </div>
     </footer>
