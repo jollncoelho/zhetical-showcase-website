@@ -19,6 +19,18 @@ import {
   BadgeCheck,
   MapPin,
   BookOpen,
+  Network,
+  PlayCircle,
+  BookMarked,
+  Cpu,
+  Bot,
+  Wrench,
+  MousePointerClick,
+  MapPinned,
+  Bug,
+  FileDown,
+  ShieldCheck,
+  Sparkles,
 } from 'lucide-react';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -96,6 +108,54 @@ const t = {
       cta: 'Lancer le Tracker',
       accessNote: 'tracker.prohacking77.me · Accès professionnel uniquement',
       pills: ['Tracking IP', 'Geo-intelligence', 'Device fingerprint', 'Session analysis', 'Cross-platform', 'Temps réel'],
+    },
+    ghostint: {
+      sectionLabel: 'Outil Open Source',
+      kicker: 'GHOSTINT TRACKER',
+      title: "L'investigation OSINT",
+      titleAccent: 'poussée à son maximum.',
+      description: 'Centralisez vos indices sur un graphe dynamique, cartographiez vos cibles instantanément et activez l\'analyse par Intelligence Artificielle en un clic. Un outil puissant, fluide et open source conçu pour les analystes et la Threat Intelligence.',
+      openCta: 'Ouvrir le Tracker',
+      guideCta: 'Voir le Guide',
+      videoLabel: 'Tutoriel Vidéo',
+      videoTitle: 'Découvrez Ghostint Tracker en Action.',
+      videoDesc: 'Apprenez à maîtriser la plateforme en 30 minutes : de la création visuelle de votre premier graphe relationnel à la configuration ultra-simple de vos agents IA locaux et avancés.',
+      aiLabel: 'Analyse Hybride IA',
+      aiCases: [
+        {
+          badge: 'Mode Local',
+          title: 'Confidentialité Absolue',
+          desc: "Ne laissez aucune trace sur le réseau. En connectant Ghostint à Ollama (Gemma 2), vous profitez d'une puissance d'analyse textuelle et de reconnaissance directement sur votre machine, sans aucune connexion internet.",
+        },
+        {
+          badge: 'Mode Avancé',
+          title: 'Renseignement Immédiat',
+          desc: 'Libérez la puissance des agents autonomes Hermes. Plus besoin de configurations complexes ou de serveurs locaux en ligne de commande : entrez simplement votre clé API Nous Portal directement dans l\'interface du tracker. L\'IA prend le relais pour explorer le web, croiser les données en temps réel et générer de nouvelles entités prêtes à être injectées.',
+        },
+      ],
+      featuresLabel: 'Fonctionnalités d\'Élite',
+      features: [
+        {
+          title: '450+ Outils Experts (Ghostint Tools)',
+          desc: 'Un panneau complet intégré pour pivoter en un instant vers les meilleures ressources OSINT du web (réseaux sociaux, reverse image, emails).',
+        },
+        {
+          title: 'Interface Épurée (Actions au Survol)',
+          desc: "Les boutons d'action et les outils d'analyse apparaissent uniquement au survol du nœud par la souris pour vous laisser 100% d'espace lisible sur vos entités.",
+        },
+        {
+          title: 'Entité Adresse Automatique',
+          desc: 'Saisissez une adresse, le nœud se met à jour tout seul et se synchronise directement avec la carte interactive pour placer le marqueur sans aucune manipulation manuelle.',
+        },
+        {
+          title: 'Nouvelles Entités Cyber',
+          desc: 'Support natif des menaces avancées avec des nœuds dédiés pour les ASN, les Hashs de malwares, les Certificats SSL, les Hostnames et les TTP.',
+        },
+        {
+          title: 'Rapports et Sauvegardes',
+          desc: 'Exportez votre progression en JSON pour la reprendre plus tard, ou générez instantanément des rapports officiels en PNG ou PDF.',
+        },
+      ],
     },
     bio: {
       passportLabel: 'PASSEPORT CYBER · N° ZHT-2026-BE',
@@ -203,6 +263,54 @@ const t = {
       accessNote: 'tracker.prohacking77.me · Professional access only',
       pills: ['IP Tracking', 'Geo-intelligence', 'Device fingerprint', 'Session analysis', 'Cross-platform', 'Real-time'],
     },
+    ghostint: {
+      sectionLabel: 'Open Source Tool',
+      kicker: 'GHOSTINT TRACKER',
+      title: 'OSINT investigation',
+      titleAccent: 'pushed to its maximum.',
+      description: 'Centralise your clues on a dynamic graph, map your targets instantly and activate AI analysis in one click. A powerful, fluid and open source tool built for analysts and Threat Intelligence.',
+      openCta: 'Open the Tracker',
+      guideCta: 'View the Guide',
+      videoLabel: 'Video Tutorial',
+      videoTitle: 'Discover Ghostint Tracker in Action.',
+      videoDesc: 'Learn to master the platform in 30 minutes: from visually creating your first relationship graph to the ultra-simple configuration of your local and advanced AI agents.',
+      aiLabel: 'Hybrid AI Analysis',
+      aiCases: [
+        {
+          badge: 'Local Mode',
+          title: 'Absolute Privacy',
+          desc: 'Leave no trace on the network. By connecting Ghostint to Ollama (Gemma 2), you get textual analysis and recognition power directly on your machine, without any internet connection.',
+        },
+        {
+          badge: 'Advanced Mode',
+          title: 'Immediate Intelligence',
+          desc: 'Unleash the power of the autonomous Hermes agents. No more complex configurations or local command-line servers: simply enter your Nous Portal API key directly in the tracker interface. The AI takes over to explore the web, cross-reference data in real time and generate new entities ready to be injected.',
+        },
+      ],
+      featuresLabel: 'Elite Features',
+      features: [
+        {
+          title: '450+ Expert Tools (Ghostint Tools)',
+          desc: 'A complete integrated panel to instantly pivot to the best OSINT resources on the web (social networks, reverse image, emails).',
+        },
+        {
+          title: 'Clean Interface (Hover Actions)',
+          desc: 'Action buttons and analysis tools appear only on mouse hover over the node, leaving 100% readable space for your entities.',
+        },
+        {
+          title: 'Automatic Address Entity',
+          desc: 'Enter an address, the node updates itself and syncs directly with the interactive map to place the marker without any manual manipulation.',
+        },
+        {
+          title: 'New Cyber Entities',
+          desc: 'Native support for advanced threats with dedicated nodes for ASN, malware Hashes, SSL Certificates, Hostnames and TTPs.',
+        },
+        {
+          title: 'Reports & Backups',
+          desc: 'Export your progress as JSON to resume later, or instantly generate official reports in PNG or PDF.',
+        },
+      ],
+    },
     bio: {
       passportLabel: 'CYBER PASSPORT · N° ZHT-2026-BE',
       statsLabels: ['Certif.', 'Badges'],
@@ -309,6 +417,54 @@ const t = {
       accessNote: 'tracker.prohacking77.me · Acceso profesional únicamente',
       pills: ['Tracking IP', 'Geo-intelligence', 'Huella de dispositivo', 'Análisis de sesión', 'Cross-platform', 'Tiempo real'],
     },
+    ghostint: {
+      sectionLabel: 'Herramienta Open Source',
+      kicker: 'GHOSTINT TRACKER',
+      title: 'Investigación OSINT',
+      titleAccent: 'llevada al máximo.',
+      description: 'Centraliza tus pistas en un grafo dinámico, mapea tus objetivos al instante y activa el análisis por Inteligencia Artificial en un clic. Una herramienta potente, fluida y de código abierto diseñada para analistas e Threat Intelligence.',
+      openCta: 'Abrir el Tracker',
+      guideCta: 'Ver la Guía',
+      videoLabel: 'Tutoría en Vídeo',
+      videoTitle: 'Descubre Ghostint Tracker en Acción.',
+      videoDesc: 'Aprende a dominar la plataforma en 30 minutos: desde la creación visual de tu primer grafo relacional hasta la configuración ultra-simple de tus agentes IA locales y avanzados.',
+      aiLabel: 'Análisis Híbrido IA',
+      aiCases: [
+        {
+          badge: 'Modo Local',
+          title: 'Confidencialidad Absoluta',
+          desc: 'No dejes ningún rastro en la red. Conectando Ghostint a Ollama (Gemma 2), disfrutas de potencia de análisis textual y de reconocimiento directamente en tu máquina, sin ninguna conexión a internet.',
+        },
+        {
+          badge: 'Modo Avanzado',
+          title: 'Inteligencia Inmediata',
+          desc: 'Libera el poder de los agentes autónomos Hermes. No más configuraciones complejas o servidores locales en línea de comandos: simplemente introduce tu clave API Nous Portal directamente en la interfaz del tracker. La IA toma el relevo para explorar la web, cruzar datos en tiempo real y generar nuevas entidades listas para inyectar.',
+        },
+      ],
+      featuresLabel: 'Funcionalidades de Élite',
+      features: [
+        {
+          title: '450+ Herramientas Expertas (Ghostint Tools)',
+          desc: 'Un panel completo integrado para pivotar al instante hacia los mejores recursos OSINT de la web (redes sociales, reverse image, emails).',
+        },
+        {
+          title: 'Interfaz Limpia (Acciones al Pasar)',
+          desc: 'Los botones de acción y las herramientas de análisis aparecen únicamente al pasar el ratón sobre el nodo para dejarte 100% de espacio legible sobre tus entidades.',
+        },
+        {
+          title: 'Entidad Dirección Automática',
+          desc: 'Introduce una dirección, el nodo se actualiza solo y se sincroniza directamente con el mapa interactivo para colocar el marcador sin ninguna manipulación manual.',
+        },
+        {
+          title: 'Nuevas Entidades Cyber',
+          desc: 'Soporte nativo de amenazas avanzadas con nodos dedicados para ASN, Hashs de malwares, Certificados SSL, Hostnames y TTP.',
+        },
+        {
+          title: 'Informes y Copias de Seguridad',
+          desc: 'Exporta tu progreso en JSON para retomarlo más tarde, o genera al instante informes oficiales en PNG o PDF.',
+        },
+      ],
+    },
     bio: {
       passportLabel: 'PASAPORTE CYBER · N° ZHT-2026-BE',
       statsLabels: ['Certif.', 'Badges'],
@@ -414,6 +570,54 @@ const t = {
       cta: 'Iniciar Tracker',
       accessNote: 'tracker.prohacking77.me · Acesso profissional apenas',
       pills: ['Tracking IP', 'Geo-intelligence', 'Impressão digital do dispositivo', 'Análise de sessão', 'Cross-platform', 'Tempo real'],
+    },
+    ghostint: {
+      sectionLabel: 'Ferramenta Open Source',
+      kicker: 'GHOSTINT TRACKER',
+      title: 'Investigação OSINT',
+      titleAccent: 'levada ao máximo.',
+      description: 'Centralize as suas pistas num grafo dinâmico, mapeie os seus alvos instantaneamente e ative a análise por Inteligência Artificial num clique. Uma ferramenta poderosa, fluida e de código aberto concebida para analistas e Threat Intelligence.',
+      openCta: 'Abrir o Tracker',
+      guideCta: 'Ver o Guia',
+      videoLabel: 'Tutoriais em Vídeo',
+      videoTitle: 'Descubra o Ghostint Tracker em Ação.',
+      videoDesc: 'Aprenda a dominar a plataforma em 30 minutos: desde a criação visual do seu primeiro grafo relacional até à configuração ultra-simples dos seus agentes IA locais e avançados.',
+      aiLabel: 'Análise Híbrida IA',
+      aiCases: [
+        {
+          badge: 'Modo Local',
+          title: 'Confidencialidade Absoluta',
+          desc: 'Não deixe nenhum rastro na rede. Ao ligar o Ghostint ao Ollama (Gemma 2), beneficia de potência de análise textual e de reconhecimento diretamente na sua máquina, sem qualquer ligação à internet.',
+        },
+        {
+          badge: 'Modo Avançado',
+          title: 'Inteligência Imediata',
+          desc: 'Liberte o poder dos agentes autónomos Hermes. Chega de configurações complexas ou de servidores locais em linha de comandos: basta introduzir a sua chave API Nous Portal diretamente na interface do tracker. A IA assume o controlo para explorar a web, cruzar dados em tempo real e gerar novas entidades prontas a serem injetadas.',
+        },
+      ],
+      featuresLabel: 'Funcionalidades de Elite',
+      features: [
+        {
+          title: '450+ Ferramentas Especialistas (Ghostint Tools)',
+          desc: 'Um painel completo integrado para pivotar num instante para os melhores recursos OSINT da web (redes sociais, reverse image, emails).',
+        },
+        {
+          title: 'Interface Limpa (Ações ao Passar)',
+          desc: 'Os botões de ação e as ferramentas de análise aparecem apenas ao passar com o rato sobre o nó, deixando 100% de espaço legível para as suas entidades.',
+        },
+        {
+          title: 'Entidade Morada Automática',
+          desc: 'Introduza uma morada, o nó atualiza-se sozinho e sincroniza-se diretamente com o mapa interativo para colocar o marcador sem qualquer manipulação manual.',
+        },
+        {
+          title: 'Novas Entidades Cyber',
+          desc: 'Suporte nativo de ameaças avançadas com nós dedicados para ASN, Hashes de malwares, Certificados SSL, Hostnames e TTP.',
+        },
+        {
+          title: 'Relatórios e Cópias de Segurança',
+          desc: 'Exporte o seu progresso em JSON para retomar mais tarde, ou gere instantaneamente relatórios oficiais em PNG ou PDF.',
+        },
+      ],
     },
     bio: {
       passportLabel: 'PASSAPORTE CYBER · N° ZHT-2026-BE',
@@ -1057,6 +1261,164 @@ function PreventionSection({ lang }: { lang: Lang }) {
   );
 }
 
+function GhostintTrackerSection({ lang }: { lang: Lang }) {
+  const tr = t[lang].ghostint;
+
+  const featureIcons = [
+    <Wrench className="text-emerald-400" size={22} />,
+    <MousePointerClick className="text-emerald-400" size={22} />,
+    <MapPinned className="text-emerald-400" size={22} />,
+    <Bug className="text-emerald-400" size={22} />,
+    <FileDown className="text-emerald-400" size={22} />,
+  ];
+
+  const aiCaseMeta = [
+    { icon: <Cpu className="text-emerald-400" size={26} />, accent: 'border-emerald-500/30', glow: 'shadow-[0_0_30px_rgba(16,185,129,0.08)]' },
+    { icon: <Bot className="text-emerald-400" size={26} />, accent: 'border-emerald-500/30', glow: 'shadow-[0_0_30px_rgba(16,185,129,0.08)]' },
+  ];
+
+  return (
+    <section id="ghostint-tracker" className="py-28 px-6 relative overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[700px] h-[700px] bg-emerald-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10 space-y-20">
+        {/* Présentation */}
+        <AnimatedSection className="text-center">
+          <SectionLabel>{tr.sectionLabel}</SectionLabel>
+          <p className="text-emerald-400/70 text-xs font-mono tracking-[0.4em] uppercase mb-4">{tr.kicker}</p>
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight max-w-3xl mx-auto">
+            {tr.title}{' '}
+            <span className="text-emerald-400" style={{ textShadow: '0 0 18px rgba(16,185,129,0.45)' }}>
+              {tr.titleAccent}
+            </span>
+          </h2>
+          <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">{tr.description}</p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="https://tracker.prohacking77.me"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-emerald-500 text-black px-8 py-4 rounded-lg font-bold text-base hover:bg-emerald-400 transition-all hover:scale-105 active:scale-95 shadow-[0_0_24px_rgba(16,185,129,0.35)]"
+            >
+              <Network size={20} />
+              {tr.openCta}
+              <ExternalLink size={16} />
+            </a>
+            <a
+              href="https://github.com/prohacking77/ghostint-tracker"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 border border-emerald-500/40 text-emerald-400 px-8 py-4 rounded-lg font-bold text-base hover:bg-emerald-500/10 transition-all"
+            >
+              <BookMarked size={20} />
+              {tr.guideCta}
+              <ExternalLink size={16} />
+            </a>
+          </div>
+        </AnimatedSection>
+
+        {/* Vidéo Tutoriel */}
+        <AnimatedSection>
+          <div className="rounded-2xl border border-emerald-500/15 bg-[#080b08] overflow-hidden">
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+            <div className="px-6 md:px-10 py-8 md:py-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 bg-emerald-500/10 border border-emerald-500/20 rounded-lg flex items-center justify-center">
+                  <PlayCircle className="text-emerald-400" size={22} />
+                </div>
+                <div>
+                  <p className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">{tr.videoLabel}</p>
+                  <h3 className="text-xl md:text-2xl font-black text-white leading-tight">{tr.videoTitle}</h3>
+                </div>
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-3xl">{tr.videoDesc}</p>
+              <div className="relative rounded-xl overflow-hidden border border-emerald-500/20 bg-black aspect-video">
+                <iframe
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/mQl5btUpOwc"
+                  title="Ghostint Tracker — Tutoriel"
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* Analyse Hybride IA */}
+        <AnimatedSection>
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <Sparkles className="text-emerald-400" size={18} />
+              <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">{tr.aiLabel}</span>
+              <Sparkles className="text-emerald-400" size={18} />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {tr.aiCases.map((c, i) => {
+              const meta = aiCaseMeta[i];
+              return (
+              <motion.div
+                key={c.badge}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.15 }}
+                className={`relative rounded-xl border ${meta.accent} bg-[#080b08] p-8 ${meta.glow}`}
+              >
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-lg flex items-center justify-center">
+                    {meta.icon}
+                  </div>
+                  <div>
+                    <span className="inline-block text-[10px] font-mono tracking-widest uppercase bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 px-2 py-0.5 rounded mb-1">
+                      {c.badge}
+                    </span>
+                    <h3 className="text-lg font-bold text-white leading-tight">{c.title}</h3>
+                  </div>
+                </div>
+                <p className="text-gray-400 text-sm leading-relaxed">{c.desc}</p>
+              </motion.div>
+              );
+            })}
+          </div>
+        </AnimatedSection>
+
+        {/* Fonctionnalités d'Élite */}
+        <AnimatedSection>
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <ShieldCheck className="text-emerald-400" size={18} />
+              <span className="text-emerald-400/60 text-[10px] font-mono tracking-[0.3em] uppercase">{tr.featuresLabel}</span>
+              <ShieldCheck className="text-emerald-400" size={18} />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {tr.features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+              className="group bg-cyber-card border border-cyber-border rounded-xl p-6 hover:border-emerald-500/30 transition-all"
+            >
+              <div className="w-11 h-11 bg-emerald-500/10 border border-emerald-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                {featureIcons[i]}
+              </div>
+              <h3 className="text-white font-semibold text-sm mb-2 leading-snug">{f.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+            </motion.div>
+            ))}
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 function TrackerSection({ lang }: { lang: Lang }) {
   const tr = t[lang].tracker;
 
@@ -1236,6 +1598,7 @@ export default function App() {
       <PreventionSection lang={lang} />
       <TrackerSection lang={lang} />
       <ExpertiseBioSection lang={lang} />
+      <GhostintTrackerSection lang={lang} />
       <Footer lang={lang} />
     </div>
   );
