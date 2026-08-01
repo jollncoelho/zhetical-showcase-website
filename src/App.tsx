@@ -1263,6 +1263,12 @@ function PreventionSection({ lang }: { lang: Lang }) {
 
 function GhostintTrackerSection({ lang }: { lang: Lang }) {
   const tr = t[lang].ghostint;
+  const [videoLang, setVideoLang] = useState<'FR' | 'EN'>(lang === 'EN' ? 'EN' : 'FR');
+
+  const videos = {
+    FR: { id: 'mQl5btUpOwc', label: '🇫🇷 FR' },
+    EN: { id: 'UOYh_BPoErA', label: '🇬🇧 EN' },
+  } as const;
 
   const featureIcons = [
     <Wrench className="text-emerald-400" size={22} />,
@@ -1334,11 +1340,30 @@ function GhostintTrackerSection({ lang }: { lang: Lang }) {
                 </div>
               </div>
               <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-3xl">{tr.videoDesc}</p>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-gray-500 text-xs font-mono uppercase tracking-wider">Langue / Language:</span>
+                <div className="inline-flex rounded-lg overflow-hidden border border-emerald-500/25 bg-[#080b08]">
+                  {(Object.keys(videos) as Array<keyof typeof videos>).map((k) => (
+                    <button
+                      key={k}
+                      onClick={() => setVideoLang(k)}
+                      className={`px-4 py-2 text-sm font-semibold transition-all ${
+                        videoLang === k
+                          ? 'bg-emerald-500 text-black'
+                          : 'text-gray-400 hover:text-emerald-400 hover:bg-emerald-500/10'
+                      }`}
+                    >
+                      {videos[k].label}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <div className="relative rounded-xl overflow-hidden border border-emerald-500/20 bg-black aspect-video">
                 <iframe
+                  key={videos[videoLang].id}
                   className="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/mQl5btUpOwc"
-                  title="Ghostint Tracker — Tutoriel"
+                  src={`https://www.youtube.com/embed/${videos[videoLang].id}`}
+                  title={`Ghostint Tracker — ${videoLang}`}
                   loading="lazy"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
