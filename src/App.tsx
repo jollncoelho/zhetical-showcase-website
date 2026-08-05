@@ -1313,7 +1313,7 @@ function GhostintTrackerSection({ lang }: { lang: Lang }) {
               <ExternalLink size={16} />
             </a>
             <a
-              href="https://github.com/prohacking77/ghostint-tracker"
+              href="https://drive.google.com/file/d/1A5RYO0fQyay0fE9RlcAMCVb9JPnNfSIi/view"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 border border-emerald-500/40 text-emerald-400 px-8 py-4 rounded-lg font-bold text-base hover:bg-emerald-500/10 transition-all"
