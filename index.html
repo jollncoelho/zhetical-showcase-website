@@ -203,6 +203,12 @@ section{position:relative}
   font-size:14px;font-weight:800;color:var(--accent,var(--green))}
 .card-link svg{width:13px;height:13px;transition:transform .25s}
 .card:hover .card-link svg{transform:translate(3px,-3px)}
+.card-links{position:relative;z-index:1;display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:20px}
+.card-links .card-link{margin-top:0}
+.card-link.alt{color:#8b95ad;font-size:13.5px}
+.card-link.alt:hover{color:var(--text)}
+.card-link svg.no-shift{width:15px;height:15px;transition:none}
+.card:hover .card-link svg.no-shift{transform:none}
 .badge-soon{position:absolute;top:16px;right:16px;z-index:2;background:var(--pink);color:#fff;
   font-family:var(--font-mono);font-size:9.5px;font-weight:800;letter-spacing:.14em;padding:5px 10px;border-radius:999px;
   box-shadow:0 0 16px rgba(255,0,85,.55);animation:pulse 2.2s infinite}
@@ -673,10 +679,15 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
         </div>
         <h4>Ghostint Tracker</h4>
         <p>Prise en main complète en 30 minutes : création de votre premier graphe relationnel, entités cyber, et configuration des agents IA locaux (Ollama) et avancés (Hermes).</p>
-        <a class="card-link" href="https://drive.google.com/file/d/1A5RYO0fQyay0fE9RlcAMCVb9JPnNfSIi/view" target="_blank" rel="noopener">
-          Voir le tutoriel
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
-        </a>
+        <div class="card-links">
+          <a class="card-link" href="https://www.youtube.com/watch?v=mQl5btUpOwc" target="_blank" rel="noopener">
+            <svg class="no-shift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
+            Tutoriel vidéo (FR)
+          </a>
+          <a class="card-link alt" href="https://www.youtube.com/watch?v=UOYh_BPoErA" target="_blank" rel="noopener">
+            🇬🇧 Version EN
+          </a>
+        </div>
       </article>
 
       <!-- Tutoriel : Ghosint Tools — À VENIR -->
