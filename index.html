@@ -1,50 +1,1215 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT | Query Intel</title>
+<meta name="description" content="Expert OSINT et cybersécurité. Investigations numériques, protection des mineurs en ligne, sensibilisation des familles et outils open-source : Ghosint Tools, Ghostint Tracker, OSINT Gods Eye.">
+<meta name="keywords" content="OSINT, Zhétical, Query Intel, sécurité en ligne, protection des mineurs, sensibilisation parents, cybersécurité, Ghosint Tools, Ghostint Tracker, Gods Eye, Belgique">
+<meta name="author" content="ZHÉTICAL">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#06070b">
+<link rel="canonical" href="https://www.query-intel.com/">
+<link rel="alternate" hreflang="fr" href="https://www.query-intel.com/">
+<link rel="alternate" hreflang="x-default" href="https://www.query-intel.com/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
-    <!-- Primary SEO -->
-    <title>Zhétical OSINT - Investigation & Intelligence Spatiale</title>
-    <meta name="description" content="Plateforme d'investigation OSINT et d'intelligence spatiale. Centralisez vos indices, cartographiez vos cibles et exploitez l'IA locale pour vos enquêtes." />
-    <meta name="keywords" content="OSINT, Zhétical, investigation, cybersécurité, intelligence spatiale, cartographie, threat intelligence, IA locale" />
-    <meta name="author" content="Zhétical" />
-    <meta name="robots" content="index, follow" />
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.query-intel.com/">
+<meta property="og:site_name" content="ZHÉTICAL">
+<meta property="og:title" content="ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT">
+<meta property="og:description" content="Investigations OSINT, protection des communautés en ligne, sensibilisation des familles et outils de cybersécurité open-source.">
+<meta property="og:image" content="https://www.query-intel.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ZHÉTICAL — Expert OSINT &amp; Cybersécurité">
+<meta property="og:locale" content="fr_FR">
 
-    <!-- Canonical & hreflang -->
-    <link rel="canonical" href="https://prohacking77.me/" />
-    <link rel="alternate" hreflang="fr" href="https://prohacking77.me/?lang=fr" />
-    <link rel="alternate" hreflang="en" href="https://prohacking77.me/?lang=en" />
-    <link rel="alternate" hreflang="es" href="https://prohacking77.me/?lang=es" />
-    <link rel="alternate" hreflang="pt" href="https://prohacking77.me/?lang=pt" />
-    <link rel="alternate" hreflang="x-default" href="https://prohacking77.me/" />
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@zhetikal77">
+<meta name="twitter:creator" content="@zhetikal77">
+<meta name="twitter:title" content="ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT">
+<meta name="twitter:description" content="Investigations OSINT, protection des communautés en ligne, sensibilisation des familles et outils de cybersécurité open-source.">
+<meta name="twitter:image" content="https://www.query-intel.com/og-image.jpg">
 
-    <!-- Open Graph (LinkedIn / Facebook / X) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://prohacking77.me/" />
-    <meta property="og:site_name" content="Zhétical" />
-    <meta property="og:title" content="Zhétical OSINT - Investigation & Intelligence Spatiale" />
-    <meta property="og:description" content="Plateforme d'investigation OSINT et d'intelligence spatiale. Centralisez vos indices, cartographiez vos cibles et exploitez l'IA locale pour vos enquêtes." />
-    <meta property="og:image" content="https://prohacking77.me/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Zhétical — Expert OSINT &amp; Cybersécurité" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta property="og:locale:alternate" content="en_GB" />
-    <meta property="og:locale:alternate" content="es_ES" />
-    <meta property="og:locale:alternate" content="pt_PT" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306070b'/%3E%3Cpath d='M50 16 84 34v32L50 84 16 66V34z' fill='none' stroke='%2300ff9d' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='9' fill='%2300b8ff'/%3E%3C/svg%3E">
 
-    <!-- Twitter / X Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@zhetikal77" />
-    <meta name="twitter:creator" content="@zhetikal77" />
-    <meta name="twitter:title" content="Zhétical OSINT - Investigation & Intelligence Spatiale" />
-    <meta name="twitter:description" content="Plateforme d'investigation OSINT et d'intelligence spatiale. Centralisez vos indices, cartographiez vos cibles et exploitez l'IA locale pour vos enquêtes." />
-    <meta name="twitter:image" content="https://prohacking77.me/og-image.jpg" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<style>
+/* ============================================================
+   ZHÉTICAL — query-intel.com
+   Feuille de style unique, zéro dépendance externe
+   ============================================================ */
+:root{
+  --bg:#06070b;
+  --bg-2:#0a0c13;
+  --card:#10131d;
+  --card-2:#151926;
+  --border:#1e2333;
+  --border-soft:#171b28;
+  --text:#e6ebf5;
+  --muted:#8b95ad;
+  --green:#00ff9d;
+  --cyan:#00b8ff;
+  --pink:#ff0055;
+  --violet:#a855f7;
+  --amber:#ffb020;
+  --radius:18px;
+  --nav-h:70px;
+  --font-sans:"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 16px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-sans);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,h5{margin:0;line-height:1.15;font-weight:800;letter-spacing:-.02em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+blockquote{margin:0}
+
+/* ---------- Fond animé ---------- */
+.bg-layer{position:fixed;inset:0;z-index:-3;pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 12% -8%,rgba(0,255,157,.11),transparent 62%),
+    radial-gradient(820px 600px at 88% 6%,rgba(0,184,255,.11),transparent 62%),
+    radial-gradient(760px 560px at 50% 108%,rgba(168,85,247,.09),transparent 62%);
+}
+.bg-grid{position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(circle at 50% 26%,#000 18%,transparent 76%);
+  mask-image:radial-gradient(circle at 50% 26%,#000 18%,transparent 76%);
+}
+.bg-scan{position:fixed;left:0;right:0;height:180px;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(0,255,157,.035),transparent);
+  animation:scan 11s linear infinite;
+}
+@keyframes scan{0%{top:-200px}100%{top:110%}}
+
+/* ---------- Barre de progression ---------- */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:100;
+  background:linear-gradient(90deg,var(--green),var(--cyan),var(--violet));
+  box-shadow:0 0 12px rgba(0,255,157,.6);transition:width .1s linear}
+
+/* ---------- Navigation ---------- */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:90;
+  background:rgba(6,7,11,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border-soft);transition:background .3s,border-color .3s}
+.nav.scrolled{background:rgba(6,7,11,.94);border-bottom-color:var(--border)}
+.nav-inner{max-width:1240px;margin:0 auto;height:100%;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-mark{width:34px;height:34px;flex:0 0 34px}
+.brand-txt{display:flex;flex-direction:column;line-height:1}
+.brand-name{font-size:19px;font-weight:800;letter-spacing:.13em;
+  background:linear-gradient(90deg,var(--green),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.brand-sub{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.16em;color:#5b6478;margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:1px}
+.nav-links a{position:relative;padding:9px 10px;border-radius:9px;font-size:12.5px;font-weight:600;color:#a8b2c7;transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.045)}
+.nav-links a.active{color:var(--green)}
+.nav-links a.active::after{content:"";position:absolute;left:10px;right:10px;bottom:2px;height:2px;border-radius:2px;background:var(--green);box-shadow:0 0 10px var(--green)}
+.nav-cta{margin-left:8px;background:var(--green);color:#04120c;padding:9px 17px;border-radius:9px;font-size:12.5px;font-weight:800;transition:background .2s,transform .2s,box-shadow .2s}
+.nav-cta:hover{background:var(--cyan);transform:translateY(-1px);box-shadow:0 10px 26px -12px var(--cyan)}
+.burger{display:none;width:42px;height:42px;border:1px solid var(--border);background:rgba(255,255,255,.03);border-radius:10px;cursor:pointer;align-items:center;justify-content:center;gap:5px;flex-direction:column}
+.burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--text);transition:transform .25s,opacity .25s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:var(--nav-h);left:0;right:0;z-index:89;
+  background:rgba(8,10,16,.98);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);
+  padding:14px 20px 22px;flex-direction:column;gap:2px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{padding:13px 12px;border-radius:10px;font-weight:600;color:#b8c1d4;border-bottom:1px solid rgba(255,255,255,.04)}
+.mobile-menu a:last-child{border-bottom:0;color:var(--green)}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+section{position:relative}
+.band{padding:104px 0}
+.band-alt{background:linear-gradient(180deg,rgba(16,19,29,.55),rgba(10,12,19,.25));border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)}
+
+/* ---------- Titres de section ---------- */
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+.eyebrow::before{content:"";width:22px;height:1px;background:linear-gradient(90deg,transparent,var(--green))}
+.sec-head{max-width:760px;margin:0 auto 58px;text-align:center}
+.sec-head .eyebrow{justify-content:center}
+.sec-head .eyebrow::after{content:"";width:22px;height:1px;background:linear-gradient(90deg,var(--green),transparent)}
+.sec-title{font-size:clamp(27px,4vw,40px)}
+.sec-title .hl{background:linear-gradient(90deg,var(--green),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sec-sub{color:var(--muted);margin-top:16px;font-size:16px}
+
+/* ---------- Boutons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 26px;border-radius:12px;font-weight:800;font-size:15px;border:1px solid transparent;cursor:pointer;transition:transform .2s,background .2s,border-color .2s,color .2s,box-shadow .25s}
+.btn-primary{background:var(--green);color:#04120c;box-shadow:0 16px 40px -20px var(--green)}
+.btn-primary:hover{background:var(--cyan);transform:translateY(-2px);box-shadow:0 20px 46px -18px var(--cyan)}
+.btn-ghost{border-color:#2b3346;color:var(--text);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--green);color:var(--green);transform:translateY(-2px)}
+.btn svg{width:17px;height:17px}
+
+/* ---------- Hero ---------- */
+.hero{padding:calc(var(--nav-h) + 82px) 0 88px;text-align:center;overflow:hidden}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;
+  border:1px solid rgba(0,255,157,.28);background:rgba(0,255,157,.07);
+  color:var(--green);font-family:var(--font-mono);font-size:10.5px;letter-spacing:.14em;font-weight:600}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.hero h1{margin:26px 0 0;font-size:clamp(34px,6.8vw,70px);line-height:1.04}
+.hero h1 .hl{background:linear-gradient(100deg,var(--green) 0%,var(--cyan) 55%,var(--violet) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 26px rgba(0,255,157,.28))}
+.hero p.lead{margin:24px auto 0;max-width:680px;color:#9aa5bb;font-size:clamp(16px,1.6vw,18.5px)}
+.hero-cta{margin-top:38px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+.signal{max-width:1000px;margin:60px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border-soft);border:1px solid var(--border-soft);border-radius:16px;overflow:hidden}
+.signal div{background:rgba(10,12,19,.72);padding:20px 16px;text-align:center}
+.signal b{display:block;font-size:26px;font-weight:800;font-family:var(--font-mono);letter-spacing:-.02em}
+.signal span{display:block;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#6d768c;margin-top:6px}
+.signal div:nth-child(1) b{color:var(--green)}
+.signal div:nth-child(2) b{color:var(--cyan)}
+.signal div:nth-child(3) b{color:var(--pink)}
+.signal div:nth-child(4) b{color:var(--violet)}
+
+/* ---------- Cartes génériques ---------- */
+.card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0)),var(--card);
+  border:1px solid var(--border);border-radius:var(--radius);padding:26px;overflow:hidden;
+  transition:transform .32s cubic-bezier(.2,.7,.3,1),border-color .32s,box-shadow .32s}
+.card::after{content:"";position:absolute;top:-70px;right:-70px;width:190px;height:190px;border-radius:50%;
+  background:var(--accent,var(--green));opacity:.07;filter:blur(46px);transition:opacity .35s}
+.card:hover{transform:translateY(-7px);border-color:var(--accent,var(--green));box-shadow:0 26px 54px -30px var(--accent,var(--green))}
+.card:hover::after{opacity:.16}
+.ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;
+  border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--accent,var(--green));position:relative;z-index:1}
+.ico svg{width:24px;height:24px}
+.card h3{font-size:19.5px;position:relative;z-index:1}
+.card p.desc{color:var(--muted);font-size:14.5px;margin-top:12px;position:relative;z-index:1}
+.card-link{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+  font-size:14px;font-weight:800;color:var(--accent,var(--green))}
+.card-link svg{width:13px;height:13px;transition:transform .25s}
+.card:hover .card-link svg{transform:translate(3px,-3px)}
+.badge-soon{position:absolute;top:16px;right:16px;z-index:2;background:var(--pink);color:#fff;
+  font-family:var(--font-mono);font-size:9.5px;font-weight:800;letter-spacing:.14em;padding:5px 10px;border-radius:999px;
+  box-shadow:0 0 16px rgba(255,0,85,.55);animation:pulse 2.2s infinite}
+.card.soon{border-color:rgba(255,0,85,.34)}
+.card.soon::after{background:var(--pink)}
+
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+
+/* ---------- Ghostint Tracker ---------- */
+.mode{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0)),var(--card);
+  border:1px solid var(--border);border-radius:var(--radius);padding:30px;overflow:hidden;transition:transform .32s,border-color .32s,box-shadow .32s}
+.mode:hover{transform:translateY(-6px);border-color:var(--accent,var(--green));box-shadow:0 26px 54px -30px var(--accent,var(--green))}
+.mode-tag{display:inline-block;font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent,var(--green));border:1px solid var(--accent,var(--green));border-radius:999px;padding:4px 12px;margin-bottom:16px;opacity:.9}
+.mode h4{font-size:19px}
+.mode p{color:var(--muted);font-size:14.5px;margin-top:12px}
+.feat{background:rgba(255,255,255,.028);border:1px solid var(--border);border-radius:14px;padding:20px;transition:border-color .25s,background .25s}
+.feat:hover{border-color:var(--green);background:rgba(0,255,157,.04)}
+.feat h5{font-size:14.5px;display:flex;align-items:flex-start;gap:9px}
+.feat h5 svg{width:16px;height:16px;flex:0 0 16px;margin-top:3px;color:var(--green)}
+.feat p{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.6}
+.tuto{margin-top:26px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between;
+  background:rgba(0,255,157,.05);border:1px solid rgba(0,255,157,.22);border-radius:14px;padding:18px 22px}
+.tuto-txt{display:flex;align-items:center;gap:14px}
+.tuto-txt svg{width:26px;height:26px;flex:0 0 26px;color:var(--green)}
+.tuto strong{display:block;font-size:14.5px}
+.tuto span{font-size:13px;color:var(--muted)}
+
+/* ---------- Tutoriels ---------- */
+.tuto-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.tuto-card{display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0)),var(--card);
+  border:1px solid var(--border);border-radius:var(--radius);padding:26px;transition:transform .3s,border-color .3s,box-shadow .3s}
+.tuto-card:hover{transform:translateY(-5px);border-color:var(--accent,var(--green));box-shadow:0 26px 54px -30px var(--accent,var(--green))}
+.tuto-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
+.tuto-ico{width:46px;height:46px;flex:0 0 46px;border-radius:12px;display:grid;place-items:center;
+  border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--accent,var(--green))}
+.tuto-ico svg{width:22px;height:22px}
+.tuto-card h4{font-size:17px}
+.tuto-card p{color:var(--muted);font-size:14px;margin-top:10px;flex:1}
+.st-pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;padding:5px 11px;border-radius:999px;border:1px solid;white-space:nowrap}
+.st-pill.ok{color:var(--green);border-color:rgba(0,255,157,.35);background:rgba(0,255,157,.08)}
+.st-pill.soon{color:#8b95ad;border-color:var(--border);background:rgba(255,255,255,.03)}
+.st-pill svg{width:11px;height:11px}
+
+/* ---------- Protection & Éducation ---------- */
+.quote{margin:56px auto 0;max-width:820px;text-align:center;padding:36px 30px;
+  border:1px solid rgba(0,255,157,.22);border-radius:var(--radius);background:rgba(0,255,157,.045)}
+.quote p{font-size:clamp(18px,2.3vw,24px);font-weight:700;line-height:1.5;color:#e9eef8;letter-spacing:-.01em}
+.quote p .hl{color:var(--green)}
+.quote cite{display:block;margin-top:16px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:#6d768c;font-style:normal}
+.atelier{margin-top:26px;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px 30px}
+.atelier h4{font-size:18px;display:flex;align-items:center;gap:10px}
+.atelier h4 svg{width:20px;height:20px;color:var(--green)}
+.atelier p{color:var(--muted);font-size:14.5px;margin-top:10px;max-width:660px}
+
+/* ---------- Méthode ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{position:relative;padding:28px 24px 26px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  transition:transform .3s,border-color .3s,box-shadow .3s}
+.step:hover{transform:translateY(-6px);border-color:var(--green);box-shadow:0 24px 50px -30px var(--green)}
+.step-num{font-family:var(--font-mono);font-size:34px;font-weight:800;letter-spacing:-.04em;
+  background:linear-gradient(180deg,var(--green),rgba(0,255,157,.12));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.step h4{margin-top:12px;font-size:16.5px}
+.step p{color:var(--muted);font-size:14px;margin-top:9px}
+.step::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--green),transparent);opacity:.6}
+
+/* ---------- Parcours ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+.prose p{color:#b4bdd0;margin-bottom:16px;font-size:15.5px}
+.prose strong{color:var(--green);font-weight:700}
+.stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+.stat{flex:1 1 120px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-align:center}
+.stat b{display:block;font-family:var(--font-mono);font-size:30px;font-weight:800;line-height:1}
+.stat span{display:block;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#6d768c;margin-top:8px}
+
+.passport{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,0)),var(--card);
+  border:1px solid var(--border);border-radius:var(--radius);padding:30px;position:relative;overflow:hidden;
+  box-shadow:0 30px 70px -40px rgba(0,184,255,.5)}
+.passport::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--green),var(--cyan),var(--violet))}
+.passport-head{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.14em;color:var(--green);display:flex;align-items:center;gap:9px;margin-bottom:22px}
+.passport-head svg{width:15px;height:15px}
+.pp-row{display:flex;justify-content:space-between;gap:16px;font-family:var(--font-mono);font-size:13px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.pp-row span:first-child{color:#69728a;letter-spacing:.1em}
+.pp-row span:last-child{font-weight:700;color:#fff;text-align:right}
+.pp-row .ok{color:var(--green)}
+.mrz{margin-top:20px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;color:#525b70;word-break:break-all;line-height:1.7}
+
+/* Badges de certification */
+.pp-badges{display:flex;justify-content:center;gap:22px;margin-top:26px;padding-top:26px;
+  border-top:1px solid rgba(255,255,255,.07);flex-wrap:wrap}
+.badge-item{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.badge-item img{width:78px;height:78px;object-fit:contain;transition:transform .3s,filter .3s;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.65))}
+.badge-item img.round{border-radius:50%}
+.badge-item img.soft{border-radius:12px}
+.badge-item:hover img{transform:translateY(-5px) scale(1.06);filter:drop-shadow(0 10px 24px rgba(0,255,157,.35))}
+.badge-item span{font-family:var(--font-mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;
+  color:#6d768c;max-width:96px;line-height:1.6}
+
+/* Actions passeport */
+.pp-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+.pp-actions .wide{grid-column:1 / -1}
+.pp-btn{display:flex;align-items:center;justify-content:center;gap:9px;padding:13px 14px;border-radius:12px;
+  font-weight:800;font-size:13.5px;border:1px solid var(--border);background:rgba(255,255,255,.04);
+  transition:transform .22s,border-color .22s,background .22s,color .22s,box-shadow .25s}
+.pp-btn svg{width:15px;height:15px;flex:0 0 15px}
+.pp-btn:hover{transform:translateY(-2px)}
+.pp-btn.primary{background:var(--green);color:#04120c;border-color:transparent;box-shadow:0 14px 34px -18px var(--green)}
+.pp-btn.primary:hover{background:var(--cyan);box-shadow:0 18px 40px -16px var(--cyan)}
+.pp-btn.linkedin{color:var(--cyan);border-color:rgba(0,184,255,.35);background:rgba(0,184,255,.07)}
+.pp-btn.linkedin:hover{border-color:var(--cyan);background:rgba(0,184,255,.14)}
+.pp-btn.mail{color:#c2cadb}
+.pp-btn.mail:hover{color:var(--green);border-color:var(--green);background:rgba(0,255,157,.06)}
+
+/* ---------- Certifications ---------- */
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+thead th{text-align:left;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:#6d768c;font-weight:600;padding:16px 22px;background:rgba(255,255,255,.025);border-bottom:1px solid var(--border)}
+tbody td{padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.05);color:#c2cadb}
+tbody tr:last-child td{border-bottom:0}
+tbody tr{transition:background .22s}
+tbody tr:hover{background:rgba(0,255,157,.035)}
+tbody td:first-child{font-weight:700;color:#fff}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid;letter-spacing:.06em}
+.tag.g{color:var(--green);border-color:rgba(0,255,157,.35);background:rgba(0,255,157,.08)}
+.tag.c{color:var(--cyan);border-color:rgba(0,184,255,.35);background:rgba(0,184,255,.08)}
+.tag.v{color:var(--violet);border-color:rgba(168,85,247,.35);background:rgba(168,85,247,.08)}
+.tag.a{color:var(--amber);border-color:rgba(255,176,32,.35);background:rgba(255,176,32,.08)}
+
+/* ---------- Services ---------- */
+.svc-list{margin-top:20px;display:flex;flex-direction:column;gap:12px}
+.svc-list li{display:flex;gap:12px;align-items:flex-start;color:#c2cadb;font-size:14.5px}
+.svc-list svg{width:16px;height:16px;flex:0 0 16px;margin-top:4px;color:var(--accent,var(--green))}
+.plat{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.plat div{background:rgba(255,255,255,.028);border:1px solid var(--border);border-radius:14px;padding:16px;transition:border-color .25s,background .25s}
+.plat div:hover{border-color:var(--accent,var(--cyan));background:rgba(0,184,255,.05)}
+.plat h5{margin:0 0 8px;font-size:14.5px;font-weight:800;color:#fff;display:flex;align-items:center;gap:9px}
+.plat h5 svg{width:16px;height:16px;color:var(--accent,var(--cyan))}
+.plat p{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+/* ---------- Contact ---------- */
+.mail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mail{display:block;padding:28px 24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden}
+.mail::after{content:"";position:absolute;inset:0;background:radial-gradient(300px 140px at 20% 0%,var(--accent,var(--green)),transparent 70%);opacity:0;transition:opacity .35s}
+.mail:hover{transform:translateY(-6px);border-color:var(--accent,var(--green));box-shadow:0 26px 54px -30px var(--accent,var(--green))}
+.mail:hover::after{opacity:.09}
+.mail .ico{margin-bottom:18px}
+.mail h4{font-size:16px;position:relative;z-index:1}
+.mail .addr{position:relative;z-index:1;font-family:var(--font-mono);font-size:13.5px;color:var(--accent,var(--green));margin-top:10px;word-break:break-all}
+.mail .note{position:relative;z-index:1;color:var(--muted);font-size:13px;margin-top:10px}
+
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64px 0 30px}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:44px}
+.foot-brand p{color:var(--muted);font-size:14.5px;margin-top:16px;max-width:340px}
+.foot h5{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#6d768c;margin:0 0 16px}
+.foot ul{display:flex;flex-direction:column;gap:11px}
+.foot ul a{font-size:14.5px;color:#b4bdd0;transition:color .2s;word-break:break-all}
+.foot ul a:hover{color:var(--green)}
+.socials{display:flex;gap:12px;margin-top:22px}
+.socials a{width:40px;height:40px;border-radius:11px;border:1px solid var(--border);background:rgba(255,255,255,.03);
+  display:grid;place-items:center;color:#9aa5bb;transition:color .22s,border-color .22s,transform .22s}
+.socials a:hover{color:var(--green);border-color:var(--green);transform:translateY(-3px)}
+.socials svg{width:18px;height:18px}
+.foot-bottom{margin-top:50px;padding-top:24px;border-top:1px solid var(--border-soft);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:#5f6879}
+
+/* ---------- Reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Top ---------- */
+.top{position:fixed;right:22px;bottom:22px;z-index:80;width:44px;height:44px;border-radius:12px;
+  border:1px solid var(--border);background:rgba(16,19,29,.9);backdrop-filter:blur(10px);color:var(--green);
+  display:grid;place-items:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.top.show{opacity:1;pointer-events:auto}
+.top:hover{transform:translateY(-3px);border-color:var(--green)}
+.top svg{width:18px;height:18px}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1080px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .tuto-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .burger{display:flex}
+  .split{grid-template-columns:1fr;gap:40px}
+  .mail-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:34px}
+  .foot-brand{grid-column:1/-1}
+}
+@media(max-width:720px){
+  .band{padding:74px 0}
+  .signal{grid-template-columns:repeat(2,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .plat{grid-template-columns:1fr}
+  .table-wrap{overflow-x:auto}
+  table{min-width:560px}
+  .hero{padding-top:calc(var(--nav-h) + 52px)}
+  .foot-grid{grid-template-columns:1fr}
+  .pp-badges{gap:16px}
+  .badge-item img{width:66px;height:66px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+::selection{background:rgba(0,255,157,.28);color:#fff}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:#080a10}
+::-webkit-scrollbar-thumb{background:#242b3c;border-radius:6px;border:6px solid #080a10}
+::-webkit-scrollbar-thumb:hover{background:#33405c}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+<div class="bg-scan"></div>
+<div class="progress" id="progress"></div>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#0a0c13" stroke="#1e2333"/>
+        <path d="M50 16 84 34v32L50 84 16 66V34z" fill="none" stroke="#00ff9d" stroke-width="5" stroke-linejoin="round"/>
+        <circle cx="50" cy="50" r="9" fill="#00b8ff"/>
+      </svg>
+      <span class="brand-txt">
+        <span class="brand-name">ZHÉTICAL</span>
+        <span class="brand-sub">QUERY-INTEL.COM</span>
+      </span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#outils">Outils</a>
+      <a href="#tracker">Tracker</a>
+      <a href="#tutoriels">Tutoriels</a>
+      <a href="#protection">Protection</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#certifications">Certifs</a>
+      <a href="#services">Services</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#outils">Mes Outils</a>
+  <a href="#tracker">Ghostint Tracker</a>
+  <a href="#tutoriels">Tutoriels</a>
+  <a href="#protection">Protection &amp; Éducation</a>
+  <a href="#methode">Méthode</a>
+  <a href="#parcours">Mon Parcours</a>
+  <a href="#certifications">Certifications</a>
+  <a href="#services">Services</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-inner">
+      <span class="pill"><span class="dot"></span>EXPERT OSINT · PROTECTION DES MINEURS · FORMATEUR</span>
+      <h1>Cyber <span class="hl">Intelligence</span><br>&amp; Protection numérique</h1>
+      <p class="lead">
+        Investigations OSINT, protection des communautés en ligne et sensibilisation des familles à la sécurité
+        numérique — avec des outils open-source de nouvelle génération.
+      </p>
+      <div class="hero-cta">
+        <a href="#outils" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Découvrir mes outils
+        </a>
+        <a href="#protection" class="btn btn-ghost">Protection &amp; sensibilisation</a>
+      </div>
+    </div>
+
+    <div class="signal reveal">
+      <div><b data-count="30" data-suffix="+">0</b><span>Certifications</span></div>
+      <div><b data-count="9">0</b><span>Badges CanCred</span></div>
+      <div><b data-count="50" data-suffix="+">0</b><span>Enquêtes</span></div>
+      <div><b data-count="450" data-suffix="+">0</b><span>Outils intégrés</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MES OUTILS ============ -->
+<section id="outils" class="band band-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Arsenal</span>
+      <h2 class="sec-title">Mes Outils &amp; <span class="hl">Projets</span></h2>
+      <p class="sec-sub">Une suite d'outils développés pour optimiser les investigations OSINT, l'analyse de données et la sécurité numérique.</p>
+    </div>
+
+    <div class="grid-4">
+      <!-- Outil 1 -->
+      <article class="card reveal" style="--accent:#00ff9d;--d:.05s">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4v13H3zM10 4h4v16h-4zM17 11h4v9h-4z"/><path d="M3 7h18"/></svg>
+        </div>
+        <h3>Ghosint Tools</h3>
+        <p class="desc">Boîte à outils OSINT centralisée. Accès à des centaines d'utilitaires pour la recherche de personnes, l'analyse de domaines et l'investigation numérique.</p>
+        <a class="card-link" href="https://ghosint.prohacking77.me" target="_blank" rel="noopener">
+          Accéder à l'outil
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <!-- Outil 2 -->
+      <article class="card reveal" style="--accent:#00b8ff;--d:.12s">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.4v4.2M12 11.6 6.5 16.9M12 11.6l5.5 5.3"/></svg>
+        </div>
+        <h3>Ghosint-Tracker</h3>
+        <p class="desc">Cartographiez vos cibles sur un graphe dynamique. Analyse par IA, mode local (Ollama) pour une confidentialité absolue et outils experts intégrés.</p>
+        <a class="card-link" href="https://tracker.prohacking77.me" target="_blank" rel="noopener">
+          Lancer le Tracker
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <!-- Outil 3 -->
+      <article class="card reveal" style="--accent:#a855f7;--d:.19s">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a8 8 0 0 1 16 0"/><path d="M12 10v11"/><circle cx="12" cy="10" r="1.6"/><path d="M2 20h20"/></svg>
+        </div>
+        <h3>OSINT Gods Eye</h3>
+        <p class="desc">Cartographie tactique de nouvelle génération. Visualisez vos cibles avec des cartes 2D et 3D haute définition, offrant une vue « God's Eye » et une interface esthétique inspirée des systèmes militaires (type Osiris).</p>
+        <a class="card-link" href="https://osintgodseye.prohacking77.me/" target="_blank" rel="noopener">
+          Ouvrir Gods Eye
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <!-- Outil 4 -->
+      <article class="card soon reveal" style="--accent:#ff0055;--d:.26s">
+        <span class="badge-soon">BIENTÔT</span>
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg>
+        </div>
+        <h3>Investigator Browser</h3>
+        <p class="desc">Navigateur dédié et sécurisé pour les investigations OSINT. Isolation des sessions, gestion avancée des empreintes numériques et outils intégrés.</p>
+        <span class="card-link" style="color:#8b95ad;cursor:default">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#ff0055"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+          Sortie dans quelques jours
+        </span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GHOSTINT TRACKER ============ -->
+<section id="tracker" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Outil open source</span>
+      <h2 class="sec-title">GHOSTINT <span class="hl">TRACKER</span></h2>
+      <p class="sec-sub">
+        L'investigation OSINT poussée à son maximum. Centralisez vos indices sur un graphe dynamique, cartographiez
+        vos cibles instantanément et activez l'analyse par Intelligence Artificielle en un clic. Un outil puissant,
+        fluide et open source conçu pour les analystes et la Threat Intelligence.
+      </p>
+    </div>
+
+    <div class="cta-row reveal">
+      <a class="btn btn-primary" href="https://tracker.prohacking77.me" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Ouvrir le Tracker
+      </a>
+      <a class="btn btn-ghost" href="#tutoriels">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
+        Voir les tutoriels
+      </a>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-bottom:26px">
+      <div class="mode" style="--accent:#00ff9d">
+        <span class="mode-tag">Mode local</span>
+        <h4>Confidentialité Absolue</h4>
+        <p>
+          Ne laissez aucune trace sur le réseau. En connectant Ghostint à Ollama (Gemma 2), vous profitez d'une puissance
+          d'analyse textuelle et de reconnaissance directement sur votre machine, sans aucune connexion internet.
+        </p>
+      </div>
+      <div class="mode" style="--accent:#00b8ff">
+        <span class="mode-tag">Mode avancé</span>
+        <h4>Renseignement Immédiat</h4>
+        <p>
+          Libérez la puissance des agents autonomes Hermes. Plus besoin de configurations complexes : entrez simplement
+          votre clé API Nous Portal dans l'interface du tracker. L'IA explore le web, croise les données en temps réel
+          et génère de nouvelles entités prêtes à être injectées.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-3 reveal">
+      <div class="feat">
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg> 450+ Outils Experts</h5>
+        <p>Un panneau complet intégré pour pivoter en un instant vers les meilleures ressources OSINT du web (réseaux sociaux, reverse image, e-mails).</p>
+      </div>
+      <div class="feat">
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M9 15l3-3 3 3"/></svg> Interface Épurée</h5>
+        <p>Les boutons d'action et les outils d'analyse apparaissent uniquement au survol du nœud, pour vous laisser 100 % d'espace lisible sur vos entités.</p>
+      </div>
+      <div class="feat">
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg> Entité Adresse Automatique</h5>
+        <p>Saisissez une adresse : le nœud se met à jour tout seul et se synchronise avec la carte interactive pour placer le marqueur, sans manipulation manuelle.</p>
+      </div>
+      <div class="feat">
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/></svg> Nouvelles Entités Cyber</h5>
+        <p>Support natif des menaces avancées avec des nœuds dédiés pour les ASN, les hashs de malwares, les certificats SSL, les hostnames et les TTP.</p>
+      </div>
+      <div class="feat">
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5z"/><path d="M14 3.5v5h5"/></svg> Rapports &amp; Sauvegardes</h5>
+        <p>Exportez votre progression en JSON pour la reprendre plus tard, ou générez instantanément des rapports officiels en PNG ou PDF.</p>
+      </div>
+      <div class="feat">
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5c4 0 7.5 2.6 9 5.5-1.5 2.9-5 5.5-9 5.5S4.5 14.9 3 12c1.5-2.9 5-5.5 9-5.5z"/><circle cx="12" cy="12" r="2.6"/></svg> Analyse Hybride IA</h5>
+        <p>Deux moteurs complémentaires : Ollama en local pour la confidentialité totale, agents Hermes en ligne pour le renseignement en temps réel.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TUTORIELS ============ -->
+<!--
+  ⚠️ POUR AJOUTER UN TUTORIEL :
+     remplace  <span class="st-pill soon">Tutoriel à venir</span>
+     par       <span class="st-pill ok">Disponible</span>
+     et décommente / remplis le lien  <a class="card-link" href="ICI_LE_LIEN_DU_TUTORIEL" target="_blank" rel="noopener">
+-->
+<section id="tutoriels" class="band band-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Apprentissage</span>
+      <h2 class="sec-title">Tutoriels &amp; <span class="hl">Guides</span></h2>
+      <p class="sec-sub">Des tutoriels vidéo pas à pas pour prendre en main chaque outil. Un nouvel épisode sera publié pour chaque projet de l'arsenal.</p>
+    </div>
+
+    <div class="tuto-grid">
+      <!-- Tutoriel : Ghostint Tracker — DISPONIBLE -->
+      <article class="tuto-card reveal" style="--accent:#00b8ff;--d:.05s">
+        <div class="tuto-head">
+          <div class="tuto-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.4v4.2M12 11.6 6.5 16.9M12 11.6l5.5 5.3"/></svg>
+          </div>
+          <span class="st-pill ok">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>
+            Disponible
+          </span>
+        </div>
+        <h4>Ghostint Tracker</h4>
+        <p>Prise en main complète en 30 minutes : création de votre premier graphe relationnel, entités cyber, et configuration des agents IA locaux (Ollama) et avancés (Hermes).</p>
+        <a class="card-link" href="https://drive.google.com/file/d/1A5RYO0fQyay0fE9RlcAMCVb9JPnNfSIi/view" target="_blank" rel="noopener">
+          Voir le tutoriel
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <!-- Tutoriel : Ghosint Tools — À VENIR -->
+      <article class="tuto-card reveal" style="--accent:#00ff9d;--d:.12s">
+        <div class="tuto-head">
+          <div class="tuto-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4v13H3zM10 4h4v16h-4zM17 11h4v9h-4z"/><path d="M3 7h18"/></svg>
+          </div>
+          <span class="st-pill soon">Tutoriel à venir</span>
+        </div>
+        <h4>Ghosint Tools</h4>
+        <p>Comment naviguer dans la boîte à outils, choisir le bon utilitaire selon votre besoin et enchaîner les pivots efficacement lors d'une investigation.</p>
+        <!-- <a class="card-link" href="LIEN_TUTORIEL_GHOSINT_TOOLS" target="_blank" rel="noopener">Voir le tutoriel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a> -->
+      </article>
+
+      <!-- Tutoriel : OSINT Gods Eye — À VENIR -->
+      <article class="tuto-card reveal" style="--accent:#a855f7;--d:.19s">
+        <div class="tuto-head">
+          <div class="tuto-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a8 8 0 0 1 16 0"/><path d="M12 10v11"/><circle cx="12" cy="10" r="1.6"/><path d="M2 20h20"/></svg>
+          </div>
+          <span class="st-pill soon">Tutoriel à venir</span>
+        </div>
+        <h4>OSINT Gods Eye</h4>
+        <p>Maîtrisez la cartographie tactique 2D et 3D : import de cibles, calques, vues « God's Eye » et export des cartes pour vos rapports.</p>
+        <!-- <a class="card-link" href="LIEN_TUTORIEL_GODS_EYE" target="_blank" rel="noopener">Voir le tutoriel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a> -->
+      </article>
+
+      <!-- Tutoriel : Investigator Browser — À VENIR -->
+      <article class="tuto-card reveal" style="--accent:#ff0055;--d:.26s">
+        <div class="tuto-head">
+          <div class="tuto-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg>
+          </div>
+          <span class="st-pill soon">À la sortie</span>
+        </div>
+        <h4>Investigator Browser</h4>
+        <p>Le tutoriel sortira en même temps que le navigateur : isolation des sessions, gestion des empreintes numériques et outils d'investigation intégrés.</p>
+        <!-- <a class="card-link" href="LIEN_TUTORIEL_INVESTIGATOR_BROWSER" target="_blank" rel="noopener">Voir le tutoriel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a> -->
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROTECTION & ÉDUCATION ============ -->
+<section id="protection" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Protection &amp; Éducation</span>
+      <h2 class="sec-title">Protéger, <span class="hl">sensibiliser</span>, accompagner</h2>
+      <p class="sec-sub">
+        La meilleure protection n'est pas la surveillance : c'est la prévention. Comprendre les risques, en parler en
+        famille et adopter les bons réflexes — voilà le cœur de mon travail.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <article class="card reveal" style="--accent:#00ff9d;--d:.05s">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.7" r="1.3"/></svg>
+        </div>
+        <h3>Sécurité en ligne au quotidien</h3>
+        <p class="desc">Mots de passe robustes, double authentification, paramètres de confidentialité, gestion des données personnelles : les bases qui évitent la grande majorité des incidents.</p>
+      </article>
+
+      <article class="card reveal" style="--accent:#00b8ff;--d:.1s">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M2.5 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.2c3 .3 5 2.5 5.5 5.3"/></svg>
+        </div>
+        <h3>Relation parent-enfant</h3>
+        <p class="desc">Comment parler du numérique à la maison : écouter sans surveiller, instaurer un dialogue de confiance et accompagner l'autonomie plutôt que la contrôler.</p>
+      </article>
+
+      <article class="card reveal" style="--accent:#ffb020;--d:.15s">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 9.5v4.5M12 17h.01"/></svg>
+        </div>
+        <h3>Repérer les signaux d'alerte</h3>
+        <p class="desc">Isolement soudain, changement de comportement, contacts inconnus, contenus inappropriés : les signes qui doivent alerter, et comment les identifier sans dramatiser.</p>
+      </article>
+
+      <article class="card reveal" style="--accent:#a855f7;--d:.2s">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3>Réagir &amp; signaler</h3>
+        <p class="desc">Les bons réflexes, la conservation des preuves, et les ressources ou plateformes de signalement adaptées à chaque situation — sans se mettre en danger.</p>
+      </article>
+    </div>
+
+    <blockquote class="quote reveal">
+      <p>Un enfant protégé n'est pas un enfant surveillé.<br>La meilleure sécurité reste <span class="hl">le dialogue</span>.</p>
+      <cite>ZHÉTICAL — Protection &amp; sensibilisation</cite>
+    </blockquote>
+
+    <div class="atelier reveal">
+      <div>
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h13v10H3z"/><path d="m16 11 5-3v8l-5-3z"/></svg>
+          Ateliers &amp; interventions
+        </h4>
+        <p>J'interviens auprès des écoles, associations et structures jeunesse pour des ateliers de sensibilisation à la sécurité numérique, adaptés aux enfants comme aux parents.</p>
+      </div>
+      <a class="btn btn-primary" href="mailto:j.coelho@query-intel.com?subject=Demande%20d%27atelier%20de%20sensibilisation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h18v11H3z"/><path d="m3 7 9 6.5L21 7"/></svg>
+        Organiser un atelier
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÉTHODE ============ -->
+<section id="methode" class="band band-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Méthodologie</span>
+      <h2 class="sec-title">Notre processus <span class="hl">d'intervention</span></h2>
+      <p class="sec-sub">Une procédure en quatre temps, reproductible et traçable, de la détection du signal au signalement officiel.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal" style="--d:.05s">
+        <div class="step-num">01</div>
+        <h4>Détection</h4>
+        <p>Identification des comportements suspects, des comptes liés et des signaux faibles sur les plateformes ciblées.</p>
+      </div>
+      <div class="step reveal" style="--d:.12s">
+        <div class="step-num">02</div>
+        <h4>Investigation</h4>
+        <p>Collecte de preuves numériques : empreintes, métadonnées, corrélations inter-comptes et chronologie des faits.</p>
+      </div>
+      <div class="step reveal" style="--d:.19s">
+        <div class="step-num">03</div>
+        <h4>Documentation</h4>
+        <p>Rapport légal complet et certifié, structuré pour être exploitable par les autorités et les équipes de modération.</p>
+      </div>
+      <div class="step reveal" style="--d:.26s">
+        <div class="step-num">04</div>
+        <h4>Signalement</h4>
+        <p>Transmission aux autorités compétentes et accompagnement des plateformes jusqu'à la résolution du dossier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARCOURS ============ -->
+<section id="parcours" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Opérateur</span>
+      <h2 class="sec-title">Profil <span class="hl">Opérateur</span></h2>
+    </div>
+
+    <div class="split">
+      <div class="prose reveal">
+        <p>
+          Spécialiste en cybersécurité et OSINT, mon expertise s'est d'abord forgée sur le terrain en tant qu'autodidacte passionné.
+          Ce parcours a été consolidé par un solide cursus de formation continue, comptant aujourd'hui
+          <strong>plus de 30 certifications internationales</strong>.
+        </p>
+        <p>
+          Instructeur de groupes techniques spécialisés, je forme la prochaine génération d'analystes OSINT.
+          Ma démarche allie la curiosité naturelle de l'investigateur à la rigueur des standards professionnels actuels.
+        </p>
+        <p>
+          Spécialisé dans la protection des mineurs en ligne, la traque des prédateurs numériques et la documentation
+          légale de preuves numériques. Collaboration régulière avec des plateformes communautaires (Roblox, Discord).
+        </p>
+        <p>
+          Convaincu que la meilleure protection reste la prévention, j'interviens également auprès des familles, des écoles
+          et des associations pour sensibiliser à la sécurité numérique et <strong>accompagner le dialogue parent-enfant</strong>
+          autour des usages en ligne.
+        </p>
+
+        <div class="stats">
+          <div class="stat"><b style="color:#00ff9d">30+</b><span>Certifications</span></div>
+          <div class="stat"><b style="color:#00b8ff">9</b><span>Badges CanCred</span></div>
+          <div class="stat"><b style="color:#ff0055">50+</b><span>Enquêtes</span></div>
+        </div>
+      </div>
+
+      <!-- Passeport Cyber + badges + liens -->
+      <aside class="passport reveal" style="--d:.12s">
+        <div class="passport-head">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><circle cx="12" cy="10" r="3"/><path d="M8.5 17.5h7"/></svg>
+          PASSEPORT CYBER · N° ZHT-2026-BE
+        </div>
+        <div class="pp-row"><span>NOM</span><span>ZHÉTICAL</span></div>
+        <div class="pp-row"><span>STATUT</span><span>OPERATOR OSINT</span></div>
+        <div class="pp-row"><span>NATIONALITÉ</span><span>BELGIQUE (BEL)</span></div>
+        <div class="pp-row"><span>VÉRIFICATION</span><span class="ok">VERIF. 2026 ✓</span></div>
+        <div class="mrz">P&lt;BEL&lt;ZHETICAL&lt;&lt;OPERATOR&lt;OSINT&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;ZHT2026BE&lt;&lt;CANCRED13165</div>
+
+        <!-- Badges de certification -->
+        <div class="pp-badges">
+          <div class="badge-item">
+            <img class="round" src="/badges/permis-osinter.png" alt="Permis d'Osinter — Oscar Zulu" title="Permis d'Osinter — Oscar Zulu" width="78" height="78" loading="lazy">
+            <span>Permis d'Osinter</span>
+          </div>
+          <div class="badge-item">
+            <img class="soft" src="/badges/tracelabs-ctf.jpg" alt="Trace Labs CTF Participant" title="Trace Labs — CTF Participant" width="78" height="78" loading="lazy">
+            <span>Trace Labs CTF</span>
+          </div>
+          <div class="badge-item">
+            <img class="round" src="/badges/exorcisethat.jpg" alt="ExorciseThat Cybersecurity — OSINT &amp; Doxxing" title="ExorciseThat Cybersecurity — OSINT &amp; Doxxing" width="78" height="78" loading="lazy">
+            <span>ExorciseThat</span>
+          </div>
+        </div>
+
+        <!-- Liens -->
+        <div class="pp-actions">
+          <a class="pp-btn primary wide" href="https://passport.cancred.ca/app/profile/13165" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg>
+            Vérifier mon Passeport CanCred
+          </a>
+          <a class="pp-btn linkedin" href="https://www.linkedin.com/in/jose-luis-c-a57a782b1/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.08 1.38-2.08 2.81V21h-4z"/></svg>
+            LinkedIn
+          </a>
+          <a class="pp-btn mail" href="mailto:j.coelho@query-intel.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h18v11H3z"/><path d="m3 7 9 6.5L21 7"/></svg>
+            Contact
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CERTIFICATIONS ============ -->
+<section id="certifications" class="band band-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Accréditations</span>
+      <h2 class="sec-title">Registre des <span class="hl">Certifications</span></h2>
+      <p class="sec-sub">30+ certifications professionnelles et 9 badges vérifiables publiquement via le registre CanCred.</p>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr><th>Domaine</th><th>Niveau</th><th>Preuve</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cybersécurité &amp; bonnes pratiques</td>
+            <td>Praticien certifié</td>
+            <td><span class="tag g">ExorciseThat Cybersecurity</span></td>
+          </tr>
+          <tr>
+            <td>Investigation numérique &amp; Forensics</td>
+            <td>Expert enquêteur</td>
+            <td><span class="tag c">Permis d'Osinter · CanCred</span></td>
+          </tr>
+          <tr>
+            <td>Protection des mineurs &amp; sensibilisation</td>
+            <td>Formateur intervenant</td>
+            <td><span class="tag a">9 Badges CanCred</span></td>
+          </tr>
+          <tr>
+            <td>Veille &amp; renseignement</td>
+            <td>Spécialiste</td>
+            <td><span class="tag v">Trace Labs CTF</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Opérations</span>
+      <h2 class="sec-title">Investigations &amp; <span class="hl">Protection</span></h2>
+      <p class="sec-sub">Des services opérationnels pour sécuriser les communautés digitales et accompagner les familles.</p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Service 1 -->
+      <article class="card reveal" style="--accent:#00ff9d">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        </div>
+        <h3 style="font-size:22px">Ghostint : OSINT Avancé</h3>
+        <p class="desc">
+          Nous traquons les individus malveillants, identifions les prédateurs en ligne et documentons les preuves numériques
+          avec une précision chirurgicale. Discrétion absolue et méthodes forensiques.
+        </p>
+        <ul class="svc-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> Recherche d'identité et croisement de données</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> Géolocalisation digitale et analyse de métadonnées</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> Surveillance discrète et collecte de renseignements</li>
+        </ul>
+      </article>
+
+      <!-- Service 2 -->
+      <article class="card reveal" style="--accent:#00b8ff;--d:.1s">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/><path d="M12 8v4M12 15.5h.01"/></svg>
+        </div>
+        <h3 style="font-size:22px">Prévention &amp; Sécurité</h3>
+        <p class="desc">
+          Protection active des communautés en ligne contre les menaces numériques, en particulier les plus jeunes utilisateurs
+          sur les plateformes populaires.
+        </p>
+        <div class="plat" style="--accent:#00b8ff">
+          <div>
+            <h5>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="10.5" rx="4"/><path d="M7.5 10.5v3.5M5.75 12.25h3.5M15.5 12h.01M18 13.8h.01"/></svg>
+              Roblox
+            </h5>
+            <p>Anti-grooming, harcèlement, vol de comptes et arnaques Robux.</p>
+          </div>
+          <div>
+            <h5>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 6.5C11 4 16 4 18.5 6.2c1.6 1.5 1.4 6.8-.6 10.4-1 1.8-3.2 1.2-4.4-.4l-1.5.1-1.5-.1c-1.2 1.6-3.4 2.2-4.4.4-2-3.6-2.2-8.9-.6-10.4z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg>
+              Discord
+            </h5>
+            <p>Anti-raids, doxxing, phishing ciblé et bots malveillants.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="band band-alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Contact</span>
+      <h2 class="sec-title">Parlons de votre <span class="hl">dossier</span></h2>
+      <p class="sec-sub">Trois canaux directs. Choisissez celui qui correspond à votre demande.</p>
+    </div>
+
+    <div class="mail-grid">
+      <a class="mail reveal" style="--accent:#00ff9d" href="mailto:j.coelho@query-intel.com">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h18v11H3z"/><path d="m3 7 9 6.5L21 7"/></svg>
+        </div>
+        <h4>Contact direct</h4>
+        <div class="addr">j.coelho@query-intel.com</div>
+        <p class="note">Direction, partenariats, ateliers et demandes générales.</p>
+      </a>
+
+      <a class="mail reveal" style="--accent:#00b8ff;--d:.1s" href="mailto:investigation@query-intel.com">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        </div>
+        <h4>Demandes d'enquête</h4>
+        <div class="addr">investigation@query-intel.com</div>
+        <p class="note">Dossiers OSINT, protection de communautés et signalements.</p>
+      </a>
+
+      <a class="mail reveal" style="--accent:#a855f7;--d:.2s" href="mailto:support@query-intel.com">
+        <div class="ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><path d="M4 13v3.5a2 2 0 0 0 2 2h1V13H4zM20 13v3.5a2 2 0 0 1-2 2h-1V13h3z"/></svg>
+        </div>
+        <h4>Support technique</h4>
+        <div class="addr">support@query-intel.com</div>
+        <p class="note">Assistance sur les outils, accès et plateformes.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand">
+          <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
+            <rect width="100" height="100" rx="22" fill="#0a0c13" stroke="#1e2333"/>
+            <path d="M50 16 84 34v32L50 84 16 66V34z" fill="none" stroke="#00ff9d" stroke-width="5" stroke-linejoin="round"/>
+            <circle cx="50" cy="50" r="9" fill="#00b8ff"/>
+          </svg>
+          <span class="brand-txt">
+            <span class="brand-name">ZHÉTICAL</span>
+            <span class="brand-sub">QUERY-INTEL.COM</span>
+          </span>
+        </a>
+        <p>Intelligence numérique, investigations OSINT, protection des communautés et sensibilisation des familles.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/jose-luis-c-a57a782b1/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.08 1.38-2.08 2.81V21h-4z"/></svg>
+          </a>
+          <a href="https://github.com/jollncoelho" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.35 4.8-4.58 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.06 10.06 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+          </a>
+          <a href="mailto:j.coelho@query-intel.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h18v11H3z"/><path d="m3 7 9 6.5L21 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="foot">
+        <h5>Navigation</h5>
+        <ul>
+          <li><a href="#outils">Mes Outils</a></li>
+          <li><a href="#tracker">Ghostint Tracker</a></li>
+          <li><a href="#tutoriels">Tutoriels</a></li>
+          <li><a href="#protection">Protection &amp; Éducation</a></li>
+          <li><a href="#methode">Méthode</a></li>
+          <li><a href="#parcours">Mon Parcours</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#services">Services</a></li>
+        </ul>
+      </div>
+
+      <div class="foot">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:j.coelho@query-intel.com">j.coelho@query-intel.com</a></li>
+          <li><a href="mailto:investigation@query-intel.com">investigation@query-intel.com</a></li>
+          <li><a href="mailto:support@query-intel.com">support@query-intel.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 ZHÉTICAL · Tous droits réservés.</span>
+      <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em">QUERY-INTEL.COM · BELGIQUE</span>
+    </div>
+  </div>
+</footer>
+
+<button class="top" id="topBtn" aria-label="Haut de page">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* --- Navigation : état au scroll + progression --- */
+  var nav = document.getElementById("nav");
+  var progress = document.getElementById("progress");
+  var topBtn = document.getElementById("topBtn");
+
+  function onScroll(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    nav.classList.toggle("scrolled", y > 20);
+    progress.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+    topBtn.classList.toggle("show", y > 600);
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  topBtn.addEventListener("click", function(){
+    window.scrollTo({top:0, behavior: reduce ? "auto" : "smooth"});
+  });
+
+  /* --- Menu mobile --- */
+  var burger = document.getElementById("burger");
+  var mobileMenu = document.getElementById("mobileMenu");
+  burger.addEventListener("click", function(){
+    var open = burger.classList.toggle("open");
+    mobileMenu.classList.toggle("open", open);
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+  mobileMenu.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click", function(){
+      burger.classList.remove("open");
+      mobileMenu.classList.remove("open");
+      burger.setAttribute("aria-expanded","false");
+    });
+  });
+
+  /* --- Reveal au scroll --- */
+  var reveals = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12, rootMargin:"0px 0px -60px 0px"});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add("in"); });
+  }
+
+  /* --- Compteurs animés --- */
+  var counters = document.querySelectorAll("[data-count]");
+  function runCounter(el){
+    var target = parseInt(el.getAttribute("data-count"), 10);
+    var suffix = el.getAttribute("data-suffix") || "";
+    if(reduce){ el.textContent = target + suffix; return; }
+    var dur = 1400, start = null;
+    function tick(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  if("IntersectionObserver" in window){
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ runCounter(e.target); co.unobserve(e.target); }
+      });
+    }, {threshold:0.5});
+    counters.forEach(function(el){ co.observe(el); });
+  } else {
+    counters.forEach(runCounter);
+  }
+
+  /* --- Lien actif dans la nav --- */
+  var sections = Array.prototype.slice.call(document.querySelectorAll("section[id], header[id]"));
+  var links = Array.prototype.slice.call(document.querySelectorAll('#navLinks a[href^="#"]'));
+  if("IntersectionObserver" in window && sections.length){
+    var so = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var id = e.target.getAttribute("id");
+          links.forEach(function(l){
+            l.classList.toggle("active", l.getAttribute("href") === "#" + id);
+          });
+        }
+      });
+    }, {rootMargin:"-45% 0px -50% 0px"});
+    sections.forEach(function(s){ so.observe(s); });
+  }
+})();
+</script>
+</body>
 </html>
