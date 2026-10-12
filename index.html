@@ -34,7 +34,8 @@
 <meta name="twitter:description" content="Investigations OSINT, protection des communautés en ligne, sensibilisation des familles et outils de cybersécurité open-source.">
 <meta name="twitter:image" content="https://www.query-intel.com/og-image.jpg">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2306070b'/%3E%3Cpath d='M50 16 84 34v32L50 84 16 66V34z' fill='none' stroke='%2300ff9d' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='9' fill='%2300b8ff'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <style>
 /* ============================================================
@@ -112,7 +113,7 @@ blockquote{margin:0}
 .nav.scrolled{background:rgba(6,7,11,.94);border-bottom-color:var(--border)}
 .nav-inner{max-width:1240px;margin:0 auto;height:100%;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{display:flex;align-items:center;gap:11px}
-.brand-mark{width:34px;height:34px;flex:0 0 34px}
+.brand-mark{width:42px;height:42px;flex:0 0 42px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(0,255,157,.22))}
 .brand-txt{display:flex;flex-direction:column;line-height:1}
 .brand-name{font-size:19px;font-weight:800;letter-spacing:.13em;
   background:linear-gradient(90deg,var(--green),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -122,8 +123,8 @@ blockquote{margin:0}
 .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.045)}
 .nav-links a.active{color:var(--green)}
 .nav-links a.active::after{content:"";position:absolute;left:10px;right:10px;bottom:2px;height:2px;border-radius:2px;background:var(--green);box-shadow:0 0 10px var(--green)}
-.nav-cta{margin-left:8px;background:var(--green);color:#04120c;padding:9px 17px;border-radius:9px;font-size:12.5px;font-weight:800;transition:background .2s,transform .2s,box-shadow .2s}
-.nav-cta:hover{background:var(--cyan);transform:translateY(-1px);box-shadow:0 10px 26px -12px var(--cyan)}
+.nav-links .nav-cta{margin-left:8px;background:var(--green);color:#04120c;padding:9px 17px;border-radius:9px;font-size:12.5px;font-weight:800;transition:background .2s,transform .2s,box-shadow .2s}
+.nav-links .nav-cta:hover{background:var(--cyan);transform:translateY(-1px);box-shadow:0 10px 26px -12px var(--cyan)}
 .burger{display:none;width:42px;height:42px;border:1px solid var(--border);background:rgba(255,255,255,.03);border-radius:10px;cursor:pointer;align-items:center;justify-content:center;gap:5px;flex-direction:column}
 .burger span{display:block;width:18px;height:2px;border-radius:2px;background:var(--text);transition:transform .25s,opacity .25s}
 .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
@@ -441,11 +442,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#top" class="brand">
-      <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
-        <rect width="100" height="100" rx="22" fill="#0a0c13" stroke="#1e2333"/>
-        <path d="M50 16 84 34v32L50 84 16 66V34z" fill="none" stroke="#00ff9d" stroke-width="5" stroke-linejoin="round"/>
-        <circle cx="50" cy="50" r="9" fill="#00b8ff"/>
-      </svg>
+      <img class="brand-mark" src="/logo-mark.png" alt="ZHÉTICAL" width="42" height="42">
       <span class="brand-txt">
         <span class="brand-name">ZHÉTICAL</span>
         <span class="brand-sub">QUERY-INTEL.COM</span>
@@ -1054,11 +1051,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
     <div class="foot-grid">
       <div class="foot-brand">
         <a href="#top" class="brand">
-          <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
-            <rect width="100" height="100" rx="22" fill="#0a0c13" stroke="#1e2333"/>
-            <path d="M50 16 84 34v32L50 84 16 66V34z" fill="none" stroke="#00ff9d" stroke-width="5" stroke-linejoin="round"/>
-            <circle cx="50" cy="50" r="9" fill="#00b8ff"/>
-          </svg>
+          <img class="brand-mark" src="/logo-mark.png" alt="ZHÉTICAL" width="42" height="42">
           <span class="brand-txt">
             <span class="brand-name">ZHÉTICAL</span>
             <span class="brand-sub">QUERY-INTEL.COM</span>
