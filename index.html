@@ -186,6 +186,24 @@ section{position:relative}
 .signal div:nth-child(3) b{color:var(--pink)}
 .signal div:nth-child(4) b{color:var(--violet)}
 
+/* ---------- Marque secondaire : le logo « atome » (OSINT Master-Toolkit / Ghostint) ----------
+   Référence discrète à l'autre logo de la suite. Volontairement en filigrane,
+   miroir horizontal (scaleX(-1)), pour ne jamais concurrencer la marque ZHÉTICAL. */
+.hero{position:relative}
+.hero .wrap{position:relative;z-index:1}
+.hero-atom{position:absolute;top:-14px;right:-56px;width:min(42vw,340px);height:min(42vw,340px);
+  color:rgba(0,255,157,.085);transform:scaleX(-1);pointer-events:none;z-index:0;
+  filter:drop-shadow(0 0 70px rgba(0,255,157,.10))}
+.alt-brand{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:8px 15px 8px 13px;
+  border:1px solid var(--border-soft);border-radius:999px;background:rgba(255,255,255,.025);
+  transition:border-color .25s,background .25s}
+.alt-brand:hover{border-color:rgba(0,184,255,.45);background:rgba(0,184,255,.06)}
+.alt-brand svg{width:21px;height:21px;flex:0 0 21px;transform:scaleX(-1);
+  filter:drop-shadow(0 0 9px rgba(0,184,255,.42))}
+.alt-brand span{font-family:var(--font-mono);font-size:9px;letter-spacing:.15em;color:#6d768c;
+  text-transform:uppercase;line-height:1.45}
+.alt-brand b{display:block;color:#a8b2c7;font-size:10px;letter-spacing:.13em;font-weight:700}
+
 /* ---------- Cartes génériques ---------- */
 .card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0)),var(--card);
   border:1px solid var(--border);border-radius:var(--radius);padding:26px;overflow:hidden;
@@ -425,6 +443,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
   .table-wrap{overflow-x:auto}
   table{min-width:560px}
   .hero{padding-top:calc(var(--nav-h) + 52px)}
+  .hero-atom{width:min(78vw,250px);height:min(78vw,250px);right:-88px;top:-6px;color:rgba(0,255,157,.06)}
   .foot-grid{grid-template-columns:1fr}
   .pp-badges{gap:16px}
   .badge-item img{width:66px;height:66px}
@@ -447,6 +466,57 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <div class="bg-grid"></div>
 <div class="bg-scan"></div>
 <div class="progress" id="progress"></div>
+
+<!-- ============ MARQUES SVG (définitions réutilisables) ============ -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="atomGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00ff9d"/>
+      <stop offset="55%" stop-color="#00b8ff"/>
+      <stop offset="100%" stop-color="#7c5cff"/>
+    </linearGradient>
+    <radialGradient id="atomCore">
+      <stop offset="0%" stop-color="#00ff9d" stop-opacity=".85"/>
+      <stop offset="55%" stop-color="#00b8ff" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="#00b8ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Atome monochrome (currentColor) — utilisé en filigrane -->
+    <symbol id="atom-line" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-linecap="round">
+        <g stroke-width="3.1" opacity=".28">
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85"/>
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85" transform="rotate(120 12 12)"/>
+        </g>
+        <g stroke-width="1.4">
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85"/>
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85" transform="rotate(120 12 12)"/>
+        </g>
+      </g>
+      <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+    </symbol>
+
+    <!-- Atome néon (dégradé) — marque secondaire -->
+    <symbol id="atom-neon" viewBox="0 0 24 24">
+      <g fill="none" stroke="url(#atomGrad)" stroke-linecap="round">
+        <g stroke-width="3.1" opacity=".3">
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85"/>
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85" transform="rotate(120 12 12)"/>
+        </g>
+        <g stroke-width="1.4">
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85"/>
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="9.6" ry="3.85" transform="rotate(120 12 12)"/>
+        </g>
+      </g>
+      <circle cx="12" cy="12" r="3.4" fill="url(#atomCore)"/>
+      <circle cx="12" cy="12" r="1.8" fill="#ffffff"/>
+    </symbol>
+  </defs>
+</svg>
 
 <!-- ============ NAVIGATION ============ -->
 <nav class="nav" id="nav">
@@ -489,6 +559,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
+  <svg class="hero-atom" aria-hidden="true" focusable="false"><use href="#atom-line"/></svg>
   <div class="wrap">
     <div class="hero-inner">
       <span class="pill"><span class="dot"></span>EXPERT OSINT · PROTECTION DES MINEURS · FORMATEUR</span>
@@ -1084,6 +1155,10 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h18v11H3z"/><path d="m3 7 9 6.5L21 7"/></svg>
           </a>
         </div>
+        <a class="alt-brand" href="https://ghostint.query-intel.com/" target="_blank" rel="noopener">
+          <svg aria-hidden="true" focusable="false"><use href="#atom-neon"/></svg>
+          <span><b>OSINT Master-Toolkit</b>Suite Ghostint</span>
+        </a>
       </div>
 
       <div class="foot">
