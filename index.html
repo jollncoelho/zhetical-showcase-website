@@ -345,6 +345,10 @@ tbody td:first-child{font-weight:700;color:#fff}
 .tag.c{color:var(--cyan);border-color:rgba(0,184,255,.35);background:rgba(0,184,255,.08)}
 .tag.v{color:var(--violet);border-color:rgba(168,85,247,.35);background:rgba(168,85,247,.08)}
 .tag.a{color:var(--amber);border-color:rgba(255,176,32,.35);background:rgba(255,176,32,.08)}
+.proof{display:inline-flex;align-items:center;gap:10px}
+.proof img{width:32px;height:32px;object-fit:contain;flex:0 0 32px;border-radius:9px;
+  background:rgba(255,255,255,.05);padding:3px}
+.proof img.round{border-radius:50%}
 
 /* ---------- Services ---------- */
 .svc-list{margin-top:20px;display:flex;flex-direction:column;gap:12px}
@@ -504,7 +508,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 
     <div class="signal reveal">
       <div><b data-count="30" data-suffix="+">0</b><span>Certifications</span></div>
-      <div><b data-count="9">0</b><span>Badges CanCred</span></div>
+      <div><b data-count="13">0</b><span>Badges CanCred</span></div>
       <div><b data-count="50" data-suffix="+">0</b><span>Enquêtes</span></div>
       <div><b data-count="450" data-suffix="+">0</b><span>Outils intégrés</span></div>
     </div>
@@ -864,7 +868,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 
         <div class="stats">
           <div class="stat"><b style="color:#00ff9d">30+</b><span>Certifications</span></div>
-          <div class="stat"><b style="color:#00b8ff">9</b><span>Badges CanCred</span></div>
+          <div class="stat"><b style="color:#00b8ff">13</b><span>Badges CanCred</span></div>
           <div class="stat"><b style="color:#ff0055">50+</b><span>Enquêtes</span></div>
         </div>
       </div>
@@ -923,7 +927,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
     <div class="sec-head reveal">
       <span class="eyebrow">Accréditations</span>
       <h2 class="sec-title">Registre des <span class="hl">Certifications</span></h2>
-      <p class="sec-sub">30+ certifications professionnelles et 9 badges vérifiables publiquement via le registre CanCred.</p>
+      <p class="sec-sub">30+ certifications professionnelles et 13 badges vérifiables publiquement via le registre CanCred.</p>
     </div>
 
     <div class="table-wrap reveal">
@@ -935,22 +939,22 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           <tr>
             <td>Cybersécurité &amp; bonnes pratiques</td>
             <td>Praticien certifié</td>
-            <td><span class="tag g">ExorciseThat Cybersecurity</span></td>
+            <td><span class="proof"><img class="round" src="/badges/exorcisethat.jpg" alt="ExorciseThat Cybersecurity" width="32" height="32" loading="lazy"><span class="tag g">ExorciseThat Cybersecurity</span></span></td>
           </tr>
           <tr>
             <td>Investigation numérique &amp; Forensics</td>
             <td>Expert enquêteur</td>
-            <td><span class="tag c">Permis d'Osinter · CanCred</span></td>
+            <td><span class="proof"><img class="round" src="/badges/permis-osinter.png" alt="Permis d'Osinter" width="32" height="32" loading="lazy"><span class="tag c">Permis d'Osinter · CanCred</span></span></td>
           </tr>
           <tr>
             <td>Protection des mineurs &amp; sensibilisation</td>
             <td>Formateur intervenant</td>
-            <td><span class="tag a">9 Badges CanCred</span></td>
+            <td><span class="proof"><span class="tag a">13 Badges CanCred</span></span></td>
           </tr>
           <tr>
             <td>Veille &amp; renseignement</td>
             <td>Spécialiste</td>
-            <td><span class="tag v">Trace Labs CTF</span></td>
+            <td><span class="proof"><img class="soft" src="/badges/tracelabs-ctf.jpg" alt="Trace Labs CTF" width="32" height="32" loading="lazy"><span class="tag v">Trace Labs CTF</span></span></td>
           </tr>
         </tbody>
       </table>
