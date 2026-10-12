@@ -10,15 +10,17 @@
 </p>
 
 <p align="center">
-  <strong><a href="https://www.query-intel.com/">www.query-intel.com</a></strong>
+  <strong><a href="https://www.query-intel.com/">www.query-intel.com</a></strong><br>
+  <sub>Disponible en français · English · Español · Português</sub>
 </p>
 
 ---
 
 ## Le projet en une phrase
 
-Un site vitrine **statique d'un seul fichier**, sans dépendance externe à l'exécution :
-tout le HTML, le CSS, le JavaScript et les icônes (SVG) vivent dans `index.html`.
+Un site vitrine **statique d'un seul fichier, en quatre langues**, sans dépendance
+externe à l'exécution : tout le HTML, le CSS, le JavaScript, les icônes (SVG) et les
+traductions vivent dans `index.html`.
 
 ## Stack
 
@@ -27,7 +29,8 @@ tout le HTML, le CSS, le JavaScript et les icônes (SVG) vivent dans `index.html
 | Structure | **HTML statique** (`index.html`) | Un seul fichier à éditer, rien à compiler pour modifier le contenu |
 | Styles | CSS intégré (variables + `clamp()`) | Aucune feuille externe, aucun CDN |
 | Icônes | **SVG inline** | Zéro requête réseau, net à toutes les tailles |
-| JS | Vanilla (IntersectionObserver, compteurs animés) | Pas de framework côté client |
+| JS | Vanilla (IntersectionObserver, compteurs animés, i18n) | Pas de framework côté client |
+| Langues | **FR / EN / ES / PT** (dictionnaire intégré) | Bascule instantanée, sans rechargement |
 | Build | **Vite 5** | Minifie et copie `public/` vers `dist/` |
 | Hébergement | **Vercel** | Déploiement automatique à chaque push sur `main` |
 
@@ -95,6 +98,49 @@ curl -s -L "https://www.query-intel.com/?v=$RANDOM" | grep -c '<une chaine recen
 
 Le site est servi **depuis la racine** du domaine. Ne **pas** definir de `base`
 dans `vite.config.ts` : cela casserait le chargement des assets en production.
+
+## Langues (FR / EN / ES / PT)
+
+Le site existe en **quatre langues**, commutables **sans rechargement de page**.
+
+- **Le français est la langue de référence** et vit directement dans le HTML : c'est
+  ce que voient les moteurs de recherche et les visiteurs sans JavaScript.
+- Les traductions sont dans un dictionnaire JavaScript en bas de `index.html`
+  (`var LANG = { en: {...}, es: {...}, pt: {...} }`). Le dictionnaire ne contient
+  **que ce qui change** — le français est capturé depuis le DOM au chargement.
+- Le sélecteur `FR EN ES PT` est dans la barre de navigation.
+
+### Comment ça marche
+
+| Mécanisme | Détail |
+|---|---|
+| Marquage | `data-i18n="clé"` pour du texte brut, `data-i18n-html="clé"` quand la traduction contient du balisage (ex. `<span class='hl'>`) |
+| Ordre de détection | `?lang=xx` → `localStorage` → langue du navigateur → `fr` |
+| URL | `?lang=en` est écrit dans l'adresse (partageable) ; `fr` le retire |
+| SEO | `<html lang>`, `<title>`, `meta description`, `og:*` et `twitter:*` sont mis à jour à chaque bascule |
+| Persistance | Le choix est mémorisé dans `localStorage` (`zht-lang`) |
+
+### Ajouter une langue
+
+1. Ajouter le code dans `SUPPORTED` et dans `SEO` (bloc `var SEO = {...}`).
+2. Ajouter un bloc `xx: { ... }` dans `var LANG = {...}`.
+3. Ajouter un bouton dans `#langSwitcher`.
+
+### Ajouter un texte traduisible
+
+1. Marquer l'élément dans le HTML : `<p data-i18n="section.cle">Texte français</p>`.
+2. Ajouter la clé dans les trois blocs `en`, `es`, `pt` du dictionnaire.
+
+> ⚠️ Toute clé présente dans le HTML **doit** exister dans les trois langues. Un script
+> de contrôle est facile à refaire : comparer les `data-i18n` du HTML avec les clés du
+> dictionnaire (le site compte **155 clés**, 0 manquante).
+
+### Limite SEO à connaître
+
+Les quatre langues partagent **une seule URL**. Google n'indexera donc correctement
+que le français. Pour que chaque langue ait sa propre URL indexable (`/en/`, `/es/`,
+`/pt/`) il faudrait **générer quatre fichiers HTML statiques** au build — c'est
+faisable, mais c'est un chantier distinct.
 
 ## Contenu du site
 

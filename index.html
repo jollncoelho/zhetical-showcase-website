@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT | Query Intel</title>
-<meta name="description" content="Expert OSINT et cybersécurité. Investigations numériques, protection des mineurs en ligne, sensibilisation des familles et outils open-source : Ghosint Tools, Ghostint Tracker, OSINT Gods Eye.">
+<title id="pageTitle">ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT | Query Intel</title>
+<meta name="description" id="metaDesc" content="Expert OSINT et cybersécurité. Investigations numériques, protection des mineurs en ligne, sensibilisation des familles et outils open-source : Ghosint Tools, Ghostint Tracker, OSINT Gods Eye.">
 <meta name="keywords" content="OSINT, Zhétical, Query Intel, sécurité en ligne, protection des mineurs, sensibilisation parents, cybersécurité, Ghosint Tools, Ghostint Tracker, Gods Eye, Belgique">
 <meta name="author" content="ZHÉTICAL">
 <meta name="robots" content="index, follow">
@@ -18,8 +18,8 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.query-intel.com/">
 <meta property="og:site_name" content="ZHÉTICAL">
-<meta property="og:title" content="ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT">
-<meta property="og:description" content="Investigations OSINT, protection des communautés en ligne, sensibilisation des familles et outils de cybersécurité open-source.">
+<meta property="og:title" id="ogTitle" content="ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT">
+<meta property="og:description" id="ogDesc" content="Investigations OSINT, protection des communautés en ligne, sensibilisation des familles et outils de cybersécurité open-source.">
 <meta property="og:image" content="https://www.query-intel.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -30,8 +30,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@zhetikal77">
 <meta name="twitter:creator" content="@zhetikal77">
-<meta name="twitter:title" content="ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT">
-<meta name="twitter:description" content="Investigations OSINT, protection des communautés en ligne, sensibilisation des familles et outils de cybersécurité open-source.">
+<meta name="twitter:title" id="twTitle" content="ZHÉTICAL · Cyber Intelligence, Protection &amp; Outils OSINT">
+<meta name="twitter:description" id="twDesc" content="Investigations OSINT, protection des communautés en ligne, sensibilisation des familles et outils de cybersécurité open-source.">
 <meta name="twitter:image" content="https://www.query-intel.com/og-image.jpg">
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -136,6 +136,19 @@ blockquote{margin:0}
 .mobile-menu.open{display:flex}
 .mobile-menu a{padding:13px 12px;border-radius:10px;font-weight:600;color:#b8c1d4;border-bottom:1px solid rgba(255,255,255,.04)}
 .mobile-menu a:last-child{border-bottom:0;color:var(--green)}
+
+/* ---------- Sélecteur de langue ---------- */
+.nav-end{display:flex;align-items:center;gap:10px}
+.lang{display:flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--border);
+  background:rgba(255,255,255,.03);border-radius:10px;flex:0 0 auto}
+.lang button{appearance:none;-webkit-appearance:none;border:0;background:transparent;cursor:pointer;
+  font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.06em;
+  color:#7b8598;padding:6px 7px;border-radius:7px;line-height:1;
+  transition:color .2s,background .2s,box-shadow .2s}
+.lang button:hover{color:var(--text);background:rgba(255,255,255,.07)}
+.lang button.on{color:#04120c;background:var(--green);box-shadow:0 0 14px -4px var(--green)}
+.lang button:focus-visible{outline:2px solid var(--cyan);outline-offset:1px}
+@media(max-width:1200px){ .lang button{padding:6px 5px;font-size:10px;letter-spacing:0} }
 
 /* ---------- Layout ---------- */
 .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
@@ -530,31 +543,39 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
     </a>
 
     <div class="nav-links" id="navLinks">
-      <a href="#outils">Outils</a>
-      <a href="#tracker">Tracker</a>
-      <a href="#tutoriels">Tutoriels</a>
-      <a href="#protection">Protection</a>
-      <a href="#parcours">Parcours</a>
-      <a href="#certifications">Certifs</a>
-      <a href="#services">Services</a>
-      <a href="#contact" class="nav-cta">Contact</a>
+      <a href="#outils" data-i18n="nav.tools">Outils</a>
+      <a href="#tracker" data-i18n="nav.tracker">Tracker</a>
+      <a href="#tutoriels" data-i18n="nav.tutos">Tutoriels</a>
+      <a href="#protection" data-i18n="nav.protection">Protection</a>
+      <a href="#parcours" data-i18n="nav.profile">Parcours</a>
+      <a href="#certifications" data-i18n="nav.certs">Certifs</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#contact" class="nav-cta" data-i18n="nav.contact">Contact</a>
     </div>
 
-    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-end">
+      <div class="lang" id="langSwitcher" role="group" aria-label="Langue / Language">
+        <button type="button" data-lang="fr" aria-label="Français">FR</button>
+        <button type="button" data-lang="en" aria-label="English">EN</button>
+        <button type="button" data-lang="es" aria-label="Español">ES</button>
+        <button type="button" data-lang="pt" aria-label="Português">PT</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#outils">Mes Outils</a>
-  <a href="#tracker">Ghostint Tracker</a>
-  <a href="#tutoriels">Tutoriels</a>
-  <a href="#protection">Protection &amp; Éducation</a>
-  <a href="#methode">Méthode</a>
-  <a href="#parcours">Mon Parcours</a>
-  <a href="#certifications">Certifications</a>
-  <a href="#services">Services</a>
-  <a href="#contact">Contact</a>
+  <a href="#outils" data-i18n="m.tools">Mes Outils</a>
+  <a href="#tracker" data-i18n="m.tracker">Ghostint Tracker</a>
+  <a href="#tutoriels" data-i18n="m.tutos">Tutoriels</a>
+  <a href="#protection" data-i18n="m.protection">Protection &amp; Éducation</a>
+  <a href="#methode" data-i18n="m.method">Méthode</a>
+  <a href="#parcours" data-i18n="m.profile">Mon Parcours</a>
+  <a href="#certifications" data-i18n="m.certs">Certifications</a>
+  <a href="#services" data-i18n="m.services">Services</a>
+  <a href="#contact" data-i18n="m.contact">Contact</a>
 </div>
 
 <!-- ============ HERO ============ -->
@@ -562,26 +583,26 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
   <svg class="hero-atom" aria-hidden="true" focusable="false"><use href="#atom-line"/></svg>
   <div class="wrap">
     <div class="hero-inner">
-      <span class="pill"><span class="dot"></span>EXPERT OSINT · PROTECTION DES MINEURS · FORMATEUR</span>
-      <h1>Cyber <span class="hl">Intelligence</span><br>&amp; Protection numérique</h1>
-      <p class="lead">
+      <span class="pill"><span class="dot"></span><span data-i18n="hero.pill">EXPERT OSINT · PROTECTION DES MINEURS · FORMATEUR</span></span>
+      <h1 data-i18n-html="hero.h1">Cyber <span class="hl">Intelligence</span><br>&amp; Protection numérique</h1>
+      <p class="lead" data-i18n="hero.lead">
         Investigations OSINT, protection des communautés en ligne et sensibilisation des familles à la sécurité
         numérique — avec des outils open-source de nouvelle génération.
       </p>
       <div class="hero-cta">
         <a href="#outils" class="btn btn-primary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          Découvrir mes outils
+          <span data-i18n="hero.cta1">Découvrir mes outils</span>
         </a>
-        <a href="#protection" class="btn btn-ghost">Protection &amp; sensibilisation</a>
+        <a href="#protection" class="btn btn-ghost" data-i18n="hero.cta2">Protection &amp; sensibilisation</a>
       </div>
     </div>
 
     <div class="signal reveal">
-      <div><b data-count="30" data-suffix="+">0</b><span>Certifications</span></div>
-      <div><b data-count="13">0</b><span>Badges CanCred</span></div>
-      <div><b data-count="50" data-suffix="+">0</b><span>Enquêtes</span></div>
-      <div><b data-count="450" data-suffix="+">0</b><span>Outils intégrés</span></div>
+      <div><b data-count="30" data-suffix="+">0</b><span data-i18n="stat.certs">Certifications</span></div>
+      <div><b data-count="13">0</b><span data-i18n="stat.badges">Badges CanCred</span></div>
+      <div><b data-count="50" data-suffix="+">0</b><span data-i18n="stat.investigations">Enquêtes</span></div>
+      <div><b data-count="450" data-suffix="+">0</b><span data-i18n="stat.tools">Outils intégrés</span></div>
     </div>
   </div>
 </header>
@@ -590,9 +611,9 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="outils" class="band band-alt">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Arsenal</span>
-      <h2 class="sec-title">Mes Outils &amp; <span class="hl">Projets</span></h2>
-      <p class="sec-sub">Une suite d'outils développés pour optimiser les investigations OSINT, l'analyse de données et la sécurité numérique.</p>
+      <span class="eyebrow" data-i18n="tools.eyebrow">Arsenal</span>
+      <h2 class="sec-title" data-i18n-html="tools.title">Mes Outils &amp; <span class="hl">Projets</span></h2>
+      <p class="sec-sub" data-i18n="tools.sub">Une suite d'outils développés pour optimiser les investigations OSINT, l'analyse de données et la sécurité numérique.</p>
     </div>
 
     <div class="grid-4">
@@ -602,9 +623,9 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4v13H3zM10 4h4v16h-4zM17 11h4v9h-4z"/><path d="M3 7h18"/></svg>
         </div>
         <h3>Ghosint Tools</h3>
-        <p class="desc">Boîte à outils OSINT centralisée. Accès à des centaines d'utilitaires pour la recherche de personnes, l'analyse de domaines et l'investigation numérique.</p>
+        <p class="desc" data-i18n="tools.c1">Boîte à outils OSINT centralisée. Accès à des centaines d'utilitaires pour la recherche de personnes, l'analyse de domaines et l'investigation numérique.</p>
         <a class="card-link" href="https://ghostint.prohacking77.me" target="_blank" rel="noopener">
-          Accéder à l'outil
+          <span data-i18n="tools.c1cta">Accéder à l'outil</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </a>
       </article>
@@ -615,9 +636,9 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.4v4.2M12 11.6 6.5 16.9M12 11.6l5.5 5.3"/></svg>
         </div>
         <h3>Ghosint-Tracker</h3>
-        <p class="desc">Cartographiez vos cibles sur un graphe dynamique. Analyse par IA, mode local (Ollama) pour une confidentialité absolue et outils experts intégrés.</p>
+        <p class="desc" data-i18n="tools.c2">Cartographiez vos cibles sur un graphe dynamique. Analyse par IA, mode local (Ollama) pour une confidentialité absolue et outils experts intégrés.</p>
         <a class="card-link" href="https://tracker.prohacking77.me" target="_blank" rel="noopener">
-          Lancer le Tracker
+          <span data-i18n="tools.c2cta">Lancer le Tracker</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </a>
       </article>
@@ -628,24 +649,24 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a8 8 0 0 1 16 0"/><path d="M12 10v11"/><circle cx="12" cy="10" r="1.6"/><path d="M2 20h20"/></svg>
         </div>
         <h3>OSINT Gods Eye</h3>
-        <p class="desc">Cartographie tactique de nouvelle génération. Visualisez vos cibles avec des cartes 2D et 3D haute définition, offrant une vue « God's Eye » et une interface esthétique inspirée des systèmes militaires (type Osiris).</p>
+        <p class="desc" data-i18n="tools.c3">Cartographie tactique de nouvelle génération. Visualisez vos cibles avec des cartes 2D et 3D haute définition, offrant une vue « God's Eye » et une interface esthétique inspirée des systèmes militaires (type Osiris).</p>
         <a class="card-link" href="https://osintgodseye.prohacking77.me/" target="_blank" rel="noopener">
-          Ouvrir Gods Eye
+          <span data-i18n="tools.c3cta">Ouvrir Gods Eye</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </a>
       </article>
 
       <!-- Outil 4 -->
       <article class="card soon reveal" style="--accent:#ff0055;--d:.26s">
-        <span class="badge-soon">BIENTÔT</span>
+        <span class="badge-soon" data-i18n="tools.soon">BIENTÔT</span>
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg>
         </div>
         <h3>Investigator Browser</h3>
-        <p class="desc">Navigateur dédié et sécurisé pour les investigations OSINT. Isolation des sessions, gestion avancée des empreintes numériques et outils intégrés.</p>
+        <p class="desc" data-i18n="tools.c4">Navigateur dédié et sécurisé pour les investigations OSINT. Isolation des sessions, gestion avancée des empreintes numériques et outils intégrés.</p>
         <span class="card-link" style="color:#8b95ad;cursor:default">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#ff0055"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
-          Sortie dans quelques jours
+          <span data-i18n="tools.c4cta">Sortie dans quelques jours</span>
         </span>
       </article>
     </div>
@@ -656,9 +677,9 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="tracker" class="band">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Outil open source</span>
+      <span class="eyebrow" data-i18n="trk.eyebrow">Outil open source</span>
       <h2 class="sec-title">GHOSTINT <span class="hl">TRACKER</span></h2>
-      <p class="sec-sub">
+      <p class="sec-sub" data-i18n="trk.sub">
         L'investigation OSINT poussée à son maximum. Centralisez vos indices sur un graphe dynamique, cartographiez
         vos cibles instantanément et activez l'analyse par Intelligence Artificielle en un clic. Un outil puissant,
         fluide et open source conçu pour les analystes et la Threat Intelligence.
@@ -668,27 +689,27 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
     <div class="cta-row reveal">
       <a class="btn btn-primary" href="https://tracker.prohacking77.me" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        Ouvrir le Tracker
+        <span data-i18n="trk.cta1">Ouvrir le Tracker</span>
       </a>
       <a class="btn btn-ghost" href="#tutoriels">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
-        Voir les tutoriels
+        <span data-i18n="trk.cta2">Voir les tutoriels</span>
       </a>
     </div>
 
     <div class="grid-2 reveal" style="margin-bottom:26px">
       <div class="mode" style="--accent:#00ff9d">
-        <span class="mode-tag">Mode local</span>
-        <h4>Confidentialité Absolue</h4>
-        <p>
+        <span class="mode-tag" data-i18n="trk.m1tag">Mode local</span>
+        <h4 data-i18n="trk.m1title">Confidentialité Absolue</h4>
+        <p data-i18n="trk.m1desc">
           Ne laissez aucune trace sur le réseau. En connectant Ghostint à Ollama (Gemma 2), vous profitez d'une puissance
           d'analyse textuelle et de reconnaissance directement sur votre machine, sans aucune connexion internet.
         </p>
       </div>
       <div class="mode" style="--accent:#00b8ff">
-        <span class="mode-tag">Mode avancé</span>
-        <h4>Renseignement Immédiat</h4>
-        <p>
+        <span class="mode-tag" data-i18n="trk.m2tag">Mode avancé</span>
+        <h4 data-i18n="trk.m2title">Renseignement Immédiat</h4>
+        <p data-i18n="trk.m2desc">
           Libérez la puissance des agents autonomes Hermes. Plus besoin de configurations complexes : entrez simplement
           votre clé API Nous Portal dans l'interface du tracker. L'IA explore le web, croise les données en temps réel
           et génère de nouvelles entités prêtes à être injectées.
@@ -698,28 +719,28 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 
     <div class="grid-3 reveal">
       <div class="feat">
-        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg> 450+ Outils Experts</h5>
-        <p>Un panneau complet intégré pour pivoter en un instant vers les meilleures ressources OSINT du web (réseaux sociaux, reverse image, e-mails).</p>
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg> <span data-i18n="feat.1t">450+ Outils Experts</span></h5>
+        <p data-i18n="feat.1d">Un panneau complet intégré pour pivoter en un instant vers les meilleures ressources OSINT du web (réseaux sociaux, reverse image, e-mails).</p>
       </div>
       <div class="feat">
-        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M9 15l3-3 3 3"/></svg> Interface Épurée</h5>
-        <p>Les boutons d'action et les outils d'analyse apparaissent uniquement au survol du nœud, pour vous laisser 100 % d'espace lisible sur vos entités.</p>
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M9 15l3-3 3 3"/></svg> <span data-i18n="feat.2t">Interface Épurée</span></h5>
+        <p data-i18n="feat.2d">Les boutons d'action et les outils d'analyse apparaissent uniquement au survol du nœud, pour vous laisser 100 % d'espace lisible sur vos entités.</p>
       </div>
       <div class="feat">
-        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg> Entité Adresse Automatique</h5>
-        <p>Saisissez une adresse : le nœud se met à jour tout seul et se synchronise avec la carte interactive pour placer le marqueur, sans manipulation manuelle.</p>
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg> <span data-i18n="feat.3t">Entité Adresse Automatique</span></h5>
+        <p data-i18n="feat.3d">Saisissez une adresse : le nœud se met à jour tout seul et se synchronise avec la carte interactive pour placer le marqueur, sans manipulation manuelle.</p>
       </div>
       <div class="feat">
-        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/></svg> Nouvelles Entités Cyber</h5>
-        <p>Support natif des menaces avancées avec des nœuds dédiés pour les ASN, les hashs de malwares, les certificats SSL, les hostnames et les TTP.</p>
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/></svg> <span data-i18n="feat.4t">Nouvelles Entités Cyber</span></h5>
+        <p data-i18n="feat.4d">Support natif des menaces avancées avec des nœuds dédiés pour les ASN, les hashs de malwares, les certificats SSL, les hostnames et les TTP.</p>
       </div>
       <div class="feat">
-        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5z"/><path d="M14 3.5v5h5"/></svg> Rapports &amp; Sauvegardes</h5>
-        <p>Exportez votre progression en JSON pour la reprendre plus tard, ou générez instantanément des rapports officiels en PNG ou PDF.</p>
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5z"/><path d="M14 3.5v5h5"/></svg> <span data-i18n="feat.5t">Rapports &amp; Sauvegardes</span></h5>
+        <p data-i18n="feat.5d">Exportez votre progression en JSON pour la reprendre plus tard, ou générez instantanément des rapports officiels en PNG ou PDF.</p>
       </div>
       <div class="feat">
-        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5c4 0 7.5 2.6 9 5.5-1.5 2.9-5 5.5-9 5.5S4.5 14.9 3 12c1.5-2.9 5-5.5 9-5.5z"/><circle cx="12" cy="12" r="2.6"/></svg> Analyse Hybride IA</h5>
-        <p>Deux moteurs complémentaires : Ollama en local pour la confidentialité totale, agents Hermes en ligne pour le renseignement en temps réel.</p>
+        <h5><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5c4 0 7.5 2.6 9 5.5-1.5 2.9-5 5.5-9 5.5S4.5 14.9 3 12c1.5-2.9 5-5.5 9-5.5z"/><circle cx="12" cy="12" r="2.6"/></svg> <span data-i18n="feat.6t">Analyse Hybride IA</span></h5>
+        <p data-i18n="feat.6d">Deux moteurs complémentaires : Ollama en local pour la confidentialité totale, agents Hermes en ligne pour le renseignement en temps réel.</p>
       </div>
     </div>
   </div>
@@ -735,9 +756,9 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="tutoriels" class="band band-alt">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Apprentissage</span>
-      <h2 class="sec-title">Tutoriels &amp; <span class="hl">Guides</span></h2>
-      <p class="sec-sub">Des tutoriels vidéo pas à pas pour prendre en main chaque outil. Un nouvel épisode sera publié pour chaque projet de l'arsenal.</p>
+      <span class="eyebrow" data-i18n="tuto.eyebrow">Apprentissage</span>
+      <h2 class="sec-title" data-i18n-html="tuto.title">Tutoriels &amp; <span class="hl">Guides</span></h2>
+      <p class="sec-sub" data-i18n="tuto.sub">Des tutoriels vidéo pas à pas pour prendre en main chaque outil. Un nouvel épisode sera publié pour chaque projet de l'arsenal.</p>
     </div>
 
     <div class="tuto-grid">
@@ -749,17 +770,17 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           </div>
           <span class="st-pill ok">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg>
-            Disponible
+            <span data-i18n="tuto.available">Disponible</span>
           </span>
         </div>
         <h4>Ghostint Tracker</h4>
-        <p>Prise en main complète en 30 minutes : création de votre premier graphe relationnel, entités cyber, et configuration des agents IA locaux (Ollama) et avancés (Hermes).</p>
+        <p data-i18n="tuto.d1">Prise en main complète en 30 minutes : création de votre premier graphe relationnel, entités cyber, et configuration des agents IA locaux (Ollama) et avancés (Hermes).</p>
         <div class="card-links">
           <a class="card-link" href="https://www.youtube.com/watch?v=mQl5btUpOwc" target="_blank" rel="noopener">
             <svg class="no-shift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
-            Tutoriel vidéo (FR)
+            <span data-i18n="tuto.videoFr">Tutoriel vidéo (FR)</span>
           </a>
-          <a class="card-link alt" href="https://www.youtube.com/watch?v=UOYh_BPoErA" target="_blank" rel="noopener">
+          <a class="card-link alt" href="https://www.youtube.com/watch?v=UOYh_BPoErA" target="_blank" rel="noopener" data-i18n="tuto.videoEn">
             🇬🇧 Version EN
           </a>
         </div>
@@ -771,10 +792,10 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           <div class="tuto-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h4v13H3zM10 4h4v16h-4zM17 11h4v9h-4z"/><path d="M3 7h18"/></svg>
           </div>
-          <span class="st-pill soon">Tutoriel à venir</span>
+          <span class="st-pill soon" data-i18n="tuto.coming">Tutoriel à venir</span>
         </div>
         <h4>Ghosint Tools</h4>
-        <p>Comment naviguer dans la boîte à outils, choisir le bon utilitaire selon votre besoin et enchaîner les pivots efficacement lors d'une investigation.</p>
+        <p data-i18n="tuto.d2">Comment naviguer dans la boîte à outils, choisir le bon utilitaire selon votre besoin et enchaîner les pivots efficacement lors d'une investigation.</p>
         <!-- <a class="card-link" href="LIEN_TUTORIEL_GHOSINT_TOOLS" target="_blank" rel="noopener">Voir le tutoriel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a> -->
       </article>
 
@@ -784,10 +805,10 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           <div class="tuto-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a8 8 0 0 1 16 0"/><path d="M12 10v11"/><circle cx="12" cy="10" r="1.6"/><path d="M2 20h20"/></svg>
           </div>
-          <span class="st-pill soon">Tutoriel à venir</span>
+          <span class="st-pill soon" data-i18n="tuto.coming">Tutoriel à venir</span>
         </div>
         <h4>OSINT Gods Eye</h4>
-        <p>Maîtrisez la cartographie tactique 2D et 3D : import de cibles, calques, vues « God's Eye » et export des cartes pour vos rapports.</p>
+        <p data-i18n="tuto.d3">Maîtrisez la cartographie tactique 2D et 3D : import de cibles, calques, vues « God's Eye » et export des cartes pour vos rapports.</p>
         <!-- <a class="card-link" href="LIEN_TUTORIEL_GODS_EYE" target="_blank" rel="noopener">Voir le tutoriel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a> -->
       </article>
 
@@ -797,10 +818,10 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           <div class="tuto-ico">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg>
           </div>
-          <span class="st-pill soon">À la sortie</span>
+          <span class="st-pill soon" data-i18n="tuto.onRelease">À la sortie</span>
         </div>
         <h4>Investigator Browser</h4>
-        <p>Le tutoriel sortira en même temps que le navigateur : isolation des sessions, gestion des empreintes numériques et outils d'investigation intégrés.</p>
+        <p data-i18n="tuto.d4">Le tutoriel sortira en même temps que le navigateur : isolation des sessions, gestion des empreintes numériques et outils d'investigation intégrés.</p>
         <!-- <a class="card-link" href="LIEN_TUTORIEL_INVESTIGATOR_BROWSER" target="_blank" rel="noopener">Voir le tutoriel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a> -->
       </article>
     </div>
@@ -811,9 +832,9 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="protection" class="band">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Protection &amp; Éducation</span>
-      <h2 class="sec-title">Protéger, <span class="hl">sensibiliser</span>, accompagner</h2>
-      <p class="sec-sub">
+      <span class="eyebrow" data-i18n="prot.eyebrow">Protection &amp; Éducation</span>
+      <h2 class="sec-title" data-i18n-html="prot.title">Protéger, <span class="hl">sensibiliser</span>, accompagner</h2>
+      <p class="sec-sub" data-i18n="prot.sub">
         La meilleure protection n'est pas la surveillance : c'est la prévention. Comprendre les risques, en parler en
         famille et adopter les bons réflexes — voilà le cœur de mon travail.
       </p>
@@ -824,51 +845,51 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.7" r="1.3"/></svg>
         </div>
-        <h3>Sécurité en ligne au quotidien</h3>
-        <p class="desc">Mots de passe robustes, double authentification, paramètres de confidentialité, gestion des données personnelles : les bases qui évitent la grande majorité des incidents.</p>
+        <h3 data-i18n="prot.c1t">Sécurité en ligne au quotidien</h3>
+        <p class="desc" data-i18n="prot.c1d">Mots de passe robustes, double authentification, paramètres de confidentialité, gestion des données personnelles : les bases qui évitent la grande majorité des incidents.</p>
       </article>
 
       <article class="card reveal" style="--accent:#00b8ff;--d:.1s">
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.4"/><path d="M2.5 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 14.2c3 .3 5 2.5 5.5 5.3"/></svg>
         </div>
-        <h3>Relation parent-enfant</h3>
-        <p class="desc">Comment parler du numérique à la maison : écouter sans surveiller, instaurer un dialogue de confiance et accompagner l'autonomie plutôt que la contrôler.</p>
+        <h3 data-i18n="prot.c2t">Relation parent-enfant</h3>
+        <p class="desc" data-i18n="prot.c2d">Comment parler du numérique à la maison : écouter sans surveiller, instaurer un dialogue de confiance et accompagner l'autonomie plutôt que la contrôler.</p>
       </article>
 
       <article class="card reveal" style="--accent:#ffb020;--d:.15s">
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2.5 20h19z"/><path d="M12 9.5v4.5M12 17h.01"/></svg>
         </div>
-        <h3>Repérer les signaux d'alerte</h3>
-        <p class="desc">Isolement soudain, changement de comportement, contacts inconnus, contenus inappropriés : les signes qui doivent alerter, et comment les identifier sans dramatiser.</p>
+        <h3 data-i18n="prot.c3t">Repérer les signaux d'alerte</h3>
+        <p class="desc" data-i18n="prot.c3d">Isolement soudain, changement de comportement, contacts inconnus, contenus inappropriés : les signes qui doivent alerter, et comment les identifier sans dramatiser.</p>
       </article>
 
       <article class="card reveal" style="--accent:#a855f7;--d:.2s">
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg>
         </div>
-        <h3>Réagir &amp; signaler</h3>
-        <p class="desc">Les bons réflexes, la conservation des preuves, et les ressources ou plateformes de signalement adaptées à chaque situation — sans se mettre en danger.</p>
+        <h3 data-i18n="prot.c4t">Réagir &amp; signaler</h3>
+        <p class="desc" data-i18n="prot.c4d">Les bons réflexes, la conservation des preuves, et les ressources ou plateformes de signalement adaptées à chaque situation — sans se mettre en danger.</p>
       </article>
     </div>
 
     <blockquote class="quote reveal">
-      <p>Un enfant protégé n'est pas un enfant surveillé.<br>La meilleure sécurité reste <span class="hl">le dialogue</span>.</p>
-      <cite>ZHÉTICAL — Protection &amp; sensibilisation</cite>
+      <p data-i18n-html="prot.quote">Un enfant protégé n'est pas un enfant surveillé.<br>La meilleure sécurité reste <span class="hl">le dialogue</span>.</p>
+      <cite data-i18n="prot.cite">ZHÉTICAL — Protection &amp; sensibilisation</cite>
     </blockquote>
 
     <div class="atelier reveal">
       <div>
         <h4>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h13v10H3z"/><path d="m16 11 5-3v8l-5-3z"/></svg>
-          Ateliers &amp; interventions
+          <span data-i18n="prot.aTitle">Ateliers &amp; interventions</span>
         </h4>
-        <p>J'interviens auprès des écoles, associations et structures jeunesse pour des ateliers de sensibilisation à la sécurité numérique, adaptés aux enfants comme aux parents.</p>
+        <p data-i18n="prot.aDesc">J'interviens auprès des écoles, associations et structures jeunesse pour des ateliers de sensibilisation à la sécurité numérique, adaptés aux enfants comme aux parents.</p>
       </div>
       <a class="btn btn-primary" href="mailto:j.coelho@query-intel.com?subject=Demande%20d%27atelier%20de%20sensibilisation">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h18v11H3z"/><path d="m3 7 9 6.5L21 7"/></svg>
-        Organiser un atelier
+        <span data-i18n="prot.aCta">Organiser un atelier</span>
       </a>
     </div>
   </div>
@@ -878,31 +899,31 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="methode" class="band band-alt">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Méthodologie</span>
-      <h2 class="sec-title">Notre processus <span class="hl">d'intervention</span></h2>
-      <p class="sec-sub">Une procédure en quatre temps, reproductible et traçable, de la détection du signal au signalement officiel.</p>
+      <span class="eyebrow" data-i18n="met.eyebrow">Méthodologie</span>
+      <h2 class="sec-title" data-i18n-html="met.title">Notre processus <span class="hl">d'intervention</span></h2>
+      <p class="sec-sub" data-i18n="met.sub">Une procédure en quatre temps, reproductible et traçable, de la détection du signal au signalement officiel.</p>
     </div>
 
     <div class="steps">
       <div class="step reveal" style="--d:.05s">
         <div class="step-num">01</div>
-        <h4>Détection</h4>
-        <p>Identification des comportements suspects, des comptes liés et des signaux faibles sur les plateformes ciblées.</p>
+        <h4 data-i18n="met.s1t">Détection</h4>
+        <p data-i18n="met.s1d">Identification des comportements suspects, des comptes liés et des signaux faibles sur les plateformes ciblées.</p>
       </div>
       <div class="step reveal" style="--d:.12s">
         <div class="step-num">02</div>
-        <h4>Investigation</h4>
-        <p>Collecte de preuves numériques : empreintes, métadonnées, corrélations inter-comptes et chronologie des faits.</p>
+        <h4 data-i18n="met.s2t">Investigation</h4>
+        <p data-i18n="met.s2d">Collecte de preuves numériques : empreintes, métadonnées, corrélations inter-comptes et chronologie des faits.</p>
       </div>
       <div class="step reveal" style="--d:.19s">
         <div class="step-num">03</div>
-        <h4>Documentation</h4>
-        <p>Rapport légal complet et certifié, structuré pour être exploitable par les autorités et les équipes de modération.</p>
+        <h4 data-i18n="met.s3t">Documentation</h4>
+        <p data-i18n="met.s3d">Rapport légal complet et certifié, structuré pour être exploitable par les autorités et les équipes de modération.</p>
       </div>
       <div class="step reveal" style="--d:.26s">
         <div class="step-num">04</div>
-        <h4>Signalement</h4>
-        <p>Transmission aux autorités compétentes et accompagnement des plateformes jusqu'à la résolution du dossier.</p>
+        <h4 data-i18n="met.s4t">Signalement</h4>
+        <p data-i18n="met.s4d">Transmission aux autorités compétentes et accompagnement des plateformes jusqu'à la résolution du dossier.</p>
       </div>
     </div>
   </div>
@@ -912,35 +933,35 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="parcours" class="band">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Opérateur</span>
-      <h2 class="sec-title">Profil <span class="hl">Opérateur</span></h2>
+      <span class="eyebrow" data-i18n="par.eyebrow">Opérateur</span>
+      <h2 class="sec-title" data-i18n-html="par.title">Profil <span class="hl">Opérateur</span></h2>
     </div>
 
     <div class="split">
       <div class="prose reveal">
-        <p>
+        <p data-i18n-html="par.p1">
           Spécialiste en cybersécurité et OSINT, mon expertise s'est d'abord forgée sur le terrain en tant qu'autodidacte passionné.
           Ce parcours a été consolidé par un solide cursus de formation continue, comptant aujourd'hui
           <strong>plus de 30 certifications internationales</strong>.
         </p>
-        <p>
+        <p data-i18n="par.p2">
           Instructeur de groupes techniques spécialisés, je forme la prochaine génération d'analystes OSINT.
           Ma démarche allie la curiosité naturelle de l'investigateur à la rigueur des standards professionnels actuels.
         </p>
-        <p>
+        <p data-i18n="par.p3">
           Spécialisé dans la protection des mineurs en ligne, la traque des prédateurs numériques et la documentation
           légale de preuves numériques. Collaboration régulière avec des plateformes communautaires (Roblox, Discord).
         </p>
-        <p>
+        <p data-i18n-html="par.p4">
           Convaincu que la meilleure protection reste la prévention, j'interviens également auprès des familles, des écoles
           et des associations pour sensibiliser à la sécurité numérique et <strong>accompagner le dialogue parent-enfant</strong>
           autour des usages en ligne.
         </p>
 
         <div class="stats">
-          <div class="stat"><b style="color:#00ff9d">30+</b><span>Certifications</span></div>
-          <div class="stat"><b style="color:#00b8ff">13</b><span>Badges CanCred</span></div>
-          <div class="stat"><b style="color:#ff0055">50+</b><span>Enquêtes</span></div>
+          <div class="stat"><b style="color:#00ff9d">30+</b><span data-i18n="stat.certs">Certifications</span></div>
+          <div class="stat"><b style="color:#00b8ff">13</b><span data-i18n="stat.badges">Badges CanCred</span></div>
+          <div class="stat"><b style="color:#ff0055">50+</b><span data-i18n="stat.investigations">Enquêtes</span></div>
         </div>
       </div>
 
@@ -948,19 +969,19 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
       <aside class="passport reveal" style="--d:.12s">
         <div class="passport-head">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><circle cx="12" cy="10" r="3"/><path d="M8.5 17.5h7"/></svg>
-          PASSEPORT CYBER · N° ZHT-2026-BE
+          <span data-i18n="par.ppHead">PASSEPORT CYBER · N° ZHT-2026-BE</span>
         </div>
-        <div class="pp-row"><span>NOM</span><span>ZHÉTICAL</span></div>
-        <div class="pp-row"><span>STATUT</span><span>OPERATOR OSINT</span></div>
-        <div class="pp-row"><span>NATIONALITÉ</span><span>BELGIQUE (BEL)</span></div>
-        <div class="pp-row"><span>VÉRIFICATION</span><span class="ok">VERIF. 2026 ✓</span></div>
+        <div class="pp-row"><span data-i18n="par.ppName">NOM</span><span>ZHÉTICAL</span></div>
+        <div class="pp-row"><span data-i18n="par.ppStatus">STATUT</span><span>OPERATOR OSINT</span></div>
+        <div class="pp-row"><span data-i18n="par.ppNat">NATIONALITÉ</span><span data-i18n="par.ppNatV">BELGIQUE (BEL)</span></div>
+        <div class="pp-row"><span data-i18n="par.ppVerif">VÉRIFICATION</span><span class="ok">VERIF. 2026 ✓</span></div>
         <div class="mrz">P&lt;BEL&lt;ZHETICAL&lt;&lt;OPERATOR&lt;OSINT&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;ZHT2026BE&lt;&lt;CANCRED13165</div>
 
         <!-- Badges de certification -->
         <div class="pp-badges">
           <div class="badge-item">
             <img class="round" src="/badges/permis-osinter.png" alt="Permis d'Osinter — Oscar Zulu" title="Permis d'Osinter — Oscar Zulu" width="78" height="78" loading="lazy">
-            <span>Permis d'Osinter</span>
+            <span data-i18n="par.b1">Permis d'Osinter</span>
           </div>
           <div class="badge-item">
             <img class="soft" src="/badges/tracelabs-ctf.jpg" alt="Trace Labs CTF Participant" title="Trace Labs — CTF Participant" width="78" height="78" loading="lazy">
@@ -976,7 +997,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
         <div class="pp-actions">
           <a class="pp-btn primary wide" href="https://passport.cancred.ca/app/profile/13165" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/><path d="m9 12 2 2 4-4"/></svg>
-            Vérifier mon Passeport CanCred
+            <span data-i18n="par.verify">Vérifier mon Passeport CanCred</span>
           </a>
           <a class="pp-btn linkedin" href="https://www.linkedin.com/in/jose-luis-c-a57a782b1/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.08 1.38-2.08 2.81V21h-4z"/></svg>
@@ -984,7 +1005,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           </a>
           <a class="pp-btn mail" href="mailto:j.coelho@query-intel.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h18v11H3z"/><path d="m3 7 9 6.5L21 7"/></svg>
-            Contact
+            <span data-i18n="par.contact">Contact</span>
           </a>
         </div>
       </aside>
@@ -996,35 +1017,35 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="certifications" class="band band-alt">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Accréditations</span>
-      <h2 class="sec-title">Registre des <span class="hl">Certifications</span></h2>
-      <p class="sec-sub">30+ certifications professionnelles et 13 badges vérifiables publiquement via le registre CanCred.</p>
+      <span class="eyebrow" data-i18n="cert.eyebrow">Accréditations</span>
+      <h2 class="sec-title" data-i18n-html="cert.title">Registre des <span class="hl">Certifications</span></h2>
+      <p class="sec-sub" data-i18n="cert.sub">30+ certifications professionnelles et 13 badges vérifiables publiquement via le registre CanCred.</p>
     </div>
 
     <div class="table-wrap reveal">
       <table>
         <thead>
-          <tr><th>Domaine</th><th>Niveau</th><th>Preuve</th></tr>
+          <tr><th data-i18n="cert.th1">Domaine</th><th data-i18n="cert.th2">Niveau</th><th data-i18n="cert.th3">Preuve</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td>Cybersécurité &amp; bonnes pratiques</td>
-            <td>Praticien certifié</td>
+            <td data-i18n="cert.r1d">Cybersécurité &amp; bonnes pratiques</td>
+            <td data-i18n="cert.r1l">Praticien certifié</td>
             <td><span class="proof"><img class="round" src="/badges/exorcisethat.jpg" alt="ExorciseThat Cybersecurity" width="32" height="32" loading="lazy"><span class="tag g">ExorciseThat Cybersecurity</span></span></td>
           </tr>
           <tr>
-            <td>Investigation numérique &amp; Forensics</td>
-            <td>Expert enquêteur</td>
+            <td data-i18n="cert.r2d">Investigation numérique &amp; Forensics</td>
+            <td data-i18n="cert.r2l">Expert enquêteur</td>
             <td><span class="proof"><img class="round" src="/badges/permis-osinter.png" alt="Permis d'Osinter" width="32" height="32" loading="lazy"><span class="tag c">Permis d'Osinter · CanCred</span></span></td>
           </tr>
           <tr>
-            <td>Protection des mineurs &amp; sensibilisation</td>
-            <td>Formateur intervenant</td>
-            <td><span class="proof"><span class="tag a">13 Badges CanCred</span></span></td>
+            <td data-i18n="cert.r3d">Protection des mineurs &amp; sensibilisation</td>
+            <td data-i18n="cert.r3l">Formateur intervenant</td>
+            <td><span class="proof"><span class="tag a" data-i18n="cert.r3p">13 Badges CanCred</span></span></td>
           </tr>
           <tr>
-            <td>Veille &amp; renseignement</td>
-            <td>Spécialiste</td>
+            <td data-i18n="cert.r4d">Veille &amp; renseignement</td>
+            <td data-i18n="cert.r4l">Spécialiste</td>
             <td><span class="proof"><img class="soft" src="/badges/tracelabs-ctf.jpg" alt="Trace Labs CTF" width="32" height="32" loading="lazy"><span class="tag v">Trace Labs CTF</span></span></td>
           </tr>
         </tbody>
@@ -1037,9 +1058,9 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="services" class="band">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Opérations</span>
-      <h2 class="sec-title">Investigations &amp; <span class="hl">Protection</span></h2>
-      <p class="sec-sub">Des services opérationnels pour sécuriser les communautés digitales et accompagner les familles.</p>
+      <span class="eyebrow" data-i18n="svc.eyebrow">Opérations</span>
+      <h2 class="sec-title" data-i18n-html="svc.title">Investigations &amp; <span class="hl">Protection</span></h2>
+      <p class="sec-sub" data-i18n="svc.sub">Des services opérationnels pour sécuriser les communautés digitales et accompagner les familles.</p>
     </div>
 
     <div class="grid-2">
@@ -1049,14 +1070,14 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
         </div>
         <h3 style="font-size:22px">Ghostint : OSINT Avancé</h3>
-        <p class="desc">
+        <p class="desc" data-i18n="svc.c1d">
           Nous traquons les individus malveillants, identifions les prédateurs en ligne et documentons les preuves numériques
           avec une précision chirurgicale. Discrétion absolue et méthodes forensiques.
         </p>
         <ul class="svc-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> Recherche d'identité et croisement de données</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> Géolocalisation digitale et analyse de métadonnées</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> Surveillance discrète et collecte de renseignements</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> <span data-i18n="svc.c1l1">Recherche d'identité et croisement de données</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> <span data-i18n="svc.c1l2">Géolocalisation digitale et analyse de métadonnées</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg> <span data-i18n="svc.c1l3">Surveillance discrète et collecte de renseignements</span></li>
         </ul>
       </article>
 
@@ -1065,8 +1086,8 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4 6v6c0 5 3.4 8.4 8 9.5 4.6-1.1 8-4.5 8-9.5V6z"/><path d="M12 8v4M12 15.5h.01"/></svg>
         </div>
-        <h3 style="font-size:22px">Prévention &amp; Sécurité</h3>
-        <p class="desc">
+        <h3 style="font-size:22px" data-i18n="svc.c2t">Prévention &amp; Sécurité</h3>
+        <p class="desc" data-i18n="svc.c2d">
           Protection active des communautés en ligne contre les menaces numériques, en particulier les plus jeunes utilisateurs
           sur les plateformes populaires.
         </p>
@@ -1076,14 +1097,14 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="10.5" rx="4"/><path d="M7.5 10.5v3.5M5.75 12.25h3.5M15.5 12h.01M18 13.8h.01"/></svg>
               Roblox
             </h5>
-            <p>Anti-grooming, harcèlement, vol de comptes et arnaques Robux.</p>
+            <p data-i18n="svc.roblox">Anti-grooming, harcèlement, vol de comptes et arnaques Robux.</p>
           </div>
           <div>
             <h5>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 6.5C11 4 16 4 18.5 6.2c1.6 1.5 1.4 6.8-.6 10.4-1 1.8-3.2 1.2-4.4-.4l-1.5.1-1.5-.1c-1.2 1.6-3.4 2.2-4.4.4-2-3.6-2.2-8.9-.6-10.4z"/><circle cx="9.5" cy="12" r="1.2"/><circle cx="14.5" cy="12" r="1.2"/></svg>
               Discord
             </h5>
-            <p>Anti-raids, doxxing, phishing ciblé et bots malveillants.</p>
+            <p data-i18n="svc.discord">Anti-raids, doxxing, phishing ciblé et bots malveillants.</p>
           </div>
         </div>
       </article>
@@ -1095,9 +1116,9 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 <section id="contact" class="band band-alt">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Contact</span>
-      <h2 class="sec-title">Parlons de votre <span class="hl">dossier</span></h2>
-      <p class="sec-sub">Trois canaux directs. Choisissez celui qui correspond à votre demande.</p>
+      <span class="eyebrow" data-i18n="ct.eyebrow">Contact</span>
+      <h2 class="sec-title" data-i18n-html="ct.title">Parlons de votre <span class="hl">dossier</span></h2>
+      <p class="sec-sub" data-i18n="ct.sub">Trois canaux directs. Choisissez celui qui correspond à votre demande.</p>
     </div>
 
     <div class="mail-grid">
@@ -1105,27 +1126,27 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h18v11H3z"/><path d="m3 7 9 6.5L21 7"/></svg>
         </div>
-        <h4>Contact direct</h4>
+        <h4 data-i18n="ct.c1t">Contact direct</h4>
         <div class="addr">j.coelho@query-intel.com</div>
-        <p class="note">Direction, partenariats, ateliers et demandes générales.</p>
+        <p class="note" data-i18n="ct.c1n">Direction, partenariats, ateliers et demandes générales.</p>
       </a>
 
       <a class="mail reveal" style="--accent:#00b8ff;--d:.1s" href="mailto:investigation@query-intel.com">
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
         </div>
-        <h4>Demandes d'enquête</h4>
+        <h4 data-i18n="ct.c2t">Demandes d'enquête</h4>
         <div class="addr">investigation@query-intel.com</div>
-        <p class="note">Dossiers OSINT, protection de communautés et signalements.</p>
+        <p class="note" data-i18n="ct.c2n">Dossiers OSINT, protection de communautés et signalements.</p>
       </a>
 
       <a class="mail reveal" style="--accent:#a855f7;--d:.2s" href="mailto:support@query-intel.com">
         <div class="ico">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13a8 8 0 0 1 16 0"/><path d="M4 13v3.5a2 2 0 0 0 2 2h1V13H4zM20 13v3.5a2 2 0 0 1-2 2h-1V13h3z"/></svg>
         </div>
-        <h4>Support technique</h4>
+        <h4 data-i18n="ct.c3t">Support technique</h4>
         <div class="addr">support@query-intel.com</div>
-        <p class="note">Assistance sur les outils, accès et plateformes.</p>
+        <p class="note" data-i18n="ct.c3n">Assistance sur les outils, accès et plateformes.</p>
       </a>
     </div>
   </div>
@@ -1143,7 +1164,7 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
             <span class="brand-sub">QUERY-INTEL.COM</span>
           </span>
         </a>
-        <p>Intelligence numérique, investigations OSINT, protection des communautés et sensibilisation des familles.</p>
+        <p data-i18n="f.tagline">Intelligence numérique, investigations OSINT, protection des communautés et sensibilisation des familles.</p>
         <div class="socials">
           <a href="https://www.linkedin.com/in/jose-luis-c-a57a782b1/" target="_blank" rel="noopener" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.3c0-1.27-.02-2.9-1.8-2.9-1.8 0-2.08 1.38-2.08 2.81V21h-4z"/></svg>
@@ -1157,26 +1178,26 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
         </div>
         <a class="alt-brand" href="https://ghostint.query-intel.com/" target="_blank" rel="noopener">
           <svg aria-hidden="true" focusable="false"><use href="#atom-neon"/></svg>
-          <span><b>OSINT Master-Toolkit</b>Suite Ghostint</span>
+          <span><b>OSINT Master-Toolkit</b><span data-i18n="f.toolkitSub">Suite Ghostint</span></span>
         </a>
       </div>
 
       <div class="foot">
-        <h5>Navigation</h5>
+        <h5 data-i18n="f.navTitle">Navigation</h5>
         <ul>
-          <li><a href="#outils">Mes Outils</a></li>
-          <li><a href="#tracker">Ghostint Tracker</a></li>
-          <li><a href="#tutoriels">Tutoriels</a></li>
-          <li><a href="#protection">Protection &amp; Éducation</a></li>
-          <li><a href="#methode">Méthode</a></li>
-          <li><a href="#parcours">Mon Parcours</a></li>
-          <li><a href="#certifications">Certifications</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="#outils" data-i18n="m.tools">Mes Outils</a></li>
+          <li><a href="#tracker" data-i18n="m.tracker">Ghostint Tracker</a></li>
+          <li><a href="#tutoriels" data-i18n="m.tutos">Tutoriels</a></li>
+          <li><a href="#protection" data-i18n="m.protection">Protection &amp; Éducation</a></li>
+          <li><a href="#methode" data-i18n="m.method">Méthode</a></li>
+          <li><a href="#parcours" data-i18n="m.profile">Mon Parcours</a></li>
+          <li><a href="#certifications" data-i18n="m.certs">Certifications</a></li>
+          <li><a href="#services" data-i18n="m.services">Services</a></li>
         </ul>
       </div>
 
       <div class="foot">
-        <h5>Contact</h5>
+        <h5 data-i18n="f.contactTitle">Contact</h5>
         <ul>
           <li><a href="mailto:j.coelho@query-intel.com">j.coelho@query-intel.com</a></li>
           <li><a href="mailto:investigation@query-intel.com">investigation@query-intel.com</a></li>
@@ -1186,8 +1207,8 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
     </div>
 
     <div class="foot-bottom">
-      <span>© 2026 ZHÉTICAL · Tous droits réservés.</span>
-      <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em">QUERY-INTEL.COM · BELGIQUE</span>
+      <span data-i18n="f.copyright">© 2026 ZHÉTICAL · Tous droits réservés.</span>
+      <span style="font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em" data-i18n="f.loc">QUERY-INTEL.COM · BELGIQUE</span>
     </div>
   </div>
 </footer>
@@ -1196,6 +1217,413 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
 
+<script>
+/* ============================================================
+   i18n — FR / EN / ES / PT
+   Le français est la langue par défaut : il vit dans le HTML (SEO + no-JS).
+   Les traductions ci-dessous ne contiennent QUE ce qui change ; le FR est
+   capturé depuis le DOM au chargement. Un élément marqué `data-i18n` reçoit
+   du texte brut, `data-i18n-html` reçoit du HTML (pour les <span class="hl">).
+   ============================================================ */
+var LANG = {
+  en: {
+    "nav.tools":"Tools","nav.tracker":"Tracker","nav.tutos":"Tutorials","nav.protection":"Protection",
+    "nav.profile":"Profile","nav.certs":"Certs","nav.services":"Services","nav.contact":"Contact",
+    "m.tools":"My Tools","m.tracker":"Ghostint Tracker","m.tutos":"Tutorials",
+    "m.protection":"Protection & Education","m.method":"Method","m.profile":"My Profile",
+    "m.certs":"Certifications","m.services":"Services","m.contact":"Contact",
+    "hero.pill":"OSINT EXPERT · CHILD PROTECTION · TRAINER",
+    "hero.h1":"Cyber <span class='hl'>Intelligence</span><br>&amp; Digital Protection",
+    "hero.lead":"OSINT investigations, protection of online communities and raising families' awareness of digital safety — with next-generation open-source tools.",
+    "hero.cta1":"Explore my tools","hero.cta2":"Protection & awareness",
+    "stat.certs":"Certifications","stat.badges":"CanCred Badges","stat.investigations":"Investigations","stat.tools":"Integrated tools",
+    "tools.eyebrow":"Arsenal","tools.title":"My Tools &amp; <span class='hl'>Projects</span>",
+    "tools.sub":"A suite of tools built to streamline OSINT investigations, data analysis and digital security.",
+    "tools.c1":"Centralised OSINT toolbox. Access hundreds of utilities for people search, domain analysis and digital investigation.",
+    "tools.c1cta":"Open the tool",
+    "tools.c2":"Map your targets on a dynamic graph. AI analysis, local mode (Ollama) for absolute privacy and built-in expert tools.",
+    "tools.c2cta":"Launch the Tracker",
+    "tools.c3":"Next-generation tactical mapping. Visualise your targets with high-definition 2D and 3D maps, offering a « God's Eye » view and an interface inspired by military systems (Osiris-like).",
+    "tools.c3cta":"Open Gods Eye",
+    "tools.soon":"COMING SOON",
+    "tools.c4":"Dedicated, hardened browser for OSINT investigations. Session isolation, advanced fingerprint management and built-in tools.",
+    "tools.c4cta":"Releasing in a few days",
+    "trk.eyebrow":"Open-source tool",
+    "trk.sub":"OSINT investigation pushed to its limit. Centralise your leads on a dynamic graph, map your targets instantly and switch on AI analysis in one click. A powerful, smooth, open-source tool built for analysts and Threat Intelligence.",
+    "trk.cta1":"Open the Tracker","trk.cta2":"Watch the tutorials",
+    "trk.m1tag":"Local mode","trk.m1title":"Absolute Privacy",
+    "trk.m1desc":"Leave no trace on the network. By connecting Ghostint to Ollama (Gemma 2) you get powerful text and reconnaissance analysis directly on your machine, with no internet connection at all.",
+    "trk.m2tag":"Advanced mode","trk.m2title":"Instant Intelligence",
+    "trk.m2desc":"Unleash the power of autonomous Hermes agents. No more complex configuration: just enter your Nous Portal API key in the tracker interface. The AI explores the web, cross-references data in real time and generates new entities ready to be injected.",
+    "feat.1t":"450+ Expert Tools","feat.1d":"A complete built-in panel to pivot instantly to the best OSINT resources on the web (social networks, reverse image, e-mails).",
+    "feat.2t":"Clean Interface","feat.2d":"Action buttons and analysis tools only appear when you hover over a node, leaving 100% of readable space on your entities.",
+    "feat.3t":"Automatic Address Entity","feat.3d":"Type an address: the node updates itself and syncs with the interactive map to place the marker, with no manual work.",
+    "feat.4t":"New Cyber Entities","feat.4d":"Native support for advanced threats with dedicated nodes for ASNs, malware hashes, SSL certificates, hostnames and TTPs.",
+    "feat.5t":"Reports &amp; Backups","feat.5d":"Export your progress as JSON to pick it up later, or instantly generate official reports as PNG or PDF.",
+    "feat.6t":"Hybrid AI Analysis","feat.6d":"Two complementary engines: local Ollama for total privacy, online Hermes agents for real-time intelligence.",
+    "tuto.eyebrow":"Learning","tuto.title":"Tutorials &amp; <span class='hl'>Guides</span>",
+    "tuto.sub":"Step-by-step video tutorials to get to grips with every tool. A new episode will be published for each project in the arsenal.",
+    "tuto.available":"Available",
+    "tuto.d1":"A full 30-minute walkthrough: building your first relationship graph, cyber entities, and configuring the local (Ollama) and advanced (Hermes) AI agents.",
+    "tuto.videoFr":"Video tutorial (FR)","tuto.videoEn":"🇬🇧 English version",
+    "tuto.coming":"Tutorial coming soon",
+    "tuto.d2":"How to navigate the toolbox, pick the right utility for your need and chain pivots efficiently during an investigation.",
+    "tuto.d3":"Master 2D and 3D tactical mapping: importing targets, layers, « God's Eye » views and exporting maps for your reports.",
+    "tuto.onRelease":"On release",
+    "tuto.d4":"The tutorial will be released alongside the browser: session isolation, fingerprint management and built-in investigation tools.",
+    "prot.eyebrow":"Protection & Education",
+    "prot.title":"Protect, <span class='hl'>raise awareness</span>, support",
+    "prot.sub":"The best protection is not surveillance: it is prevention. Understanding the risks, talking about them as a family and adopting the right reflexes — that is the heart of my work.",
+    "prot.c1t":"Everyday online safety","prot.c1d":"Strong passwords, two-factor authentication, privacy settings, personal data management: the basics that prevent the vast majority of incidents.",
+    "prot.c2t":"Parent-child relationship","prot.c2d":"How to talk about digital life at home: listening without spying, building a relationship of trust and supporting independence rather than controlling it.",
+    "prot.c3t":"Spotting warning signs","prot.c3d":"Sudden isolation, behavioural change, unknown contacts, inappropriate content: the signs that should raise concern, and how to identify them without dramatising.",
+    "prot.c4t":"React &amp; report","prot.c4d":"The right reflexes, preserving evidence, and the reporting resources or platforms suited to each situation — without putting yourself at risk.",
+    "prot.quote":"A protected child is not a monitored child.<br>The best security is still <span class='hl'>dialogue</span>.",
+    "prot.cite":"ZHÉTICAL — Protection &amp; awareness",
+    "prot.aTitle":"Workshops &amp; talks",
+    "prot.aDesc":"I run digital-safety awareness workshops in schools, associations and youth organisations, tailored to both children and parents.",
+    "prot.aCta":"Book a workshop",
+    "met.eyebrow":"Methodology","met.title":"Our <span class='hl'>intervention</span> process",
+    "met.sub":"A four-step procedure, repeatable and traceable, from detecting the signal to official reporting.",
+    "met.s1t":"Detection","met.s1d":"Identifying suspicious behaviour, linked accounts and weak signals on the targeted platforms.",
+    "met.s2t":"Investigation","met.s2d":"Collecting digital evidence: fingerprints, metadata, cross-account correlations and a timeline of events.",
+    "met.s3t":"Documentation","met.s3d":"A complete, certified legal report, structured to be usable by authorities and moderation teams.",
+    "met.s4t":"Reporting","met.s4d":"Handing over to the competent authorities and supporting the platforms until the case is resolved.",
+    "par.eyebrow":"Operator","par.title":"<span class='hl'>Operator</span> Profile",
+    "par.p1":"A cybersecurity and OSINT specialist, my expertise was first built in the field as a passionate self-taught practitioner. That path was later consolidated by a solid programme of continuing education, now counting <strong>more than 30 international certifications</strong>.",
+    "par.p2":"A trainer for specialised technical groups, I teach the next generation of OSINT analysts. My approach combines the investigator's natural curiosity with the rigour of today's professional standards.",
+    "par.p3":"Specialised in protecting minors online, tracking down digital predators and legally documenting digital evidence. Regular collaboration with community platforms (Roblox, Discord).",
+    "par.p4":"Convinced that the best protection is still prevention, I also work with families, schools and associations to raise awareness about digital safety and <strong>support parent-child dialogue</strong> around online habits.",
+    "par.ppHead":"CYBER PASSPORT · NO. ZHT-2026-BE",
+    "par.ppName":"NAME","par.ppStatus":"STATUS","par.ppNat":"NATIONALITY","par.ppNatV":"BELGIUM (BEL)","par.ppVerif":"VERIFICATION",
+    "par.b1":"Osinter Licence","par.verify":"Verify my CanCred Passport","par.contact":"Contact",
+    "cert.eyebrow":"Accreditations","cert.title":"<span class='hl'>Certification</span> Registry",
+    "cert.sub":"30+ professional certifications and 13 badges publicly verifiable through the CanCred registry.",
+    "cert.th1":"Domain","cert.th2":"Level","cert.th3":"Proof",
+    "cert.r1d":"Cybersecurity &amp; best practices","cert.r1l":"Certified practitioner",
+    "cert.r2d":"Digital investigation &amp; Forensics","cert.r2l":"Expert investigator",
+    "cert.r3d":"Child protection &amp; awareness","cert.r3l":"Trainer &amp; speaker","cert.r3p":"13 CanCred Badges",
+    "cert.r4d":"Monitoring &amp; intelligence","cert.r4l":"Specialist",
+    "svc.eyebrow":"Operations","svc.title":"Investigations &amp; <span class='hl'>Protection</span>",
+    "svc.sub":"Operational services to secure digital communities and support families.",
+    "svc.c1d":"We track malicious individuals, identify online predators and document digital evidence with surgical precision. Absolute discretion and forensic methods.",
+    "svc.c1l1":"Identity search and data cross-referencing",
+    "svc.c1l2":"Digital geolocation and metadata analysis",
+    "svc.c1l3":"Discreet monitoring and intelligence gathering",
+    "svc.c2t":"Prevention &amp; Security",
+    "svc.c2d":"Active protection of online communities against digital threats, especially the youngest users on popular platforms.",
+    "svc.roblox":"Anti-grooming, harassment, account theft and Robux scams.",
+    "svc.discord":"Anti-raids, doxxing, targeted phishing and malicious bots.",
+    "ct.eyebrow":"Contact","ct.title":"Let's talk about your <span class='hl'>case</span>",
+    "ct.sub":"Three direct channels. Pick the one that matches your request.",
+    "ct.c1t":"Direct contact","ct.c1n":"Management, partnerships, workshops and general enquiries.",
+    "ct.c2t":"Investigation requests","ct.c2n":"OSINT cases, community protection and reports.",
+    "ct.c3t":"Technical support","ct.c3n":"Help with the tools, access and platforms.",
+    "f.tagline":"Digital intelligence, OSINT investigations, community protection and family awareness.",
+    "f.toolkitSub":"Ghostint suite","f.navTitle":"Navigation","f.contactTitle":"Contact",
+    "f.copyright":"© 2026 ZHÉTICAL · All rights reserved.","f.loc":"QUERY-INTEL.COM · BELGIUM"
+  },
+  es: {
+    "nav.tools":"Herramientas","nav.tracker":"Tracker","nav.tutos":"Tutoriales","nav.protection":"Protección",
+    "nav.profile":"Trayectoria","nav.certs":"Certif.","nav.services":"Servicios","nav.contact":"Contacto",
+    "m.tools":"Mis herramientas","m.tracker":"Ghostint Tracker","m.tutos":"Tutoriales",
+    "m.protection":"Protección y educación","m.method":"Método","m.profile":"Mi trayectoria",
+    "m.certs":"Certificaciones","m.services":"Servicios","m.contact":"Contacto",
+    "hero.pill":"EXPERTO OSINT · PROTECCIÓN DE MENORES · FORMADOR",
+    "hero.h1":"Cyber<span class='hl'>inteligencia</span><br>&amp; protección digital",
+    "hero.lead":"Investigaciones OSINT, protección de comunidades en línea y concienciación de las familias sobre seguridad digital — con herramientas open source de nueva generación.",
+    "hero.cta1":"Descubrir mis herramientas","hero.cta2":"Protección y concienciación",
+    "stat.certs":"Certificaciones","stat.badges":"Insignias CanCred","stat.investigations":"Investigaciones","stat.tools":"Herramientas integradas",
+    "tools.eyebrow":"Arsenal","tools.title":"Mis herramientas y <span class='hl'>proyectos</span>",
+    "tools.sub":"Una suite de herramientas creadas para optimizar las investigaciones OSINT, el análisis de datos y la seguridad digital.",
+    "tools.c1":"Caja de herramientas OSINT centralizada. Acceso a cientos de utilidades para búsqueda de personas, análisis de dominios e investigación digital.",
+    "tools.c1cta":"Abrir la herramienta",
+    "tools.c2":"Cartografía tus objetivos en un grafo dinámico. Análisis por IA, modo local (Ollama) para una confidencialidad absoluta y herramientas expertas integradas.",
+    "tools.c2cta":"Iniciar el Tracker",
+    "tools.c3":"Cartografía táctica de nueva generación. Visualiza tus objetivos con mapas 2D y 3D de alta definición, con una vista « God's Eye » y una interfaz inspirada en sistemas militares (tipo Osiris).",
+    "tools.c3cta":"Abrir Gods Eye",
+    "tools.soon":"PRÓXIMAMENTE",
+    "tools.c4":"Navegador dedicado y seguro para investigaciones OSINT. Aislamiento de sesiones, gestión avanzada de huellas digitales y herramientas integradas.",
+    "tools.c4cta":"Disponible en unos días",
+    "trk.eyebrow":"Herramienta open source",
+    "trk.sub":"La investigación OSINT llevada al máximo. Centraliza tus indicios en un grafo dinámico, cartografía tus objetivos al instante y activa el análisis por Inteligencia Artificial con un clic. Una herramienta potente, fluida y open source pensada para analistas y Threat Intelligence.",
+    "trk.cta1":"Abrir el Tracker","trk.cta2":"Ver los tutoriales",
+    "trk.m1tag":"Modo local","trk.m1title":"Confidencialidad absoluta",
+    "trk.m1desc":"No dejes ningún rastro en la red. Al conectar Ghostint con Ollama (Gemma 2) disfrutas de una potente capacidad de análisis textual y de reconocimiento directamente en tu máquina, sin ninguna conexión a internet.",
+    "trk.m2tag":"Modo avanzado","trk.m2title":"Inteligencia inmediata",
+    "trk.m2desc":"Libera la potencia de los agentes autónomos Hermes. Sin configuraciones complejas: introduce tu clave API de Nous Portal en la interfaz del tracker. La IA explora la web, cruza los datos en tiempo real y genera nuevas entidades listas para inyectar.",
+    "feat.1t":"450+ herramientas expertas","feat.1d":"Un panel completo integrado para pivotar al instante hacia los mejores recursos OSINT de la web (redes sociales, reverse image, correos).",
+    "feat.2t":"Interfaz depurada","feat.2d":"Los botones de acción y las herramientas de análisis solo aparecen al pasar el ratón sobre el nodo, dejando el 100 % del espacio legible en tus entidades.",
+    "feat.3t":"Entidad de dirección automática","feat.3d":"Introduce una dirección: el nodo se actualiza solo y se sincroniza con el mapa interactivo para colocar el marcador, sin manipulación manual.",
+    "feat.4t":"Nuevas entidades ciber","feat.4d":"Soporte nativo de amenazas avanzadas con nodos dedicados para ASN, hashes de malware, certificados SSL, hostnames y TTP.",
+    "feat.5t":"Informes y copias","feat.5d":"Exporta tu progreso en JSON para retomarlo más tarde, o genera al instante informes oficiales en PNG o PDF.",
+    "feat.6t":"Análisis híbrido con IA","feat.6d":"Dos motores complementarios: Ollama en local para una confidencialidad total y agentes Hermes en línea para la inteligencia en tiempo real.",
+    "tuto.eyebrow":"Aprendizaje","tuto.title":"Tutoriales y <span class='hl'>guías</span>",
+    "tuto.sub":"Tutoriales en vídeo paso a paso para dominar cada herramienta. Se publicará un nuevo episodio para cada proyecto del arsenal.",
+    "tuto.available":"Disponible",
+    "tuto.d1":"Puesta en marcha completa en 30 minutos: creación de tu primer grafo relacional, entidades ciber y configuración de los agentes de IA locales (Ollama) y avanzados (Hermes).",
+    "tuto.videoFr":"Tutorial en vídeo (FR)","tuto.videoEn":"🇬🇧 Versión EN",
+    "tuto.coming":"Tutorial próximamente",
+    "tuto.d2":"Cómo navegar por la caja de herramientas, elegir la utilidad adecuada según tu necesidad y encadenar pivotes con eficacia durante una investigación.",
+    "tuto.d3":"Domina la cartografía táctica 2D y 3D: importación de objetivos, capas, vistas « God's Eye » y exportación de mapas para tus informes.",
+    "tuto.onRelease":"Al lanzamiento",
+    "tuto.d4":"El tutorial se publicará a la vez que el navegador: aislamiento de sesiones, gestión de huellas digitales y herramientas de investigación integradas.",
+    "prot.eyebrow":"Protección y educación",
+    "prot.title":"Proteger, <span class='hl'>concienciar</span>, acompañar",
+    "prot.sub":"La mejor protección no es la vigilancia: es la prevención. Comprender los riesgos, hablarlos en familia y adoptar los reflejos correctos — ese es el corazón de mi trabajo.",
+    "prot.c1t":"Seguridad en línea cotidiana","prot.c1d":"Contraseñas robustas, doble autenticación, ajustes de privacidad, gestión de datos personales: las bases que evitan la gran mayoría de incidentes.",
+    "prot.c2t":"Relación padre-hijo","prot.c2d":"Cómo hablar de lo digital en casa: escuchar sin vigilar, instaurar un diálogo de confianza y acompañar la autonomía en lugar de controlarla.",
+    "prot.c3t":"Detectar las señales de alarma","prot.c3d":"Aislamiento repentino, cambio de comportamiento, contactos desconocidos, contenidos inapropiados: las señales que deben alertar y cómo identificarlas sin dramatizar.",
+    "prot.c4t":"Reaccionar y denunciar","prot.c4d":"Los reflejos correctos, la conservación de pruebas y los recursos o plataformas de denuncia adecuados a cada situación — sin ponerse en peligro.",
+    "prot.quote":"Un niño protegido no es un niño vigilado.<br>La mejor seguridad sigue siendo <span class='hl'>el diálogo</span>.",
+    "prot.cite":"ZHÉTICAL — Protección y concienciación",
+    "prot.aTitle":"Talleres y charlas",
+    "prot.aDesc":"Intervengo en escuelas, asociaciones y entidades juveniles con talleres de concienciación sobre seguridad digital, adaptados tanto a niños como a padres.",
+    "prot.aCta":"Organizar un taller",
+    "met.eyebrow":"Metodología","met.title":"Nuestro proceso de <span class='hl'>intervención</span>",
+    "met.sub":"Un procedimiento en cuatro tiempos, reproducible y trazable, desde la detección de la señal hasta la denuncia oficial.",
+    "met.s1t":"Detección","met.s1d":"Identificación de comportamientos sospechosos, cuentas vinculadas y señales débiles en las plataformas objetivo.",
+    "met.s2t":"Investigación","met.s2d":"Recogida de pruebas digitales: huellas, metadatos, correlaciones entre cuentas y cronología de los hechos.",
+    "met.s3t":"Documentación","met.s3d":"Informe legal completo y certificado, estructurado para ser utilizable por las autoridades y los equipos de moderación.",
+    "met.s4t":"Denuncia","met.s4d":"Transmisión a las autoridades competentes y acompañamiento de las plataformas hasta la resolución del caso.",
+    "par.eyebrow":"Operador","par.title":"Perfil del <span class='hl'>operador</span>",
+    "par.p1":"Especialista en ciberseguridad y OSINT, mi experiencia se forjó primero sobre el terreno como autodidacta apasionado. Ese recorrido se consolidó después con un sólido programa de formación continua, que hoy suma <strong>más de 30 certificaciones internacionales</strong>.",
+    "par.p2":"Formador de grupos técnicos especializados, formo a la próxima generación de analistas OSINT. Mi enfoque combina la curiosidad natural del investigador con el rigor de los estándares profesionales actuales.",
+    "par.p3":"Especializado en la protección de menores en línea, la persecución de depredadores digitales y la documentación legal de pruebas digitales. Colaboración habitual con plataformas comunitarias (Roblox, Discord).",
+    "par.p4":"Convencido de que la mejor protección sigue siendo la prevención, también trabajo con familias, escuelas y asociaciones para concienciar sobre la seguridad digital y <strong>acompañar el diálogo entre padres e hijos</strong> en torno a los usos en línea.",
+    "par.ppHead":"PASAPORTE CIBER · N.º ZHT-2026-BE",
+    "par.ppName":"NOMBRE","par.ppStatus":"ESTADO","par.ppNat":"NACIONALIDAD","par.ppNatV":"BÉLGICA (BEL)","par.ppVerif":"VERIFICACIÓN",
+    "par.b1":"Licencia de Osinter","par.verify":"Verificar mi pasaporte CanCred","par.contact":"Contacto",
+    "cert.eyebrow":"Acreditaciones","cert.title":"Registro de <span class='hl'>certificaciones</span>",
+    "cert.sub":"Más de 30 certificaciones profesionales y 13 insignias verificables públicamente a través del registro CanCred.",
+    "cert.th1":"Ámbito","cert.th2":"Nivel","cert.th3":"Prueba",
+    "cert.r1d":"Ciberseguridad y buenas prácticas","cert.r1l":"Profesional certificado",
+    "cert.r2d":"Investigación digital y forense","cert.r2l":"Investigador experto",
+    "cert.r3d":"Protección de menores y concienciación","cert.r3l":"Formador interviniente","cert.r3p":"13 insignias CanCred",
+    "cert.r4d":"Vigilancia e inteligencia","cert.r4l":"Especialista",
+    "svc.eyebrow":"Operaciones","svc.title":"Investigaciones y <span class='hl'>protección</span>",
+    "svc.sub":"Servicios operativos para proteger las comunidades digitales y acompañar a las familias.",
+    "svc.c1d":"Perseguimos a individuos maliciosos, identificamos depredadores en línea y documentamos pruebas digitales con precisión quirúrgica. Discreción absoluta y métodos forenses.",
+    "svc.c1l1":"Búsqueda de identidad y cruce de datos",
+    "svc.c1l2":"Geolocalización digital y análisis de metadatos",
+    "svc.c1l3":"Vigilancia discreta y recopilación de información",
+    "svc.c2t":"Prevención y seguridad",
+    "svc.c2d":"Protección activa de las comunidades en línea frente a las amenazas digitales, en especial los usuarios más jóvenes en las plataformas más populares.",
+    "svc.roblox":"Antigrooming, acoso, robo de cuentas y estafas de Robux.",
+    "svc.discord":"Anti-raids, doxxing, phishing dirigido y bots maliciosos.",
+    "ct.eyebrow":"Contacto","ct.title":"Hablemos de su <span class='hl'>caso</span>",
+    "ct.sub":"Tres canales directos. Elija el que corresponda a su solicitud.",
+    "ct.c1t":"Contacto directo","ct.c1n":"Dirección, alianzas, talleres y consultas generales.",
+    "ct.c2t":"Solicitudes de investigación","ct.c2n":"Casos OSINT, protección de comunidades y denuncias.",
+    "ct.c3t":"Soporte técnico","ct.c3n":"Asistencia con las herramientas, accesos y plataformas.",
+    "f.tagline":"Inteligencia digital, investigaciones OSINT, protección de comunidades y concienciación de las familias.",
+    "f.toolkitSub":"Suite Ghostint","f.navTitle":"Navegación","f.contactTitle":"Contacto",
+    "f.copyright":"© 2026 ZHÉTICAL · Todos los derechos reservados.","f.loc":"QUERY-INTEL.COM · BÉLGICA"
+  },
+  pt: {
+    "nav.tools":"Ferramentas","nav.tracker":"Tracker","nav.tutos":"Tutoriais","nav.protection":"Proteção",
+    "nav.profile":"Percurso","nav.certs":"Certif.","nav.services":"Serviços","nav.contact":"Contacto",
+    "m.tools":"As minhas ferramentas","m.tracker":"Ghostint Tracker","m.tutos":"Tutoriais",
+    "m.protection":"Proteção e educação","m.method":"Método","m.profile":"O meu percurso",
+    "m.certs":"Certificações","m.services":"Serviços","m.contact":"Contacto",
+    "hero.pill":"ESPECIALISTA OSINT · PROTEÇÃO DE MENORES · FORMADOR",
+    "hero.h1":"Cyber<span class='hl'>inteligência</span><br>&amp; proteção digital",
+    "hero.lead":"Investigações OSINT, proteção de comunidades online e sensibilização das famílias para a segurança digital — com ferramentas open source de nova geração.",
+    "hero.cta1":"Descobrir as minhas ferramentas","hero.cta2":"Proteção e sensibilização",
+    "stat.certs":"Certificações","stat.badges":"Distintivos CanCred","stat.investigations":"Investigações","stat.tools":"Ferramentas integradas",
+    "tools.eyebrow":"Arsenal","tools.title":"As minhas ferramentas e <span class='hl'>projetos</span>",
+    "tools.sub":"Um conjunto de ferramentas criadas para otimizar as investigações OSINT, a análise de dados e a segurança digital.",
+    "tools.c1":"Caixa de ferramentas OSINT centralizada. Acesso a centenas de utilitários para pesquisa de pessoas, análise de domínios e investigação digital.",
+    "tools.c1cta":"Abrir a ferramenta",
+    "tools.c2":"Mapeie os seus alvos num grafo dinâmico. Análise por IA, modo local (Ollama) para uma confidencialidade absoluta e ferramentas especializadas integradas.",
+    "tools.c2cta":"Iniciar o Tracker",
+    "tools.c3":"Cartografia tática de nova geração. Visualize os seus alvos com mapas 2D e 3D de alta definição, com uma vista « God's Eye » e uma interface inspirada em sistemas militares (tipo Osiris).",
+    "tools.c3cta":"Abrir o Gods Eye",
+    "tools.soon":"EM BREVE",
+    "tools.c4":"Navegador dedicado e seguro para investigações OSINT. Isolamento de sessões, gestão avançada de impressões digitais e ferramentas integradas.",
+    "tools.c4cta":"Disponível em alguns dias",
+    "trk.eyebrow":"Ferramenta open source",
+    "trk.sub":"A investigação OSINT levada ao máximo. Centralize os seus indícios num grafo dinâmico, mapeie os seus alvos instantaneamente e ative a análise por Inteligência Artificial com um clique. Uma ferramenta potente, fluida e open source concebida para analistas e Threat Intelligence.",
+    "trk.cta1":"Abrir o Tracker","trk.cta2":"Ver os tutoriais",
+    "trk.m1tag":"Modo local","trk.m1title":"Confidencialidade absoluta",
+    "trk.m1desc":"Não deixe qualquer rasto na rede. Ao ligar o Ghostint ao Ollama (Gemma 2) beneficia de uma potente capacidade de análise textual e de reconhecimento diretamente na sua máquina, sem qualquer ligação à internet.",
+    "trk.m2tag":"Modo avançado","trk.m2title":"Informação imediata",
+    "trk.m2desc":"Liberte a potência dos agentes autónomos Hermes. Sem configurações complexas: basta introduzir a sua chave API do Nous Portal na interface do tracker. A IA explora a web, cruza os dados em tempo real e gera novas entidades prontas a injetar.",
+    "feat.1t":"450+ ferramentas especialistas","feat.1d":"Um painel completo integrado para pivotar instantaneamente para os melhores recursos OSINT da web (redes sociais, reverse image, e-mails).",
+    "feat.2t":"Interface limpa","feat.2d":"Os botões de ação e as ferramentas de análise só aparecem ao passar o rato sobre o nó, deixando 100 % de espaço legível nas suas entidades.",
+    "feat.3t":"Entidade de endereço automática","feat.3d":"Introduza um endereço: o nó atualiza-se sozinho e sincroniza-se com o mapa interativo para colocar o marcador, sem qualquer manipulação manual.",
+    "feat.4t":"Novas entidades ciber","feat.4d":"Suporte nativo de ameaças avançadas com nós dedicados para ASN, hashes de malware, certificados SSL, hostnames e TTP.",
+    "feat.5t":"Relatórios e cópias","feat.5d":"Exporte o seu progresso em JSON para o retomar mais tarde, ou gere instantaneamente relatórios oficiais em PNG ou PDF.",
+    "feat.6t":"Análise híbrida com IA","feat.6d":"Dois motores complementares: Ollama em local para uma confidencialidade total e agentes Hermes online para a informação em tempo real.",
+    "tuto.eyebrow":"Aprendizagem","tuto.title":"Tutoriais e <span class='hl'>guias</span>",
+    "tuto.sub":"Tutoriais em vídeo passo a passo para dominar cada ferramenta. Será publicado um novo episódio para cada projeto do arsenal.",
+    "tuto.available":"Disponível",
+    "tuto.d1":"Introdução completa em 30 minutos: criação do seu primeiro grafo relacional, entidades ciber e configuração dos agentes de IA locais (Ollama) e avançados (Hermes).",
+    "tuto.videoFr":"Tutorial em vídeo (FR)","tuto.videoEn":"🇬🇧 Versão EN",
+    "tuto.coming":"Tutorial em breve",
+    "tuto.d2":"Como navegar na caixa de ferramentas, escolher o utilitário certo para a sua necessidade e encadear pivots com eficácia durante uma investigação.",
+    "tuto.d3":"Domine a cartografia tática 2D e 3D: importação de alvos, camadas, vistas « God's Eye » e exportação de mapas para os seus relatórios.",
+    "tuto.onRelease":"No lançamento",
+    "tuto.d4":"O tutorial será lançado juntamente com o navegador: isolamento de sessões, gestão de impressões digitais e ferramentas de investigação integradas.",
+    "prot.eyebrow":"Proteção e educação",
+    "prot.title":"Proteger, <span class='hl'>sensibilizar</span>, acompanhar",
+    "prot.sub":"A melhor proteção não é a vigilância: é a prevenção. Compreender os riscos, falar deles em família e adotar os reflexos certos — é este o coração do meu trabalho.",
+    "prot.c1t":"Segurança online no dia a dia","prot.c1d":"Palavras-passe robustas, autenticação de dois fatores, definições de privacidade, gestão de dados pessoais: as bases que evitam a grande maioria dos incidentes.",
+    "prot.c2t":"Relação pais-filhos","prot.c2d":"Como falar do digital em casa: ouvir sem vigiar, criar um diálogo de confiança e acompanhar a autonomia em vez de a controlar.",
+    "prot.c3t":"Detetar os sinais de alerta","prot.c3d":"Isolamento súbito, mudança de comportamento, contactos desconhecidos, conteúdos inadequados: os sinais que devem alertar e como identificá-los sem dramatizar.",
+    "prot.c4t":"Reagir e denunciar","prot.c4d":"Os reflexos certos, a conservação de provas e os recursos ou plataformas de denúncia adequados a cada situação — sem se colocar em perigo.",
+    "prot.quote":"Uma criança protegida não é uma criança vigiada.<br>A melhor segurança continua a ser <span class='hl'>o diálogo</span>.",
+    "prot.cite":"ZHÉTICAL — Proteção e sensibilização",
+    "prot.aTitle":"Workshops e intervenções",
+    "prot.aDesc":"Intervenho em escolas, associações e estruturas juvenis com workshops de sensibilização para a segurança digital, adaptados tanto a crianças como a pais.",
+    "prot.aCta":"Organizar um workshop",
+    "met.eyebrow":"Metodologia","met.title":"O nosso processo de <span class='hl'>intervenção</span>",
+    "met.sub":"Um procedimento em quatro tempos, reproduzível e rastreável, da deteção do sinal à denúncia oficial.",
+    "met.s1t":"Deteção","met.s1d":"Identificação de comportamentos suspeitos, contas ligadas e sinais fracos nas plataformas visadas.",
+    "met.s2t":"Investigação","met.s2d":"Recolha de provas digitais: impressões digitais, metadados, correlações entre contas e cronologia dos factos.",
+    "met.s3t":"Documentação","met.s3d":"Relatório legal completo e certificado, estruturado para ser utilizável pelas autoridades e pelas equipas de moderação.",
+    "met.s4t":"Denúncia","met.s4d":"Transmissão às autoridades competentes e acompanhamento das plataformas até à resolução do processo.",
+    "par.eyebrow":"Operador","par.title":"Perfil do <span class='hl'>operador</span>",
+    "par.p1":"Especialista em cibersegurança e OSINT, a minha experiência foi primeiro construída no terreno como autodidata apaixonado. Esse percurso foi depois consolidado com um sólido programa de formação contínua, que conta hoje com <strong>mais de 30 certificações internacionais</strong>.",
+    "par.p2":"Formador de grupos técnicos especializados, formo a próxima geração de analistas OSINT. A minha abordagem combina a curiosidade natural do investigador com o rigor dos padrões profissionais atuais.",
+    "par.p3":"Especializado na proteção de menores online, na perseguição de predadores digitais e na documentação legal de provas digitais. Colaboração regular com plataformas comunitárias (Roblox, Discord).",
+    "par.p4":"Convencido de que a melhor proteção continua a ser a prevenção, trabalho também com famílias, escolas e associações para sensibilizar para a segurança digital e <strong>acompanhar o diálogo entre pais e filhos</strong> em torno dos usos online.",
+    "par.ppHead":"PASSAPORTE CIBER · N.º ZHT-2026-BE",
+    "par.ppName":"NOME","par.ppStatus":"ESTADO","par.ppNat":"NACIONALIDADE","par.ppNatV":"BÉLGICA (BEL)","par.ppVerif":"VERIFICAÇÃO",
+    "par.b1":"Licença de Osinter","par.verify":"Verificar o meu passaporte CanCred","par.contact":"Contacto",
+    "cert.eyebrow":"Acreditações","cert.title":"Registo de <span class='hl'>certificações</span>",
+    "cert.sub":"Mais de 30 certificações profissionais e 13 distintivos verificáveis publicamente através do registo CanCred.",
+    "cert.th1":"Domínio","cert.th2":"Nível","cert.th3":"Prova",
+    "cert.r1d":"Cibersegurança e boas práticas","cert.r1l":"Profissional certificado",
+    "cert.r2d":"Investigação digital e forense","cert.r2l":"Investigador especialista",
+    "cert.r3d":"Proteção de menores e sensibilização","cert.r3l":"Formador interveniente","cert.r3p":"13 distintivos CanCred",
+    "cert.r4d":"Vigilância e informação","cert.r4l":"Especialista",
+    "svc.eyebrow":"Operações","svc.title":"Investigações e <span class='hl'>proteção</span>",
+    "svc.sub":"Serviços operacionais para proteger as comunidades digitais e acompanhar as famílias.",
+    "svc.c1d":"Perseguimos indivíduos maliciosos, identificamos predadores online e documentamos provas digitais com precisão cirúrgica. Discreção absoluta e métodos forenses.",
+    "svc.c1l1":"Pesquisa de identidade e cruzamento de dados",
+    "svc.c1l2":"Geolocalização digital e análise de metadados",
+    "svc.c1l3":"Vigilância discreta e recolha de informação",
+    "svc.c2t":"Prevenção e segurança",
+    "svc.c2d":"Proteção ativa das comunidades online contra as ameaças digitais, em especial os utilizadores mais jovens nas plataformas populares.",
+    "svc.roblox":"Anti-grooming, assédio, roubo de contas e burlas de Robux.",
+    "svc.discord":"Anti-raids, doxxing, phishing direcionado e bots maliciosos.",
+    "ct.eyebrow":"Contacto","ct.title":"Vamos falar do seu <span class='hl'>caso</span>",
+    "ct.sub":"Três canais diretos. Escolha o que corresponde ao seu pedido.",
+    "ct.c1t":"Contacto direto","ct.c1n":"Direção, parcerias, workshops e pedidos gerais.",
+    "ct.c2t":"Pedidos de investigação","ct.c2n":"Processos OSINT, proteção de comunidades e denúncias.",
+    "ct.c3t":"Apoio técnico","ct.c3n":"Assistência com as ferramentas, acessos e plataformas.",
+    "f.tagline":"Inteligência digital, investigações OSINT, proteção de comunidades e sensibilização das famílias.",
+    "f.toolkitSub":"Suite Ghostint","f.navTitle":"Navegação","f.contactTitle":"Contacto",
+    "f.copyright":"© 2026 ZHÉTICAL · Todos os direitos reservados.","f.loc":"QUERY-INTEL.COM · BÉLGICA"
+  }
+};
+
+var SEO = {
+  fr:{lang:"fr",title:"ZHÉTICAL · Cyber Intelligence, Protection & Outils OSINT | Query Intel",
+      desc:"Expert OSINT et cybersécurité. Investigations numériques, protection des mineurs en ligne, sensibilisation des familles et outils open-source : Ghosint Tools, Ghostint Tracker, OSINT Gods Eye.",
+      ogTitle:"ZHÉTICAL · Cyber Intelligence, Protection & Outils OSINT",
+      ogDesc:"Investigations OSINT, protection des communautés en ligne, sensibilisation des familles et outils de cybersécurité open-source.",ogLocale:"fr_FR"},
+  en:{lang:"en",title:"ZHÉTICAL · OSINT & Cybersecurity Expert, Child Online Protection | Query Intel",
+      desc:"OSINT and cybersecurity expert. Digital investigations, online child protection, family awareness and open-source tools: Ghosint Tools, Ghostint Tracker, OSINT Gods Eye.",
+      ogTitle:"ZHÉTICAL · Cyber Intelligence, Protection & OSINT Tools",
+      ogDesc:"OSINT investigations, protection of online communities, family awareness and open-source cybersecurity tools.",ogLocale:"en_GB"},
+  es:{lang:"es",title:"ZHÉTICAL · Experto OSINT y ciberseguridad, protección de menores | Query Intel",
+      desc:"Experto en OSINT y ciberseguridad. Investigaciones digitales, protección de menores en línea, concienciación de las familias y herramientas open source: Ghosint Tools, Ghostint Tracker, OSINT Gods Eye.",
+      ogTitle:"ZHÉTICAL · Ciberinteligencia, protección y herramientas OSINT",
+      ogDesc:"Investigaciones OSINT, protección de comunidades en línea, concienciación de las familias y herramientas de ciberseguridad open source.",ogLocale:"es_ES"},
+  pt:{lang:"pt",title:"ZHÉTICAL · Especialista OSINT e cibersegurança, proteção de menores | Query Intel",
+      desc:"Especialista em OSINT e cibersegurança. Investigações digitais, proteção de menores online, sensibilização das famílias e ferramentas open source: Ghosint Tools, Ghostint Tracker, OSINT Gods Eye.",
+      ogTitle:"ZHÉTICAL · Ciberinteligência, proteção e ferramentas OSINT",
+      ogDesc:"Investigações OSINT, proteção de comunidades online, sensibilização das famílias e ferramentas de cibersegurança open source.",ogLocale:"pt_PT"}
+};
+
+(function(){
+  "use strict";
+  var SUPPORTED = ["fr","en","es","pt"];
+  var STORE_KEY = "zht-lang";
+  var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-i18n],[data-i18n-html]"));
+  var FR = {};   // textes français d'origine, capturés depuis le HTML
+
+  nodes.forEach(function(el){
+    var k = el.getAttribute("data-i18n") || el.getAttribute("data-i18n-html");
+    if(!k || FR[k]) return;
+    FR[k] = el.hasAttribute("data-i18n-html") ? el.innerHTML : el.textContent;
+  });
+
+  function readUrl(){
+    try{ return new URL(location.href).searchParams.get("lang"); }catch(e){ return null; }
+  }
+  function readStore(){
+    try{ return localStorage.getItem(STORE_KEY); }catch(e){ return null; }
+  }
+  function readNav(){
+    var l = (navigator.language || "fr").slice(0,2).toLowerCase();
+    return SUPPORTED.indexOf(l) >= 0 ? l : null;
+  }
+
+  function detect(){
+    var l = (readUrl() || "").toLowerCase();
+    if(SUPPORTED.indexOf(l) >= 0) return l;
+    l = (readStore() || "").toLowerCase();
+    if(SUPPORTED.indexOf(l) >= 0) return l;
+    return readNav() || "fr";
+  }
+
+  function setMeta(id, val){
+    var el = document.getElementById(id);
+    if(el && val) el.setAttribute("content", val);
+  }
+
+  function apply(lang){
+    if(SUPPORTED.indexOf(lang) < 0) lang = "fr";
+    var d = LANG[lang] || {};
+
+    nodes.forEach(function(el){
+      var k = el.getAttribute("data-i18n") || el.getAttribute("data-i18n-html");
+      if(!k) return;
+      var v = (lang === "fr") ? FR[k] : (d[k] !== undefined ? d[k] : FR[k]);
+      if(v === undefined || v === null) return;
+      if(el.hasAttribute("data-i18n-html")) el.innerHTML = v;
+      else el.textContent = v;
+    });
+
+    var s = SEO[lang] || SEO.fr;
+    document.documentElement.lang = s.lang;
+    document.title = s.title;
+    setMeta("metaDesc", s.desc);
+    setMeta("ogTitle", s.ogTitle);
+    setMeta("ogDesc", s.ogDesc);
+    setMeta("twTitle", s.ogTitle);
+    setMeta("twDesc", s.ogDesc);
+    var loc = document.querySelector('meta[property="og:locale"]');
+    if(loc) loc.setAttribute("content", s.ogLocale);
+
+    Array.prototype.forEach.call(document.querySelectorAll("#langSwitcher button"), function(b){
+      var on = b.getAttribute("data-lang") === lang;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+
+    try{ localStorage.setItem(STORE_KEY, lang); }catch(e){}
+
+    try{
+      var u = new URL(location.href);
+      if(lang === "fr") u.searchParams.delete("lang");
+      else u.searchParams.set("lang", lang);
+      var q = u.searchParams.toString();
+      history.replaceState(null, "", u.pathname + (q ? "?" + q : "") + u.hash);
+    }catch(e){}
+  }
+
+  document.getElementById("langSwitcher").addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest("button[data-lang]") : null;
+    if(b) apply(b.getAttribute("data-lang"));
+  });
+
+  apply(detect());
+})();
+</script>
 <script>
 (function(){
   "use strict";
