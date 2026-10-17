@@ -1609,6 +1609,60 @@ function Footer({ lang }: { lang: Lang }) {
   );
 }
 
+// ── Bulle flottante QueryShield ───────────────────────────────────────────────
+// Visible sur toute la page (position fixe). Ouvre l'analyseur anti-arnaque
+// QueryShield dans un nouvel onglet.
+
+const QUERYSHIELD_URL = 'https://shield.query-intel.com';
+
+const SHIELD_BUBBLE_TEXT: Record<Lang, { title: string; sub: string; aria: string }> = {
+  FR: { title: 'QueryShield', sub: 'Vérifier un message ou un site', aria: 'Ouvrir QueryShield' },
+  EN: { title: 'QueryShield', sub: 'Check a message or website', aria: 'Open QueryShield' },
+  ES: { title: 'QueryShield', sub: 'Verificar un mensaje o sitio', aria: 'Abrir QueryShield' },
+  PT: { title: 'QueryShield', sub: 'Verificar uma mensagem ou site', aria: 'Abrir QueryShield' },
+};
+
+function QueryShieldBubble({ lang }: { lang: Lang }) {
+  const text = SHIELD_BUBBLE_TEXT[lang];
+
+  return (
+    <motion.a
+      href={QUERYSHIELD_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={text.aria}
+      initial={{ opacity: 0, y: 18, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ delay: 1, duration: 0.45, ease: 'easeOut' }}
+      className="group fixed bottom-5 right-5 z-50 flex items-center gap-3"
+    >
+      {/* Étiquette — masquée sur mobile, révélée au survol sur desktop */}
+      <span className="pointer-events-none hidden select-none flex-col items-end opacity-0 transition-all duration-300 group-hover:opacity-100 sm:flex sm:translate-x-3 sm:group-hover:translate-x-0">
+        <span className="text-[13px] font-semibold tracking-wide text-white drop-shadow">
+          {text.title}
+        </span>
+        <span className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-emerald-400/90">
+          {text.sub}
+        </span>
+      </span>
+
+      {/* La bulle */}
+      <span className="relative flex h-14 w-14 flex-shrink-0 items-center justify-center">
+        <span className="absolute inset-0 rounded-full border border-emerald-500/30 animate-pulse-slow" />
+        <span className="absolute inset-1 rounded-full bg-emerald-500/10 blur-md transition-all duration-300 group-hover:bg-emerald-500/25" />
+        <span className="relative flex h-11 w-11 items-center justify-center rounded-full border border-emerald-500/50 bg-cyber-card shadow-[0_0_18px_rgba(16,185,129,0.35)] transition-transform duration-300 group-hover:scale-110">
+          <ShieldCheck size={20} strokeWidth={1.8} className="text-emerald-400" />
+          {/* Point d'activité */}
+          <span className="absolute -right-0.5 -top-0.5 flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+          </span>
+        </span>
+      </span>
+    </motion.a>
+  );
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -1625,6 +1679,7 @@ export default function App() {
       <ExpertiseBioSection lang={lang} />
       <GhostintTrackerSection lang={lang} />
       <Footer lang={lang} />
+      <QueryShieldBubble lang={lang} />
     </div>
   );
 }
