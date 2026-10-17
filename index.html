@@ -278,8 +278,8 @@ section{position:relative}
 .con-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 9px var(--green);animation:pulse 2s infinite}
 .con-live{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-size:10px;letter-spacing:.2em}
 .con-live i{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 1.2s infinite}
-.con-body{padding:16px 16px 14px;min-height:206px}
-.con-line{margin:0;color:#93a0b8;white-space:pre-wrap;word-break:break-word;opacity:0;animation:conIn .3s forwards}
+.con-body{padding:16px 16px 14px;min-height:180px}
+.con-line{margin:0;color:#93a0b8;white-space:pre-wrap;word-break:break-word;animation:conIn .3s forwards}
 .con-line b{color:var(--green);font-weight:400}
 .con-line i{color:#00b8ff;font-style:normal}
 .con-line u{color:#ffb020;text-decoration:none}
@@ -821,7 +821,12 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
         <span class="con-title"><i class="con-dot"></i><span data-i18n="con.title">ghostint://session/0x8f3a</span></span>
         <span class="con-live"><i></i><span data-i18n="con.live">LIVE</span></span>
       </div>
-      <div class="con-body" id="conBody"></div>
+      <div class="con-body" id="conBody">
+        <p class="con-line">&gt; ssh session 0x8f3a · ghostint v2.4.1</p>
+        <p class="con-line">&gt; load node ENT_0142 · type:PERSON · conf:0.87</p>
+        <p class="con-line">&gt; pivot email → 3 comptes / 2 tel (1.42s)</p>
+        <p class="con-line">&gt; pivot pseudo → 14 hits / 5 ecartes (2.10s)<span class="con-cursor"></span></p>
+      </div>
       <div class="con-foot">
         <span class="con-eng"><i class="ok"></i><span data-i18n="con.e1">OLLAMA · LOCAL</span></span>
         <span class="con-eng"><i class="warn"></i><span data-i18n="con.e2">HERMES · ONLINE</span></span>
@@ -1843,7 +1848,7 @@ var SEO = {
       "> draft autosaved · sha256 a3f9c1e0…"
     ];
 
-    var i = 0;
+    var i = body.children.length; /* reprend apres les lignes deja ecrites dans le HTML */
     function push(){
       var prev = body.querySelector(".con-cursor");
       if(prev) prev.parentNode.removeChild(prev);
