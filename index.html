@@ -471,6 +471,27 @@ footer{border-top:1px solid var(--border);background:rgba(6,7,11,.7);padding:64p
 ::-webkit-scrollbar-track{background:#080a10}
 ::-webkit-scrollbar-thumb{background:#242b3c;border-radius:6px;border:6px solid #080a10}
 ::-webkit-scrollbar-thumb:hover{background:#33405c}
+
+/* ── Bulle flottante QueryShield ─────────────────────────────────────────── */
+.qs-bubble{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:12px;text-decoration:none;opacity:0;transform:translateY(18px) scale(.92);animation:qsBubbleIn .7s .8s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes qsBubbleIn{to{opacity:1;transform:translateY(0) scale(1)}}
+.qs-bubble__label{pointer-events:none;display:none;flex-direction:column;align-items:flex-end;gap:2px;padding:8px 14px;border:1px solid var(--border);border-radius:14px;background:rgba(16,19,29,.92);backdrop-filter:blur(8px);opacity:0;transform:translateX(10px);transition:opacity .3s ease,transform .3s ease}
+.qs-bubble__title{font-size:13px;font-weight:600;color:var(--text);letter-spacing:.02em;white-space:nowrap}
+.qs-bubble__sub{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);white-space:nowrap}
+.qs-bubble__icon{position:relative;display:flex;align-items:center;justify-content:center;width:56px;height:56px;flex:none}
+.qs-bubble__ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(0,184,255,.35);animation:qsRing 2.6s ease-in-out infinite}
+@keyframes qsRing{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.12);opacity:.25}}
+.qs-bubble__glow{position:absolute;inset:6px;border-radius:50%;background:rgba(0,184,255,.16);filter:blur(8px);transition:background .3s ease}
+.qs-bubble__disc{position:relative;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,184,255,.45);background:var(--card-2);box-shadow:0 0 18px rgba(0,184,255,.28);color:var(--cyan);transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease}
+.qs-bubble:hover .qs-bubble__disc{transform:scale(1.1);box-shadow:0 0 26px rgba(0,184,255,.45)}
+.qs-bubble:hover .qs-bubble__glow{background:rgba(0,184,255,.28)}
+.qs-bubble:hover .qs-bubble__label{opacity:1;transform:translateX(0)}
+.qs-bubble__dot{position:absolute;top:8px;right:8px;width:8px;height:8px}
+.qs-bubble__dot i{position:absolute;inset:0;border-radius:50%;background:var(--green)}
+.qs-bubble__dot i:first-child{animation:qsPing 1.6s cubic-bezier(0,0,.2,1) infinite;opacity:.7}
+@keyframes qsPing{75%,100%{transform:scale(2.2);opacity:0}}
+@media (min-width:640px){.qs-bubble__label{display:flex}}
+@media (prefers-reduced-motion:reduce){.qs-bubble{animation:none;opacity:1;transform:none}.qs-bubble__ring,.qs-bubble__dot i:first-child{animation:none}}
 </style>
 </head>
 <body>
@@ -1321,7 +1342,7 @@ var LANG = {
     "ct.c3t":"Technical support","ct.c3n":"Help with the tools, access and platforms.",
     "f.tagline":"Digital intelligence, OSINT investigations, community protection and family awareness.",
     "f.toolkitSub":"Ghostint suite","f.navTitle":"Navigation","f.contactTitle":"Contact",
-    "f.copyright":"© 2026 ZHÉTICAL · All rights reserved.","f.loc":"QUERY-INTEL.COM · BELGIUM"
+    "f.copyright":"© 2026 ZHÉTICAL · All rights reserved.","f.loc":"QUERY-INTEL.COM · BELGIUM","shield.sub":"Check a message or website"
   },
   es: {
     "nav.tools":"Herramientas","nav.tracker":"Tracker","nav.tutos":"Tutoriales","nav.protection":"Protección",
@@ -1418,7 +1439,7 @@ var LANG = {
     "ct.c3t":"Soporte técnico","ct.c3n":"Asistencia con las herramientas, accesos y plataformas.",
     "f.tagline":"Inteligencia digital, investigaciones OSINT, protección de comunidades y concienciación de las familias.",
     "f.toolkitSub":"Suite Ghostint","f.navTitle":"Navegación","f.contactTitle":"Contacto",
-    "f.copyright":"© 2026 ZHÉTICAL · Todos los derechos reservados.","f.loc":"QUERY-INTEL.COM · BÉLGICA"
+    "f.copyright":"© 2026 ZHÉTICAL · Todos los derechos reservados.","f.loc":"QUERY-INTEL.COM · BÉLGICA","shield.sub":"Verificar un mensaje o sitio"
   },
   pt: {
     "nav.tools":"Ferramentas","nav.tracker":"Tracker","nav.tutos":"Tutoriais","nav.protection":"Proteção",
@@ -1515,7 +1536,7 @@ var LANG = {
     "ct.c3t":"Apoio técnico","ct.c3n":"Assistência com as ferramentas, acessos e plataformas.",
     "f.tagline":"Inteligência digital, investigações OSINT, proteção de comunidades e sensibilização das famílias.",
     "f.toolkitSub":"Suite Ghostint","f.navTitle":"Navegação","f.contactTitle":"Contacto",
-    "f.copyright":"© 2026 ZHÉTICAL · Todos os direitos reservados.","f.loc":"QUERY-INTEL.COM · BÉLGICA"
+    "f.copyright":"© 2026 ZHÉTICAL · Todos os direitos reservados.","f.loc":"QUERY-INTEL.COM · BÉLGICA","shield.sub":"Verificar uma mensagem ou site"
   }
 };
 
@@ -1722,5 +1743,21 @@ var SEO = {
   }
 })();
 </script>
+
+<!-- Bulle flottante QueryShield : accès direct à l'analyseur anti-arnaque -->
+<a class="qs-bubble" href="https://shield.query-intel.com" target="_blank" rel="noopener noreferrer" aria-label="QueryShield">
+  <span class="qs-bubble__label">
+    <span class="qs-bubble__title">QueryShield</span>
+    <span class="qs-bubble__sub" data-i18n="shield.sub">Vérifier un message ou un site</span>
+  </span>
+  <span class="qs-bubble__icon">
+    <span class="qs-bubble__ring"></span>
+    <span class="qs-bubble__glow"></span>
+    <span class="qs-bubble__disc">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.2-2.9 7.6-7 9-4.1-1.4-7-4.8-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+      <span class="qs-bubble__dot"><i></i><i></i></span>
+    </span>
+  </span>
+</a>
 </body>
 </html>
